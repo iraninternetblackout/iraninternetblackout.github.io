@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta property="og:title" content="Internet Blackout in Iran">
+    <meta property="og:description" content="Internet blackout in Iran — communication restrictions and suppression of voices.">
+    <meta property="og:image" content="https://dummyimage.com/1200x630/000/fff&text=Silenced+Voices">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <title>Internet Blackout in Iran - Silenced Voices</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="#">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background-color: #121212; /* Dark background */
+            color: #eaeaea;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            padding: 50px 20px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 35px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* RTL support */
+        .rtl {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .ltr {
+            direction: ltr;
+            text-align: left;
+        }
+
+        h1 {
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            white-space: pre-line;
+        }
+
+        #timer {
+            margin-top: 25px;
+            font-size: 2rem;
+            color: #00e0ff;
+        }
+
+        #status {
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .controls {
+            margin-top: 20px;
+        }
+
+        select, button {
+            padding: 10px;
+            margin: 5px;
+            background: #111;
+            color: white;
+            border: 1px solid #333;
+            border-radius: 6px;
+        }
+
+        button:hover, select:hover {
+            border-color: #00e0ff;
+        }
+
+        /* Share button styles */
+        .share-buttons button {
+            background-color: #1da1f2;
+            border-color: #1da1f2;
+        }
+
+        .share-buttons button:hover {
+            background-color: #0d8ddb;
+            border-color: #0d8ddb;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="card" id="card">
+            <h1>Internet Blackout in Iran - Silenced Voices</h1>
+
+            <p id="text" class="ltr"></p> <!-- Default to left-to-right text -->
+
+            <div id="timer"></div>
+            <div id="status"></div>
+
+            <div class="controls">
+                <select id="langSelect" onchange="changeLanguage(this.value)">
+                    <option value="en">English</option>
+                    <option value="fa">فارسی</option>
+                    <option value="it">Italiano</option>
+                    <option value="fr">Français</option>
+                    <option value="he">עברית</option>
+                    <option value="es">Español</option>
+                </select>
+            </div>
+
+            <!-- Share Buttons -->
+            <div class="share-buttons" style="margin-top: 20px;">
+                <button onclick="shareToTwitter()">Share on Twitter</button>
+                <button onclick="shareToFacebook()">Share on Facebook</button>
+                <button onclick="shareToTelegram()">Share on Telegram</button>
+                <button onclick="shareViaEmail()">Share via Email</button>
+                <button onclick="copyLink()">Copy Link</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ---------------------- TEXT (REAL TRANSLATIONS) ----------------------
+        const translations = {
+            en: `The internet blackout in Iran, imposed by the terrorist Islamic Republic regime, is a deliberate act to silence the voices of the Iranian people. Access to communication is cut off for millions, while only a controlled minority remains online to amplify state-approved propaganda.
+
+            The blackout began during the nationwide protests of 2025–2026, then relaxed for a brief period. However, on February 28, 2026, it returned in full force — preventing documentation, limiting coordination, and hiding the massacre of unarmed civilians.
+
+            This blackout is not just a temporary measure, but a permanent tool of tyranny: isolating the population, crushing resistance, and controlling the narrative the world sees.
+
+            Stand with the Iranian people as they fight for their freedom and against the regime's oppression.`,
+
+            fa: `قطع اینترنت در ایران، که توسط حکومت جمهوری اسلامی اعمال شده است، اقدامی عمدی برای خاموش کردن صدای مردم ایران است. دسترسی به ارتباطات برای میلیون‌ها نفر قطع شده، در حالی که تنها گروهی کنترل‌شده برای انتشار تبلیغات رسمی حکومت آنلاین باقی مانده‌اند.
+
+            این محدودیت از زمان اعتراضات سراسری ۱۴۰۴–۱۴۰۵ آغاز شد، سپس برای مدت کوتاهی کاهش یافت. اما از ۰۹ اسفند ۱۴۰۴، دوباره به طور کامل برقرار شد — جلوگیری از مستندسازی، محدود کردن هماهنگی‌ها، و مخفی کردن کشتار علیه غیرنظامیان بی‌دفاع.
+
+            این محدودیت پس از اعتراضات نیز پایان نیافته است و همچنان به‌عنوان ابزاری برای کنترل، سرکوب و شکل‌دهی به آنچه جهان اجازه دیدن آن را دارد ادامه دارد.
+
+            صدای مردم ایران باشید؛ برای آزادی و رهایی.`,
+
+            it: `Il blackout di Internet in Iran, imposto dal regime della Repubblica Islamica, è un atto deliberato per mettere a tacere la popolazione iraniana. L’accesso alle comunicazioni è stato interrotto per milioni di persone, mentre solo una minoranza controllata rimane online per diffondere propaganda ufficiale.
+
+            Il blackout è iniziato durante le proteste nazionali del 2025–2026, poi si è attenuato per un breve periodo. Tuttavia, il 28 febbraio 2026 è tornato a pieno regime — impedendo la documentazione, limitando il coordinamento e nascondendo la repressione contro civili disarmati.
+
+            Questa restrizione non è terminata con le proteste. Continua come strumento di controllo: isolamento, repressione del dissenso e manipolazione della visibilità globale.
+
+            Sii la voce del popolo iraniano, per libertà e diritti.`,
+
+            fr: `La coupure d’Internet en Iran, imposée par le régime de la République islamique, est un acte délibéré visant à faire taire la population iranienne. L’accès aux communications est coupé pour des millions de personnes, tandis qu’une minorité contrôlée relaie la propagande officielle.
+
+            La coupure a commencé lors des manifestations nationales de 2025–2026, puis s’est atténuée brièvement. Cependant, le 28 février 2026, elle est revenue en pleine force — empêchant la documentation, limitant la coordination et cachant la répression contre des civils sans défense.
+
+            Cette restriction ne s’est pas arrêtée avec les manifestations. Elle continue comme outil de contrôle : isolement, répression de la dissidence et manipulation de la visibilité mondiale.
+
+            Soyez la voix du peuple iranien.`,
+
+            he: `ניתוק האינטרנט באיראן, שמבוצע על ידי משטר הרפובליקה האסלאמית, הוא פעולה מכוונת להשתקת קולות העם האיראני. הגישה לתקשורת נחסמת עבור מיליונים, בעוד שמיעוט מבוקר בלבד נשאר מחובר להפצת תעמולה רשמית.
+
+            המהלך החל במהלך מחאות 2025–2026 ונרגע לזמן קצר. אך ב-09 במרץ 2026, הוא שב במלואו — מניעת תיעוד, הגבלת תיאום, והסתרת דיכוי נגד אזרחים לא חמושים.
+
+            ההגבלות הללו לא פסקו לאחר המחאות. הן נמשכות ככלי לשליטה: בידוד האנשים, דיכוי ההתנגדות, ועיוות מה שנראה לעולם.`,
+
+            es: `El apagón de Internet en Irán, impuesto por el régimen terrorista de la República Islámica, es un acto deliberado para silenciar las voces del pueblo iraní. El acceso a la comunicación se corta para millones, mientras que solo una minoría controlada permanece en línea para amplificar la propaganda aprobada por el estado.
+
+            El apagón comenzó durante las protestas nacionales de 2025-2026, luego se relajó por un breve período. Sin embargo, el 28 de febrero de 2026, volvió con toda su fuerza — evitando la documentación, limitando la coordinación y ocultando la masacre de los civiles desarmados.
+
+            Esta restricción no terminó con las protestas. Continúa como una herramienta de control: aislando a la gente, suprimiendo la disidencia y manipulando lo que el mundo puede ver.
+
+            Sé la voz del pueblo iraní, luchando por la libertad y la justicia.`,
+        };
+
+        // ---------------------- LANGUAGE CHANGE ----------------------
+        function changeLanguage(lang) {
+            document.getElementById("text").innerText = translations[lang];
+            document.body.className = lang === 'fa' || lang === 'he' ? 'rtl' : 'ltr';
+            document.getElementById("text").className = lang === 'fa' || lang === 'he' ? 'rtl' : 'ltr'; // Update text alignment
+        }
+
+        // ---------------------- COUNTUP TIMER ----------------------
+        const startDate = new Date("2026-02-28T10:30:00+03:30").getTime(); // Feb 28, 2026 10:30 IRST
+
+        function updateCountup() {
+            const now = new Date().getTime();
+            const elapsed = now - startDate;
+
+            // Time calculations
+            const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+
+            // Display the result
+            document.getElementById("timer").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        setInterval(updateCountup, 1000); // Update the timer every second
+
+        // ---------------------- SHARE FUNCTIONS ----------------------
+        function shareToTwitter() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent("Silenced Voices - The internet blackout in Iran!");
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+        }
+
+        function shareToFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+        }
+
+        function shareToTelegram() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://t.me/share/url?url=${url}`, '_blank');
+        }
+
+        function shareViaEmail() {
+            const subject = encodeURIComponent("Silenced Voices - The internet blackout in Iran");
+            const body = encodeURIComponent("Check out this important message about the internet blackout in Iran: " + window.location.href);
+            window.location.href = `mailto:?subject=${subject}&body=${body}`;
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert("Link copied to clipboard!");
+            }).catch(err => alert("Failed to copy link"));
+        }
+
+        // Set default language to English
+        changeLanguage('en');
+
+        // ---------------------- PWA ----------------------
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js').then(function() {
+                console.log('Service Worker Registered');
+            }).catch(function(error) {
+                console.error('Service Worker Registration failed:', error);
+            });
+        }
+
+    </script>
+
+</body>
+</html>
