@@ -3,46 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0a0a0b">
+<meta name="theme-color" content="#0a0009">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Iran Internet Blackout">
-<meta name="description" content="A memorial and testimony — 88 days of engineered darkness. The Islamic Republic terrorist regime cut off 92 million people from the internet to hide the massacre of protesters.">
-
+<meta name="description" content="138 days. The Islamic Republic terrorist regime cut off tens of millions from the internet to hide its massacres. This is the record.">
 <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
 <link rel="shortcut icon" href="/assets/favicon/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
 <link rel="manifest" href="/assets/favicon/site.webmanifest">
-
-<meta property="og:title" content="Internet Blackout in Iran">
-<meta property="og:description" content="Internet blackout in Iran — communication restrictions and suppression of voices.">
+<meta property="og:title" content="138 Days — Internet Blackout in Iran">
+<meta property="og:description" content="138 days of engineered darkness. The Islamic Republic cut off tens of millions to hide its massacres. Over 40,000 killed. This is the record.">
 <meta property="og:image" content="/assets/images/iran-internet-blackout-banner.png">
 <meta property="og:url" content="https://internetblackout.org">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Internet Blackout in Iran">
-<meta name="twitter:description" content="88 days of engineered darkness. The Islamic Republic terrorist regime cut off 92 million people to hide its massacre.">
+<meta name="twitter:title" content="138 Days — Internet Blackout in Iran">
+<meta name="twitter:description" content="138 days. The Islamic Republic cut off tens of millions to hide its massacres. Over 40,000 killed.">
 <meta name="twitter:image" content="/assets/images/iran-internet-blackout-banner.png">
-
-<title>Internet Blackout in Iran - Silenced Voices</title>
-
+<title>138 Days of Darkness — Internet Blackout in Iran</title>
 <style>
 :root {
-  --bg: #0a0a0b;
-  --surface: #111114;
-  --border: rgba(255,255,255,0.07);
-  --border-strong: rgba(255,255,255,0.14);
-  --text: #e8e6e0;
-  --text-muted: #888680;
-  --text-dim: #4e4c49;
-  --green-bright: #3fa86d;
-  --red-bright: #e74c3c;
-  --gold: #b8963e;
-  --gold-bright: #d4ac52;
-  --white: #f0ede6;
-  --container: 760px;
+  --bg: #06000a;
+  --bg-2: #0e000f;
+  --surface: #120014;
+  --border: rgba(255,255,255,0.09);
+  --border-strong: rgba(255,255,255,0.18);
+  --text: #ede8e0;
+  --text-muted: #a09aa0;
+  --text-dim: #5a5060;
+  --red: #ff3c28;
+  --red-dark: #b01c10;
+  --red-glow: rgba(255,60,40,0.15);
+  --green: #2ddd7a;
+  --amber: #ffb830;
+  --amber-dim: #c2880a;
+  --white: #f5f0ee;
+  --purple: #9b3fff;
+  --container: 800px;
   --pad: 2rem;
+  --mono: 'Courier New', 'Courier', monospace;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -57,13 +58,15 @@ body {
   overflow-x: hidden;
 }
 
+/* Noise + scanlines overlay */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image:
-    repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,0.016) 60px),
-    repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.016) 60px);
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 0%, rgba(180,0,60,0.18), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 80% 100%, rgba(100,0,180,0.08), transparent 50%),
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.012) 3px);
   pointer-events: none;
   z-index: 0;
 }
@@ -76,283 +79,436 @@ body::before {
   z-index: 1;
 }
 
+/* ── ALERT BANNER ── */
+.alert-bar {
+  background: var(--red);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.55rem 1rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 10;
+}
+.alert-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(0,0,0,0.08) 41px);
+}
+.alert-bar span { position: relative; }
+
 /* ── HEADER ── */
 header {
-  padding: 5.5rem 0 3.5rem;
+  padding: 4rem 0 2.5rem;
   text-align: center;
+  position: relative;
 }
 
-.counter-badge {
+.days-counter {
   display: inline-block;
-  font-family: 'Courier New', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--red-bright);
-  border: 1px solid rgba(231,76,60,0.3);
-  padding: 0.35rem 1rem;
-  margin-bottom: 2rem;
+  font-family: var(--mono);
+  font-size: clamp(4rem, 16vw, 9rem);
+  font-weight: 900;
+  color: var(--red);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-shadow: 0 0 60px rgba(255,60,40,0.4), 0 0 120px rgba(255,60,40,0.15);
+  margin-bottom: 0;
   opacity: 0;
-  animation: fadeUp 0.8s ease 0.2s forwards;
+  animation: slamIn 0.5s cubic-bezier(0.22,1,0.36,1) 0.1s forwards;
+}
+
+.days-label {
+  display: block;
+  font-family: var(--mono);
+  font-size: clamp(0.65rem, 2vw, 0.85rem);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 2.2rem;
+  margin-top: 0.3rem;
+  opacity: 0;
+  animation: fadeUp 0.6s ease 0.4s forwards;
 }
 
 h1 {
-  font-size: clamp(1.75rem, 5.5vw, 3.2rem);
-  font-weight: 400;
+  font-size: clamp(1.6rem, 5vw, 2.8rem);
+  font-weight: 700;
   color: var(--white);
-  line-height: 1.25;
-  letter-spacing: -0.01em;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
   margin-bottom: 1rem;
   opacity: 0;
-  animation: fadeUp 0.9s ease 0.4s forwards;
+  animation: fadeUp 0.7s ease 0.5s forwards;
+  text-transform: uppercase;
 }
 
-h1 em { font-style: normal; color: var(--gold-bright); }
+h1 em {
+  font-style: normal;
+  color: var(--amber);
+  display: block;
+  font-size: 0.7em;
+  letter-spacing: 0.05em;
+  margin-top: 0.3rem;
+}
 
 .subtitle {
-  font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+  font-size: clamp(0.9rem, 2.3vw, 1rem);
   color: var(--text-muted);
   font-style: italic;
   opacity: 0;
-  animation: fadeUp 0.9s ease 0.6s forwards;
+  animation: fadeUp 0.7s ease 0.65s forwards;
   max-width: 580px;
-  margin: 0 auto;
-}
-
-.divider {
-  width: 50px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  margin: 2.2rem auto;
-  opacity: 0;
-  animation: fadeIn 1s ease 0.8s forwards;
+  margin: 0 auto 2.5rem;
 }
 
 /* ── LANGUAGE SELECTOR ── */
 .lang-section {
   opacity: 0;
-  animation: fadeUp 0.9s ease 1s forwards;
+  animation: fadeUp 0.7s ease 0.8s forwards;
+  margin-bottom: 2.5rem;
 }
 
 .lang-label {
-  font-family: 'Courier New', monospace;
-  font-size: 0.66rem;
-  letter-spacing: 0.2em;
+  font-family: var(--mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--text-dim);
   text-align: center;
-  margin-bottom: 0.9rem;
+  margin-bottom: 0.7rem;
 }
 
 .lang-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.45rem;
-  margin-bottom: 3rem;
+  gap: 0.4rem;
 }
 
 .lang-btn {
   background: transparent;
   border: 1px solid var(--border-strong);
   color: var(--text-muted);
-  padding: 0.5rem 1rem;
+  padding: 0.45rem 1rem;
   cursor: pointer;
   font-family: Georgia, serif;
-  font-size: 0.85rem;
-  letter-spacing: 0.03em;
-  transition: all 0.2s ease;
+  font-size: 0.83rem;
+  transition: all 0.15s ease;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
-  min-height: 44px;
+  min-height: 42px;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
 }
 
-.lang-btn:hover, .lang-btn:focus { border-color: rgba(255,255,255,0.3); color: var(--white); outline: none; }
-.lang-btn.active { background: rgba(255,255,255,0.05); border-color: var(--gold); color: var(--gold-bright); }
+.lang-btn:hover { border-color: var(--red); color: var(--red); background: rgba(255,60,40,0.06); }
+.lang-btn.active { border-color: var(--amber); color: var(--amber); background: rgba(255,184,48,0.07); }
 
-/* ── STATS BAR ── */
+/* ── STATS ── */
+.stats-section {
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.9s forwards;
+  margin-bottom: 0.8rem;
+}
+
 .stats-bar {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border: 1px solid var(--border);
-  margin-bottom: 3rem;
-  opacity: 0;
-  animation: fadeUp 0.9s ease 1.1s forwards;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--red-dark);
+  background: rgba(180,0,40,0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.stats-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(135deg, transparent, transparent 8px, rgba(255,60,40,0.03) 9px);
+  pointer-events: none;
 }
 
 .stat-item {
-  padding: 1.1rem 0.75rem;
+  padding: 1.2rem 0.5rem;
   text-align: center;
-  border-right: 1px solid var(--border);
+  border-right: 1px solid var(--red-dark);
+  position: relative;
 }
 .stat-item:last-child { border-right: none; }
 
 .stat-number {
-  font-family: 'Courier New', monospace;
-  font-size: clamp(1.15rem, 3.5vw, 1.5rem);
-  font-weight: 400;
-  color: var(--red-bright);
+  font-family: var(--mono);
+  font-size: clamp(1rem, 3.5vw, 1.5rem);
+  font-weight: 700;
+  color: var(--red);
   display: block;
   line-height: 1;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.35rem;
+  text-shadow: 0 0 20px rgba(255,60,40,0.3);
 }
 
 .stat-label {
-  font-size: clamp(0.58rem, 1.5vw, 0.66rem);
-  letter-spacing: 0.08em;
+  font-size: clamp(0.5rem, 1.3vw, 0.6rem);
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--text-dim);
-  font-family: 'Courier New', monospace;
+  font-family: var(--mono);
   line-height: 1.3;
 }
 
-/* ── TEXT BLOCK ── */
+.stats-footnote {
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  margin-top: 0.5rem;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.95s forwards;
+}
+
+/* ── STATUS RESTORED BANNER ── */
+.status-restored {
+  border: 2px solid var(--amber);
+  background: rgba(255,184,48,0.06);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 3rem;
+  position: relative;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 1s forwards;
+}
+.status-restored::before {
+  content: '▶ STATUS';
+  position: absolute;
+  top: -0.65rem;
+  left: 1rem;
+  background: var(--bg);
+  padding: 0 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: var(--amber);
+}
+.status-restored p {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+.status-restored strong { color: var(--amber); }
+.status-restored .dot-green {
+  display: inline-block;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--green);
+  margin-right: 0.4rem;
+  vertical-align: middle;
+  box-shadow: 0 0 6px var(--green);
+  animation: pulse-green 2s ease-in-out infinite;
+}
+@keyframes pulse-green {
+  0%,100% { opacity:1; box-shadow: 0 0 6px var(--green); }
+  50% { opacity:0.5; box-shadow: 0 0 2px var(--green); }
+}
+
+/* ── MAIN TEXT ── */
 .text-block {
   opacity: 0;
-  animation: fadeUp 0.9s ease 1.3s forwards;
+  animation: fadeUp 0.7s ease 1.1s forwards;
+  margin-bottom: 3rem;
 }
 
 .text-block p {
-  font-size: clamp(0.97rem, 2.5vw, 1.07rem);
+  font-size: clamp(0.96rem, 2.4vw, 1.05rem);
   line-height: 1.95;
   color: var(--text);
-  margin-bottom: 1.7rem;
+  margin-bottom: 1.6rem;
 }
 
 .text-block strong {
   color: var(--white);
-  font-weight: normal;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+  font-weight: 600;
 }
 
-.text-block .highlight { color: var(--red-bright); font-style: italic; }
+.text-block .accent { color: var(--red); font-style: italic; }
 .text-block.rtl { direction: rtl; text-align: right; }
-
-/* persian/hebrew font stack */
 .fa-font { font-family: 'Tahoma', 'Arial Unicode MS', 'Noto Sans Arabic', sans-serif; }
 .he-font { font-family: 'David', 'Arial', 'Noto Serif Hebrew', serif; }
 
-.pull-quote {
-  border-left: 2px solid var(--green-bright);
-  padding: 0.9rem 0 0.9rem 1.6rem;
-  margin: 2.2rem 0;
-  font-size: clamp(1rem, 2.8vw, 1.15rem);
+.demand-box {
+  border-left: 4px solid var(--red);
+  background: rgba(255,60,40,0.06);
+  padding: 1rem 1.4rem;
+  margin: 2rem 0;
+  font-size: clamp(0.95rem, 2.5vw, 1.05rem);
   font-style: italic;
   color: var(--text-muted);
-  line-height: 1.7;
+  line-height: 1.75;
+  position: relative;
 }
-
-.rtl .pull-quote {
+.demand-box::before {
+  content: '❯';
+  position: absolute;
+  left: -0.15rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--red);
+  font-style: normal;
+  font-size: 1.1rem;
+}
+.rtl .demand-box {
   border-left: none;
-  border-right: 2px solid var(--green-bright);
-  padding: 0.9rem 1.6rem 0.9rem 0;
+  border-right: 4px solid var(--red);
+  padding-left: 1.4rem;
+  padding-right: 1.4rem;
+}
+.rtl .demand-box::before {
+  left: auto;
+  right: -0.15rem;
+  content: '❮';
 }
 
 /* ── TIMELINE ── */
 .timeline-section {
-  margin: 3.5rem 0;
+  margin: 0 0 3rem;
   opacity: 0;
-  animation: fadeUp 0.9s ease 1.5s forwards;
+  animation: fadeUp 0.7s ease 1.3s forwards;
 }
 
-.section-title {
-  font-family: 'Courier New', monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin-bottom: 1.6rem;
+.section-header {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
 }
-.section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.section-header-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--red-dark), transparent);
+}
+.section-header-line.right {
+  background: linear-gradient(90deg, transparent, var(--red-dark));
+}
+.section-header-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--red);
+  white-space: nowrap;
+}
 
 .timeline-item {
   display: flex;
-  gap: 1.2rem;
-  margin-bottom: 1.6rem;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
   align-items: flex-start;
 }
 
-.timeline-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--gold);
-  margin-top: 0.5rem;
+.tl-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
   flex-shrink: 0;
+  width: 22px;
 }
-.timeline-dot.red { background: var(--red-bright); }
-.timeline-dot.green { background: var(--green-bright); }
-
-.timeline-date {
-  font-family: 'Courier New', monospace;
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  min-width: 90px;
-  padding-top: 0.08rem;
+.tl-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--text-dim);
+  border: 2px solid var(--text-dim);
   flex-shrink: 0;
+  margin-top: 0.45rem;
+}
+.tl-dot.red { background: var(--red); border-color: var(--red); box-shadow: 0 0 8px rgba(255,60,40,0.5); }
+.tl-dot.green { background: var(--green); border-color: var(--green); box-shadow: 0 0 8px rgba(45,221,122,0.4); }
+.tl-dot.amber { background: var(--amber); border-color: var(--amber); }
+.tl-line {
+  flex: 1;
+  width: 1px;
+  min-height: 20px;
+  background: rgba(255,255,255,0.07);
+  margin-top: 2px;
 }
 
-.timeline-text { font-size: 0.95rem; color: var(--text); line-height: 1.7; }
+.tl-body { flex: 1; padding-bottom: 0.5rem; }
+.tl-date {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--amber-dim);
+  letter-spacing: 0.07em;
+  margin-bottom: 0.2rem;
+  text-transform: uppercase;
+}
+.tl-text {
+  font-size: 0.93rem;
+  color: var(--text);
+  line-height: 1.72;
+}
 
-/* ── MEMORIAL ── */
-.memorial-section {
-  border: 1px solid var(--border);
-  padding: 2rem 2.2rem;
-  margin: 3.5rem 0;
+/* ── DEMANDS / CALL TO ACTION ── */
+.cta-section {
+  border: 2px solid var(--red);
+  background: rgba(255,60,40,0.04);
+  padding: 2rem 2rem;
+  margin: 3rem 0;
   text-align: center;
   position: relative;
   opacity: 0;
-  animation: fadeUp 0.9s ease 1.6s forwards;
+  animation: fadeUp 0.7s ease 1.5s forwards;
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
 }
-
-.memorial-section::before {
-  content: '✦';
+.cta-section::before {
+  content: '★ DEMAND ★';
   position: absolute;
-  top: -0.7rem;
+  top: -0.65rem;
   left: 50%;
   transform: translateX(-50%);
   background: var(--bg);
   padding: 0 0.8rem;
-  color: var(--gold);
-  font-size: 0.95rem;
+  font-family: var(--mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.25em;
+  color: var(--red);
+  white-space: nowrap;
 }
 
-.memorial-quote {
-  font-size: clamp(0.97rem, 2.5vw, 1.08rem);
+.cta-text {
+  font-size: clamp(0.95rem, 2.4vw, 1.08rem);
   font-style: italic;
   color: var(--text-muted);
-  line-height: 1.8;
-  margin-bottom: 0.9rem;
+  line-height: 1.85;
+  margin-bottom: 0.7rem;
 }
-
-.memorial-attr {
-  font-family: 'Courier New', monospace;
-  font-size: 0.7rem;
+.cta-attr {
+  font-family: var(--mono);
+  font-size: 0.67rem;
   letter-spacing: 0.15em;
-  text-transform: uppercase;
   color: var(--text-dim);
+  text-transform: uppercase;
 }
 
 /* ── SHARE ── */
 .share-section {
   border-top: 1px solid var(--border);
-  padding: 2.2rem 0;
-  margin-top: 3.5rem;
+  padding: 2rem 0;
+  margin-top: 2.5rem;
   text-align: center;
   opacity: 0;
-  animation: fadeUp 0.9s ease 1.8s forwards;
+  animation: fadeUp 0.7s ease 1.7s forwards;
 }
 
 .share-label {
-  font-family: 'Courier New', monospace;
+  font-family: var(--mono);
   font-size: 0.66rem;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--text-dim);
-  margin-bottom: 1.1rem;
+  margin-bottom: 1rem;
 }
 
 .share-btns {
@@ -360,7 +516,7 @@ h1 em { font-style: normal; color: var(--gold-bright); }
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.5rem;
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.5rem;
 }
 
 .share-btn {
@@ -372,58 +528,86 @@ h1 em { font-style: normal; color: var(--gold-bright); }
   color: var(--text-muted);
   padding: 0.55rem 1.1rem;
   cursor: pointer;
-  font-family: 'Courier New', monospace;
-  font-size: 0.76rem;
+  font-family: var(--mono);
+  font-size: 0.74rem;
   letter-spacing: 0.07em;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   min-height: 44px;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+}
+.share-btn:hover { border-color: var(--red); color: var(--white); background: rgba(255,60,40,0.08); }
+
+.external-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
 }
 
-.share-btn:hover { border-color: rgba(255,255,255,0.3); color: var(--white); }
-.share-btn.x:hover { border-color: #aaa; color: #fff; }
-.share-btn.fb:hover { border-color: #4267B2; color: #7a9fd4; }
-.share-btn.mail:hover { border-color: var(--gold); color: var(--gold-bright); }
-
-.wiki-link {
+.ext-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.4rem;
   color: var(--text-dim);
-  font-family: 'Courier New', monospace;
-  font-size: 0.76rem;
-  letter-spacing: 0.07em;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
   text-decoration: none;
-  border-bottom: 1px solid var(--border-strong);
+  border-bottom: 1px solid transparent;
   padding-bottom: 1px;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
 }
-.wiki-link:hover { color: var(--gold-bright); border-color: var(--gold); }
+.ext-link:hover { color: var(--amber); border-color: var(--amber); }
 
 /* ── FOOTER ── */
 footer {
   border-top: 1px solid var(--border);
-  padding: 2.5rem 0 4rem;
+  padding: 2rem 0 4rem;
   text-align: center;
   opacity: 0;
-  animation: fadeIn 1s ease 2s forwards;
+  animation: fadeIn 1s ease 1.9s forwards;
 }
 
-.footer-emblem { font-size: 1.1rem; margin-bottom: 1rem; color: var(--gold-bright); letter-spacing: 0.3em; }
+.footer-emblem {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: var(--red);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
 
 .footer-text {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--text-dim);
-  font-family: 'Courier New', monospace;
-  letter-spacing: 0.06em;
+  font-family: var(--mono);
+  letter-spacing: 0.05em;
   line-height: 1.9;
 }
 
+.footer-disclaimer {
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  font-family: Georgia, serif;
+  font-style: italic;
+  line-height: 1.8;
+  margin-top: 1.2rem;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.65;
+}
+
 /* ── ANIMATIONS ── */
+@keyframes slamIn {
+  from { opacity: 0; transform: scale(1.12) translateY(-10px); filter: blur(4px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+}
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
+  from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 @keyframes fadeIn {
@@ -434,35 +618,31 @@ footer {
 /* ── RESPONSIVE ── */
 @media (max-width: 520px) {
   :root { --pad: 1.1rem; }
-  header { padding: 3.5rem 0 2.5rem; }
-  .stats-bar { grid-template-columns: repeat(3, 1fr); }
-  .stat-item { padding: 0.9rem 0.4rem; }
-  .timeline-item { flex-direction: column; gap: 0.3rem; }
-  .timeline-date { min-width: unset; }
-  .memorial-section { padding: 1.4rem 1.1rem; }
-  .pull-quote { padding-left: 1.1rem; }
-  .rtl .pull-quote { padding-right: 1.1rem; padding-left: 0; }
+  header { padding: 3rem 0 1.8rem; }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  .stat-item:nth-child(2), .stat-item:nth-child(4) { border-right: none; }
+  .stat-item:nth-child(3), .stat-item:nth-child(4) { border-top: 1px solid var(--red-dark); }
+  .timeline-item { flex-direction: row; }
+  .cta-section { padding: 1.5rem 1.1rem; }
+  .demand-box { padding-left: 1rem; }
   .share-btns { flex-direction: column; align-items: center; }
-  .share-btn { width: 100%; justify-content: center; max-width: 300px; }
-  .lang-btn { padding: 0.5rem 0.75rem; font-size: 0.82rem; }
-}
-
-@media (max-width: 360px) {
-  .stats-bar { grid-template-columns: 1fr 1fr; }
-  .stat-item:nth-child(2) { border-right: none; }
-  .stat-item:nth-child(3) { border-right: none; border-top: 1px solid var(--border); grid-column: 1 / -1; }
+  .share-btn { width: 100%; justify-content: center; max-width: 280px; }
 }
 </style>
 </head>
 <body>
 
+<div class="alert-bar">
+  <span id="i-alert">▶ Iran · 8 January – 26 May 2026 · 138 Days of Deliberate Darkness · The Record Is Here</span>
+</div>
+
 <div class="container">
 
 <header>
-  <div class="counter-badge" id="i-badge">Iran · 2025–2026 · 88 Days of Darkness</div>
-  <h1 id="i-title">They Cut the Wires.<br><em>They Could Not Cut the Truth.</em></h1>
-  <p class="subtitle" id="i-subtitle">A memorial and testimony — the internet blackout imposed by the Islamic Republic terrorist regime in Iran</p>
-  <div class="divider"></div>
+  <div class="days-counter">138</div>
+  <span class="days-label" id="i-days-label">Days the Islamic Republic Silenced Iran</span>
+  <h1 id="i-title">They Cut the Wires.<br><em>We Are Still Shouting.</em></h1>
+  <p class="subtitle" id="i-subtitle">The 2026 internet blackout imposed on Iran — a documented record of a terrorist regime's war against its own people</p>
 </header>
 
 <div class="lang-section">
@@ -477,274 +657,345 @@ footer {
   </div>
 </div>
 
-<div class="stats-bar">
-  <div class="stat-item">
-    <span class="stat-number">88</span>
-    <span class="stat-label" id="i-s1">Days of blackout</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-number">92M+</span>
-    <span class="stat-label" id="i-s2">People silenced</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-number">40,000+</span>
-    <span class="stat-label" id="i-s3">Killed in protests</span>
+<div class="stats-section">
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-number">138</span>
+      <span class="stat-label" id="i-s1">Days of blackout</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">1%</span>
+      <span class="stat-label" id="i-s2">Min. connectivity reached</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">$1.8B+</span>
+      <span class="stat-label" id="i-s3">Borne by the people</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">40,000+</span>
+      <span class="stat-label" id="i-s4">Killed by the regime</span>
+    </div>
   </div>
 </div>
+<div class="stats-footnote" id="i-stats-footnote">8 Jan – 26 May 2026 · Sources: NetBlocks, Iran International, Filterwatch, Human Rights Watch, Cloudflare Radar</div>
 
-<!-- MAIN TEXT — single block, content swapped by JS -->
+<div class="status-restored">
+  <p id="i-status-text"><span class="dot-green"></span><strong>Internet partially restored — 26 May 2026.</strong> After 138 days, connectivity returned — but the censorship is heavier than ever. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram, and thousands of other services remain blocked. Speeds are slower. Surveillance is deeper. The regime's filter wall is stronger. This is not freedom — it is a managed cage.</p>
+</div>
+
 <div id="main-text" class="text-block" lang="en"></div>
 
-<!-- TIMELINE -->
 <div class="timeline-section">
-  <div class="section-title" id="i-tl-title">Timeline of the Blackout</div>
+  <div class="section-header">
+    <div class="section-header-line"></div>
+    <div class="section-header-label" id="i-tl-title">Timeline of the Blackout</div>
+    <div class="section-header-line right"></div>
+  </div>
   <div id="timeline-items"></div>
 </div>
 
-<!-- MEMORIAL -->
-<div class="memorial-section">
-  <p class="memorial-quote" id="i-mem-quote">"They thought if they killed the signal,<br>they could kill the story.<br>But we are the story. And we are still here."</p>
-  <div class="memorial-attr" id="i-mem-attr">— Voice of the Iranian resistance, 2026</div>
+<div class="cta-section">
+  <p class="cta-text" id="i-cta-text">"They thought if they killed the signal, they could kill the story. But we are the story — and we are still shouting. The internet is back. The censorship never left. The fight is not over."</p>
+  <div class="cta-attr" id="i-cta-attr">— Voice of the Iranian resistance, 2026</div>
 </div>
 
-<!-- SHARE -->
 <div class="share-section">
-  <div class="share-label" id="i-share-label">Share this page</div>
+  <div class="share-label" id="i-share-label">Spread the word — break their silence</div>
   <div class="share-btns">
-    <a class="share-btn x" href="#" id="btn-x" onclick="shareX(); return false;">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    <a class="share-btn" href="#" onclick="shareX(); return false;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
       <span id="i-share-x">Share on X</span>
     </a>
-    <a class="share-btn fb" href="#" id="btn-fb" onclick="shareFB(); return false;">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    <a class="share-btn" href="#" onclick="shareFB(); return false;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
       <span id="i-share-fb">Share on Facebook</span>
     </a>
-    <a class="share-btn mail" href="#" id="btn-mail" onclick="shareEmail(); return false;">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+    <a class="share-btn" href="#" onclick="shareEmail(); return false;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
       <span id="i-share-mail">Share via Email</span>
     </a>
   </div>
-  <a class="wiki-link" href="https://en.wikipedia.org/wiki/2026_Internet_blackout_in_Iran" target="_blank" rel="noopener">
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-    <span id="i-wiki-text">Read more on Wikipedia: 2026 Internet blackout in Iran</span>
-  </a>
-  <br><br>
-  <a class="wiki-link" href="https://github.com/iraninternetblackout/iraninternetblackout.github.io" target="_blank" rel="noopener" id="btn-github">
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-    <span id="i-github-text">Contribute on GitHub</span>
-  </a>
+  <div class="external-links">
+    <a class="ext-link" href="https://en.wikipedia.org/wiki/2026_Internet_blackout_in_Iran" target="_blank" rel="noopener" id="btn-wiki">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      <span id="i-wiki-text">Wikipedia: 2026 Internet blackout in Iran</span>
+    </a>
+    <a class="ext-link" href="https://github.com/iraninternetblackout/iraninternetblackout.github.io" target="_blank" rel="noopener">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+      <span id="i-github-text">Contribute on GitHub</span>
+    </a>
+  </div>
 </div>
 
 <footer>
-  <div class="footer-emblem">— ✦ —</div>
-  <div class="footer-text" id="i-footer">In memory of every voice silenced, every image blocked, every connection severed.<br>This page requires no internet. It carries the record within itself.</div>
+  <div class="footer-emblem">▶ WITNESS · RESIST · REMEMBER ◀</div>
+  <div class="footer-text" id="i-footer">Every photo never uploaded. Every call that never went through. Every family that couldn't reach each other.<br>This page carries the record. Pass it on.</div>
+  <div class="footer-disclaimer" id="i-disclaimer">This page stands with the people of Iran — not with the regime that cages them. Our anger is directed solely at the Islamic Republic terrorist regime that has occupied, impoverished, and silenced the Iranian people for over four decades.</div>
 </footer>
 
-</div><!-- .container -->
+</div>
 
 <script>
-var LANGS = ['en','fa','it','es','he','fr'];
+var WIKI_LINKS = {
+  en: 'https://en.wikipedia.org/wiki/2026_Internet_blackout_in_Iran',
+  fa: 'https://fa.wikipedia.org/wiki/%D9%82%D8%B7%D8%B9%DB%8C_%D8%A7%DB%8C%D9%86%D8%AA%D8%B1%D9%86%D8%AC%DB%8C_%D8%A7%DB%8C%D8%B1%D8%A7%D9%86_(%DB%B2%DB%B0%DB%B2%DB%B6)',
+  it: 'https://it.wikipedia.org/wiki/Blackout_di_Internet_in_Iran_del_2026',
+  es: 'https://es.wikipedia.org/wiki/Apag%C3%B3n_de_Internet_en_Ir%C3%A1n_de_2026',
+  he: 'https://he.wikipedia.org/wiki/%D7%94%D7%A9%D7%91%D7%AA%D7%AA_%D7%94%D7%90%D7%99%D7%A0%D7%98%D7%A8%D7%A0%D7%98_%D7%91%D7%90%D7%99%D7%A8%D7%90%D7%9F_(2026)',
+  fr: 'https://fr.wikipedia.org/wiki/Coupure_d%27Internet_en_Iran_de_2026'
+};
 
 var T = {
   en: {
-    badge: 'Iran · 2025–2026 · 88 Days of Darkness',
-    title: 'They Cut the Wires.<br><em>They Could Not Cut the Truth.</em>',
-    subtitle: 'A memorial and testimony — the internet blackout imposed by the Islamic Republic terrorist regime in Iran',
+    alert: '▶ Iran · 8 January – 26 May 2026 · 138 Days of Deliberate Darkness · The Record Is Here',
+    daysLabel: 'Days the Islamic Republic Silenced Iran',
+    title: 'They Cut the Wires.<br><em>We Are Still Shouting.</em>',
+    subtitle: 'The 2026 internet blackout imposed on Iran — a documented record of a terrorist regime\'s war against its own people',
     langLabel: 'Select Language',
-    s1: 'Days of blackout', s2: 'People silenced', s3: 'Killed in protests',
+    s1: 'Days of blackout', s2: 'Min. connectivity reached', s3: 'Borne by the people', s4: 'Killed by the regime',
+    statsFootnote: '8 Jan – 26 May 2026 · Sources: NetBlocks, Iran International, Filterwatch, Human Rights Watch, Cloudflare Radar',
+    statusText: '<span class="dot-green"></span><strong>Internet partially restored — 26 May 2026.</strong> After 138 days, connectivity returned — but the censorship is heavier than ever. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram, and thousands of other services remain blocked. Speeds are slower. Surveillance is deeper. The regime\'s filter wall is stronger. This is not freedom — it is a managed cage.',
     tlTitle: 'Timeline of the Blackout',
     timeline: [
-      { dot: '', date: 'Late 2025', text: 'Nationwide protests erupt across Iran. Men, women, and children take to the streets demanding freedom after decades of religious tyranny and economic ruin. The Islamic Republic terrorist regime responds immediately with internet throttling and targeted service shutdowns to prevent coordination and documentation.' },
-      { dot: 'red', date: 'Late 2025', text: 'Full internet blackout imposed. Tens of millions of Iranians lose access to the global web. International news cannot reach the country. Images of protests cannot leave it. The massacre begins in silence.' },
-      { dot: 'green', date: 'Early 2026', text: 'Partial lifting of the blackout — a deliberate pause, not a retreat. The Islamic Republic terrorist regime allows limited access while continuing to monitor and suppress dissent. The death toll continues to climb past 40,000. The regime uses the window to push citizens toward its surveillance networks.' },
-      { dot: '', date: '88 Days Total', text: 'The cumulative blackout spans 88 days — among the longest sustained internet shutdowns imposed on any population in modern history. Over 40,000 people killed. The world was kept in the dark by design, so that the terrorist regime\'s crimes against the Iranian people could be erased from the record.' }
+      { dot: 'red', date: '8 Jan 2026', text: 'On the twelfth day of nationwide protests demanding the end of the Islamic Republic, the regime pulls the plug. Internet and phone lines collapse across Tehran, Isfahan, Shiraz, Kermanshah, Lordegan, and Abdanan. By afternoon, Iran is almost entirely offline. NetBlocks calls it a "nationwide internet blackout" — the beginning of 138 days of engineered darkness.' },
+      { dot: '', date: '11–20 Jan 2026', text: 'The regime escalates: GPS jamming cripples Starlink (up to 80% packet loss), satellite dishes are seized door-to-door, and Starlink access is cut entirely for the first time. Under cover of the blackout, security forces intensify the massacre of protesters. State TV is briefly hijacked by hackers broadcasting support for the Iranian people.' },
+      { dot: '', date: '28 Jan 2026', text: 'A tactical "relaxation" — not restoration. A whitelist system now decides who may reach the outside world. Online sales collapse 80%. The Tehran Stock Exchange loses 450,000 points and ~130 trillion tomans per day. Officials admit costs of $35.7 million daily — a burden carried entirely by the Iranian people, while the regime\'s officials and their families enjoy unrestricted access.' },
+      { dot: 'red', date: '28 Feb 2026', text: 'Following Israeli–US strikes on Iran, the regime slams the country back into near-total darkness. NetBlocks records connectivity at just 4% of normal. The blackout is now also a wartime cover-up.' },
+      { dot: 'red', date: '6 Mar 2026', text: 'Connectivity flatlines at ~1% of normal for weeks. Iranians abroad cannot reach family. Volunteer-built missile alert maps fill the void left by a regime that refuses to warn its own people of incoming strikes. Some Iranians cross into Turkey just to get online and contact loved ones.' },
+      { dot: '', date: '11–21 Apr 2026', text: 'The blackout passes 1,000 hours, then its 53rd consecutive day — the longest nationwide internet shutdown ever recorded on Earth. The regime restores access only to "favored groups." Estimated losses reach $1.8 billion and counting, with daily bleeding of $70–80 million — money taken from the pockets of ordinary Iranians, not the regime. Thousands remain in prison, many facing the death penalty for protesting.' },
+      { dot: 'amber', date: '26 May 2026', text: 'After 138 days, President Pezeshkian\'s cyberspace task force votes to restore international internet access. Connectivity slowly returns. But YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram, and thousands of sites remain blocked. Speeds are below pre-blackout levels. Surveillance is deeper. For millions of Iranians — content creators, students, freelancers, families — the digital damage is permanent and ongoing.' }
     ],
-    memQuote: '"They thought if they killed the signal,<br>they could kill the story.<br>But we are the story. And we are still here."',
-    memAttr: '— Voice of the Iranian resistance, 2026',
-    shareLabel: 'Share this page',
+    ctaText: '"They thought if they killed the signal, they could kill the story. But we are the story — and we are still shouting. The internet is back. The censorship never left. The fight is not over."',
+    ctaAttr: '— Voice of the Iranian resistance, 2026',
+    shareLabel: 'Spread the word — break their silence',
     shareX: 'Share on X', shareFB: 'Share on Facebook', shareMail: 'Share via Email',
-    wikiText: 'Read more on Wikipedia: 2026 Internet blackout in Iran',
+    wikiText: 'Wikipedia: 2026 Internet blackout in Iran',
     githubText: 'Contribute on GitHub',
-    footer: 'In memory of every voice silenced, every image blocked, every connection severed.<br>This page requires no internet. It carries the record within itself.',
+    footer: 'Every photo never uploaded. Every call that never went through. Every family that couldn\'t reach each other.<br>This page carries the record. Pass it on.',
+    disclaimer: 'This page stands with the people of Iran — not with the regime that cages them. Our anger is directed solely at the Islamic Republic terrorist regime that has occupied, impoverished, and silenced the Iranian people for over four decades.',
     bodyClass: '', bodyFont: '',
-    mainText: `<p>The <strong>Islamic Republic terrorist regime in Iran</strong> did not merely cut internet cables. It committed a deliberate and calculated act of war against the Iranian people — severing the arteries of communication, memory, and witness at the very moment the streets were full of voices demanding to be heard. This is the story of <strong>88 days of engineered darkness</strong>, imposed to protect a terrorist regime, not a nation.</p>
-<p>When the nationwide protests erupted across Iran in 2025–2026 — men, women, and children who had endured decades of religious tyranny, economic ruin, and systemic brutality — the terrorist regime's first reflex was not dialogue. It was silence. Access to the global internet was severed for <strong>tens of millions of people</strong>. Throttled. Blocked. Erased. The world outside Iran could not hear the screams. The people of Iran could not call for help.</p>
-<div class="pull-quote">"A government that fears the phone in your pocket is a government that knows it is committing crimes."</div>
-<p>Security forces escalated their crackdown, and the blackout gave them cover. This was not coincidence. This was operational: shut off the cameras, remove the witnesses, massacre in the dark. <strong>More than 40,000 civilians</strong> were killed during the protests — unarmed people, students, workers, mothers — while the terrorist regime ensured no image, no video, no voice could escape in real time. The blackout was not a defensive measure. It was cover for mass atrocity.</p>
-<p>But the darkness served a second, more insidious purpose. With the open internet cut off, the terrorist regime attempted to herd the Iranian population onto government-controlled domestic networks — surveillance platforms built not to connect people, but to <strong>monitor and trap them</strong>. The goal was not temporary disconnection. The goal was <em>permanent replacement</em>: to make Iranians so accustomed to their digital cage that they would forget what freedom online felt like. A people forcibly disconnected and then handed a leash instead of a lifeline.</p>
-<p>This blackout is a crime against humanity's right to witness. Every death hidden behind a severed connection is a death the terrorist regime has tried to render invisible. Every protest photo never uploaded, every distress call never made, every coordination message blocked — these are not technical failures. They are <strong>acts of state terror dressed in infrastructure</strong>.</p>
-<p>The people of Iran are not asking for sympathy. They are asking for the world to <em>see</em> what is being done to them — and to refuse to look away. The terrorist regime can cut cables. It cannot cut memory. It cannot cut solidarity. And it cannot cut the truth: that a terrorist regime which must silence 92 million people to survive has already lost any claim to legitimacy.</p>
-<div class="pull-quote">Stand with the Iranian people — not only with words, but with witness, with documentation, with refusal to normalize the erasure of an entire nation's voice.</div>`
+    mainText: `<p>The <strong>Islamic Republic terrorist regime</strong> did not merely cut internet cables. It committed a calculated act of war against the people it occupies — severing communication, memory, and witness at the exact moment tens of millions of Iranians were demanding its end. What follows is the record of <strong>138 days of engineered darkness</strong>: 8 January to 26 May 2026, the longest nationwide internet shutdown ever recorded in human history.</p>
+<p>When nationwide protests erupted in late 2025 and surged into 2026 — Iranians of every background, united in demanding the end of four decades of theocratic tyranny — the regime's answer was not dialogue. It was the kill switch. Within hours of protests on 8 January 2026, the junta severed internet and phone service nationwide. <strong>Tens of millions of people</strong> were thrown into enforced silence so the regime could commit its crimes unseen.</p>
+<div class="demand-box">"A government that fears the phone in your pocket is a government that knows it is committing crimes."</div>
+<p>The blackout was operational cover for slaughter. While Iran went dark, security forces killed <strong>more than 40,000 people</strong> according to human rights monitors — a number that climbed under a media blackout designed to make counting the dead impossible. Thousands more remain in prison today, many on charges that carry the death penalty, tried in sham proceedings with no access to independent lawyers or public scrutiny. Amnesty International and Human Rights Watch have both stated plainly: the blackout existed to hide massacres from the world.</p>
+<p>The economic cost was borne entirely by <strong>the Iranian people — not the regime</strong>. Officials, their families, and IRGC networks maintained access throughout. Ordinary Iranians — shopkeepers, content creators, students, nurses, freelancers — lost their livelihoods overnight. An estimated <strong>$1.8 billion and counting</strong> was stripped from the Iranian economy; the regime's chamber of commerce estimated daily losses of $30–40 million, with indirect losses likely double. Ten million jobs depend on internet connectivity. Those ten million people paid the price. The regime paid nothing.</p>
+<div class="demand-box">"Our families couldn't reach us. Our businesses collapsed. Our savings vanished. And the men who ordered it kept their access, their salaries, and their impunity." — Iranian business owner, May 2026</div>
+<p>The regime also hunted down every remaining lifeline. GPS jamming was deployed to cripple Starlink, satellite dishes were confiscated door-to-door, and tens of thousands of Starlink connections were reportedly cut. Using Starlink in Iran is now punishable by <strong>up to ten years in prison — or execution</strong>. That is the measure of what this regime fears most: its own citizens talking to the world.</p>
+<p>On <strong>26 May 2026</strong>, after 138 days, connectivity was partially restored — but the battle is far from over. The blackout ended; the censorship did not. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram, and thousands of other platforms and services remain blocked. Internet speeds are below pre-shutdown levels. Surveillance infrastructure built during the blackout remains in place and has been deepened. Automated verification messages on phone calls suggest routine monitoring. <strong>The regime has not restored the internet — it has replaced it with a tighter cage.</strong> Content creators have lost audiences built over years. Freelancers have lost clients. Students have lost access to global knowledge. The humiliation of Iranians forced to use a filtered, surveilled, degraded internet every day is not a footnote — it is the ongoing policy.</p>
+<div class="demand-box">The internet is back. 40,000 are still dead. Thousands are still in prison. The censorship is still there. The fight is not over. Witness what they cannot broadcast. Refuse to let their silence become yours.</div>`
   },
 
   fa: {
-    badge: 'ایران · ۱۴۰۴–۱۴۰۵ · ۸۸ روز تاریکی',
-    title: 'سیم‌ها را بریدند.<br><em>اما نتوانستند حقیقت را ببرند.</em>',
-    subtitle: 'یادبود و شهادت — قطعی اینترنت تحمیل‌شده توسط رژیم تروریستی جمهوری اسلامی در ایران',
+    alert: '▶ ایران · ۱۸ دی – ۵ خرداد ۱۴۰۴ · ۱۳۸ روز تاریکی عمدی · سند اینجاست',
+    daysLabel: 'روزی که جمهوری اسلامی ایران را خاموش کرد',
+    title: 'سیم‌ها را بریدند.<br><em>ما هنوز فریاد می‌زنیم.</em>',
+    subtitle: 'قطعی اینترنت ۱۴۰۴ در ایران — سند رسمی جنگ یک رژیم تروریست علیه مردم خودش',
     langLabel: 'انتخاب زبان',
-    s1: 'روز قطعی', s2: 'نفر خاموش شد', s3: 'کشته در اعتراضات',
+    s1: 'روز قطعی', s2: 'کمترین اتصال ثبت‌شده', s3: 'تحمیل‌شده بر مردم', s4: 'کشته‌شده توسط رژیم',
+    statsFootnote: '۱۸ دی ۱۴۰۴ – ۵ خرداد ۱۴۰۴ · منابع: نت‌بلاکس، ایران اینترنشنال، فیلتروواچ، دیده‌بان حقوق بشر',
+    statusText: '<span class="dot-green"></span><strong>اینترنت به‌طور نسبی بازگشت — ۵ خرداد ۱۴۰۴.</strong> پس از ۱۳۸ روز، اتصال برگشت — اما سانسور سنگین‌تر از همیشه است. یوتیوب، اینستاگرام، واتساپ، فیسبوک، توییتر/ایکس، تلگرام و هزاران سرویس دیگر همچنان مسدودند. سرعت کمتر. نظارت بیشتر. دیوار فیلتر رژیم محکم‌تر شده. این آزادی نیست — این یک قفس مدیریت‌شده است.',
     tlTitle: 'جدول زمانی قطعی اینترنت',
     timeline: [
-      { dot: '', date: 'اواخر ۱۴۰۴', text: 'اعتراضات سراسری در ایران آغاز می‌شود. مردان، زنان و کودکان به خیابان‌ها می‌ریزند. رژیم تروریستی جمهوری اسلامی در ایران بلافاصله با محدود کردن اینترنت و قطع سرویس‌ها پاسخ می‌دهد.' },
-      { dot: 'red', date: 'اواخر ۱۴۰۴', text: 'قطعی کامل اینترنت اعمال می‌شود. ده‌ها میلیون ایرانی دسترسی به اینترنت جهانی را از دست می‌دهند. اخبار بین‌المللی به کشور نمی‌رسد. تصاویر اعتراضات نمی‌توانند خارج شوند. کشتار در سکوت آغاز می‌شود.' },
-      { dot: 'green', date: 'اوایل ۱۴۰۵', text: 'قطعی تا حدودی برداشته می‌شود — یک توقف عمدی، نه عقب‌نشینی. رژیم تروریستی از این فرصت استفاده می‌کند تا شهروندان را به شبکه‌های نظارتی داخلی خود سوق دهد. تعداد کشته‌شدگان از ۴۰٬۰۰۰ نفر می‌گذرد.' },
-      { dot: '', date: 'جمعاً ۸۸ روز', text: 'مجموع قطعی اینترنت به ۸۸ روز می‌رسد — یکی از طولانی‌ترین قطعی‌های اینترنت در تاریخ مدرن. بیش از ۴۰٬۰۰۰ نفر کشته شده‌اند. جهان عمداً در تاریکی نگه داشته شد تا جنایات رژیم تروریستی علیه مردم ایران از حافظه پاک شود.' }
+      { dot: 'red', date: '۱۸ دی ۱۴۰۴', text: 'در دوازدهمین روز اعتراضات سراسری برای پایان جمهوری اسلامی، رژیم کلید قطع را می‌زند. اینترنت و تلفن در تهران، اصفهان، شیراز، کرمانشاه، لردگان و آبدانان قطع می‌شود. تا عصر، ایران تقریباً کاملاً آفلاین است. نت‌بلاکس آن را «قطعی سراسری اینترنت» می‌نامد — آغاز ۱۳۸ روز تاریکی مهندسی‌شده.' },
+      { dot: '', date: '۲۱–۳۰ دی ۱۴۰۴', text: 'رژیم تشدید می‌کند: اختلال جی‌پی‌اس استارلینک را فلج می‌کند (تا ۸۰٪ افت بسته)، دیش‌های ماهواره خانه‌به‌خانه مصادره می‌شوند و دسترسی به استارلینک برای اولین بار کاملاً قطع می‌شود. زیر پوشش قطعی، نیروهای امنیتی قتل‌عام معترضان را تشدید می‌کنند.' },
+      { dot: '', date: '۸ بهمن ۱۴۰۴', text: '«تخفیف» تاکتیکی — نه بازگشت. سیستم لیست سفید تعیین می‌کند چه کسی به خارج دسترسی دارد. فروش آنلاین ۸۰٪ سقوط می‌کند. بورس تهران ۴۵۰٬۰۰۰ واحد از دست می‌دهد. این هزینه را مردم ایران می‌پردازند، نه رژیم.' },
+      { dot: 'red', date: '۹ اسفند ۱۴۰۴', text: 'پس از حملات اسرائیل–آمریکا به ایران، رژیم کشور را دوباره در تاریکی فرو می‌برد. نت‌بلاکس اتصال را تنها ۴٪ از سطح معمول ثبت می‌کند.' },
+      { dot: 'red', date: '۱۵ اسفند ۱۴۰۴', text: 'اتصال برای هفته‌ها در حدود ۱٪ از سطح معمول متوقف می‌شود. ایرانیان خارج از کشور نمی‌توانند با خانواده تماس بگیرند. نقشه‌های هشدار موشکی داوطلبانه جای خلأ رژیمی را می‌گیرند که مردم خود را از حملات آتی مطلع نمی‌سازد.' },
+      { dot: '', date: '۲۲ فروردین – ۱ اردیبهشت ۱۴۰۴', text: 'قطعی از ۱٬۰۰۰ ساعت می‌گذرد؛ طولانی‌ترین قطعی سراسری اینترنت در تاریخ بشر. رژیم فقط به «گروه‌های مورد نظر» دسترسی می‌دهد. زیان اقتصادی: ۱.۸ میلیارد دلار و همچنان در حال افزایش — پولی که از جیب مردم رفت نه رژیم. هزاران نفر در زندان هستند، بسیاری با اتهاماتی که مجازات اعدام دارند.' },
+      { dot: 'amber', date: '۵ خرداد ۱۴۰۴', text: 'پس از ۱۳۸ روز، اتصال به‌صورت نسبی بازگشت. اما یوتیوب، اینستاگرام، واتساپ، فیسبوک، توییتر/ایکس، تلگرام و هزاران سایت هنوز مسدودند. سرعت کمتر از قبل. نظارت عمیق‌تر. برای میلیون‌ها ایرانی — خسارت دیجیتال دائمی است.' }
     ],
-    memQuote: '«فکر می‌کردند اگر سیگنال را بکشند،<br>می‌توانند داستان را بکشند.<br>اما ما داستان هستیم. و هنوز اینجاییم.»',
-    memAttr: '— صدای مقاومت ایرانیان، ۱۴۰۵',
-    shareLabel: 'این صفحه را به اشتراک بگذارید',
+    ctaText: '«فکر می‌کردند اگر سیگنال را بکشند، می‌توانند داستان را بکشند. اما ما داستان هستیم — و هنوز فریاد می‌زنیم. اینترنت برگشت. سانسور هرگز نرفت. مبارزه تمام نشده.»',
+    ctaAttr: '— صدای مقاومت ایرانیان، ۱۴۰۴',
+    shareLabel: 'پخش کنید — سکوت آن‌ها را بشکنید',
     shareX: 'اشتراک در X', shareFB: 'اشتراک در فیسبوک', shareMail: 'ارسال با ایمیل',
-    wikiText: 'بیشتر بخوانید در ویکی‌پدیا: قطعی اینترنت ۲۰۲۶ در ایران',
+    wikiText: 'ویکی‌پدیا: قطعی اینترنت ایران ۱۴۰۴',
     githubText: 'مشارکت در گیت‌هاب',
-    footer: 'در یاد هر صدایی که خاموش شد، هر تصویری که مسدود شد، هر اتصالی که قطع شد.<br>این صفحه به اینترنت نیاز ندارد. سند را در خود حمل می‌کند.',
+    footer: 'هر عکسی که آپلود نشد. هر تماسی که برقرار نشد. هر خانواده‌ای که نتوانست به هم برسد.<br>این صفحه سند را حمل می‌کند. آن را منتشر کنید.',
+    disclaimer: 'این صفحه در کنار مردم ایران ایستاده — نه علیه آنان. خشم ما تنها متوجه رژیم تروریستی جمهوری اسلامی است.',
     bodyClass: 'rtl', bodyFont: 'fa-font',
-    mainText: `<p><strong>رژیم تروریستی جمهوری اسلامی در ایران</strong> صرفاً کابل‌های اینترنت را قطع نکرد. این رژیم یک عمل عمدی و از پیش‌حساب‌شده علیه مردم ایران مرتکب شد — رگ‌های ارتباط، حافظه، و شهادت را در همان لحظه‌ای برید که خیابان‌ها لبریز از صداهایی بود که می‌خواستند شنیده شوند. این است داستان <strong>۸۸ روز تاریکی مهندسی‌شده</strong> — تاریکی‌ای که برای حفاظت از یک رژیم تروریستی تحمیل شد، نه یک ملت.</p>
-<p>وقتی اعتراضات سراسری در ایران در سال‌های ۱۴۰۴–۱۴۰۵ به پا خاست — مردان، زنان و کودکانی که دهه‌ها زیر یوغ استبداد دینی، ویرانی اقتصادی و خشونت نظام‌مند دوام آورده بودند — نخستین واکنش رژیم تروریستی گفت‌وگو نبود. سکوت بود. دسترسی به اینترنت جهانی برای <strong>ده‌ها میلیون نفر</strong> قطع شد. خفه شد. مسدود شد. محو شد.</p>
-<div class="pull-quote">«حکومتی که از گوشی تلفن در جیب تو می‌ترسد، حکومتی است که می‌داند جنایت می‌کند.»</div>
-<p>نیروهای امنیتی سرکوب را تشدید کردند و قطعی اینترنت پوشش لازم را فراهم کرد. این تصادف نبود. این یک عملیات بود: دوربین‌ها را خاموش کن، شاهدان را حذف کن، در تاریکی قتل‌عام کن. <strong>بیش از ۴۰٬۰۰۰ نفر</strong> در جریان اعتراضات کشته شدند — غیرنظامیان بی‌سلاح، دانشجویان، کارگران، مادران — در حالی که رژیم تروریستی اطمینان حاصل می‌کرد هیچ تصویری، هیچ ویدیویی، هیچ صدایی نمی‌تواند بگریزد. قطعی اینترنت یک اقدام دفاعی نبود. پوشش برای جنایت دسته‌جمعی بود.</p>
-<p>اما تاریکی هدف دومی هم داشت، شومتر و موذیانه‌تر. با قطع اینترنت آزاد، رژیم تروریستی تلاش کرد مردم ایران را به‌سمت شبکه‌های داخلی تحت کنترل خود سوق دهد — پلتفرم‌های نظارتی که نه برای ارتباط مردم، بلکه برای <strong>کنترل و به‌دام‌انداختن آن‌ها</strong> ساخته شده‌اند. هدف قطعی موقت نبود. هدف <em>جایگزینی دائمی</em> بود: آنقدر مردم ایران را به قفس دیجیتال‌شان عادت دهد که فراموش کنند آزادی در فضای مجازی چه حسی دارد.</p>
-<p>این قطعی اینترنت جنایتی است علیه حق بشریت برای شاهد بودن. هر مرگی که پشت یک اتصال قطع‌شده پنهان مانده، مرگی است که رژیم تروریستی کوشیده ناپدیدش کند. مردم ایران دلسوزی نمی‌خواهند. آن‌ها از جهان می‌خواهند که <em>ببیند</em> چه بلایی بر سرشان آمده — و از دیدن روی برنگرداند.</p>
-<div class="pull-quote">در کنار مردم ایران بایستید — نه فقط با کلمات، بلکه با شهادت، با مستندسازی، با امتناع از عادی‌انگاشتن محو صدای یک ملت.</div>`
+    mainText: `<p><strong>رژیم تروریستی جمهوری اسلامی</strong> صرفاً کابل اینترنت نبرید. یک عمل جنگی حساب‌شده علیه مردمی که ادعای حکومت بر آن‌ها را دارد مرتکب شد — رگ‌های ارتباط، حافظه و شهادت را در همان لحظه‌ای قطع کرد که ده‌ها میلیون ایرانی خواهان پایان آن بودند. آنچه در پی می‌آید سند <strong>۱۳۸ روز تاریکی مهندسی‌شده</strong> است: ۱۸ دی تا ۵ خرداد ۱۴۰۴، طولانی‌ترین قطعی سراسری اینترنت در تاریخ بشر.</p>
+<p>وقتی اعتراضات سراسری در اواخر ۱۴۰۳ آغاز شد و تا ۱۴۰۴ ادامه یافت — ایرانیان از هر قشری، متحد در خواست پایان چهار دهه استبداد دینی — پاسخ رژیم گفت‌وگو نبود. کلید قطع بود. رژیم در عرض چند ساعت اینترنت و تلفن را در سراسر کشور قطع کرد. <strong>ده‌ها میلیون نفر</strong> در سکوت اجباری فروافتادند تا رژیم جنایاتش را پنهان کند.</p>
+<div class="demand-box">«حکومتی که از گوشی تلفن در جیب تو می‌ترسد، حکومتی است که می‌داند جنایت می‌کند.»</div>
+<p>قطعی اینترنت پوشش عملیاتی برای کشتار بود. در حالی که ایران در تاریکی بود، نیروهای امنیتی <strong>بیش از ۴۰٬۰۰۰ نفر</strong> را طبق گزارش ناظران حقوق بشر کشتند — شماری که زیر تاریکی رسانه‌ای شمارش آن غیرممکن بود. هزاران نفر دیگر امروز همچنان در زندان‌اند، بسیاری با اتهاماتی که مجازات اعدام دارند.</p>
+<p>هزینه اقتصادی را <strong>مردم ایران پرداختند — نه رژیم</strong>. مقامات، خانواده‌هایشان و شبکه‌های سپاه در طول قطعی دسترسی داشتند. ایرانیان عادی — مغازه‌داران، تولیدکنندگان محتوا، دانشجویان، پرستاران، فریلنسرها — از شبانه‌روز شغل خود را از دست دادند. تخمیناً <strong>۱.۸ میلیارد دلار و بیشتر</strong> از اقتصاد ایران خارج شد. ده میلیون شغل وابسته به اینترنت بود. آن ده میلیون نفر هزینه را پرداختند. رژیم هیچ نپرداخت.</p>
+<div class="demand-box">«خانواده‌هایمان نمی‌توانستند با ما تماس بگیرند. کسب‌وکارمان فرو پاشید. پس‌اندازمان از بین رفت. و کسانی که این دستور را دادند، دسترسی، حقوق و مصونیت خود را حفظ کردند.» — یک بازرگان ایرانی، خرداد ۱۴۰۴</div>
+<p>در <strong>۵ خرداد ۱۴۰۴</strong>، پس از ۱۳۸ روز، اتصال به‌صورت نسبی بازگشت — اما جنگ تمام نشده. قطعی پایان یافت؛ سانسور نه. یوتیوب، اینستاگرام، واتساپ، فیسبوک، توییتر/ایکس، تلگرام و هزاران پلتفرم دیگر همچنان مسدودند. سرعت اینترنت از پیش از قطعی پایین‌تر است. زیرساخت نظارتی که در دوران قطعی ساخته شد پابرجاست و تعمیق یافته. تولیدکنندگان محتوا مخاطبانی را که سال‌ها ساخته بودند از دست داده‌اند. دانشجویان به دانش جهانی دسترسی ندارند. <strong>رژیم اینترنت را بازگردانده نکرده — آن را با یک قفس تنگ‌تر جایگزین کرده.</strong></p>
+<div class="demand-box">اینترنت برگشت. ۴۰٬۰۰۰ نفر هنوز کشته‌اند. هزاران نفر هنوز در زندان‌اند. سانسور هنوز هست. مبارزه تمام نشده. شاهد آنچه آن‌ها نمی‌توانند پخش کنند باشید. سکوت آن‌ها را به سکوت خود تبدیل نکنید.</div>`
   },
 
   it: {
-    badge: 'Iran · 2025–2026 · 88 Giorni di Oscurità',
-    title: 'Hanno tagliato i fili.<br><em>Non hanno potuto tagliare la verità.</em>',
-    subtitle: 'Un memoriale e una testimonianza — il blackout internet imposto dal regime terrorista della Repubblica Islamica in Iran',
+    alert: '▶ Iran · 8 gennaio – 26 maggio 2026 · 138 giorni di oscurità deliberata · Il record è qui',
+    daysLabel: 'Giorni in cui la Repubblica Islamica ha silenziato l\'Iran',
+    title: 'Hanno tagliato i fili.<br><em>Stiamo ancora urlando.</em>',
+    subtitle: 'Il blackout internet del 2026 imposto all\'Iran — il resoconto documentato di un regime terrorista in guerra contro il suo stesso popolo',
     langLabel: 'Seleziona la lingua',
-    s1: 'Giorni di blackout', s2: 'Persone silenziate', s3: 'Uccisi nelle proteste',
+    s1: 'Giorni di blackout', s2: 'Min. connettività raggiunta', s3: 'Pagato dal popolo', s4: 'Uccisi dal regime',
+    statsFootnote: '8 gen – 26 mag 2026 · Fonti: NetBlocks, Iran International, Filterwatch, Human Rights Watch, Cloudflare Radar',
+    statusText: '<span class="dot-green"></span><strong>Internet parzialmente ripristinato — 26 maggio 2026.</strong> Dopo 138 giorni, la connettività è tornata — ma la censura è più pesante che mai. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram e migliaia di altri servizi restano bloccati. Le velocità sono più basse. La sorveglianza è più profonda. Il muro di filtraggio del regime è più resistente. Questa non è libertà — è una gabbia gestita.',
     tlTitle: 'Cronologia del Blackout',
     timeline: [
-      { dot: '', date: 'Fine 2025', text: 'Le proteste nazionali esplodono in Iran. Uomini, donne e bambini scendono in strada dopo decenni di tirannia religiosa e rovina economica. Il regime terrorista della Repubblica Islamica in Iran risponde immediatamente con la limitazione di internet e la chiusura dei servizi.' },
-      { dot: 'red', date: 'Fine 2025', text: 'Blackout internet totale imposto. Decine di milioni di iraniani perdono l\'accesso al web globale. Le notizie internazionali non raggiungono il Paese. Le immagini delle proteste non possono uscire. Il massacro inizia nel silenzio.' },
-      { dot: 'green', date: 'Inizio 2026', text: 'Parziale revoca del blackout — una pausa deliberata, non una ritirata. Il regime terrorista usa la finestra per spingere i cittadini verso le sue reti di sorveglianza interne. Il numero di morti supera i 40.000.' },
-      { dot: '', date: '88 Giorni Totali', text: 'Il blackout cumulativo dura 88 giorni — uno dei più lunghi mai imposti a una popolazione nella storia moderna. Oltre 40.000 persone uccise. Il mondo è stato tenuto al buio deliberatamente, affinché i crimini del regime terrorista contro il popolo iraniano potessero essere cancellati dalla storia.' }
+      { dot: 'red', date: '8 gen 2026', text: 'Nel dodicesimo giorno di proteste nazionali per la caduta della Repubblica Islamica, la giunta stacca la spina. Internet e telefonia collassano a Teheran, Isfahan, Shiraz, Kermanshah, Lordegan, Abdanan. Nel pomeriggio l\'Iran è quasi completamente offline. Inizio dei 138 giorni di oscurità ingegnerizzata.' },
+      { dot: '', date: '11–20 gen 2026', text: 'Il regime intensifica: jamming GPS paralizza Starlink (fino all\'80% di packet loss), le forze di sicurezza confiscano parabole porta a porta, l\'accesso a Starlink viene tagliato per la prima volta. Sotto la copertura del blackout, le forze di sicurezza intensificano il massacro dei manifestanti.' },
+      { dot: '', date: '28 gen 2026', text: 'Una "distensione" tattica — non un ripristino. Un sistema di whitelist decide chi può raggiungere il mondo esterno. Le vendite online crollano dell\'80%. La Borsa di Teheran perde 450.000 punti. Questo costo è interamente a carico del popolo iraniano, non del regime.' },
+      { dot: 'red', date: '28 feb 2026', text: 'Dopo gli attacchi israelo-statunitensi sull\'Iran, il regime ripiomba il paese quasi nel buio totale. NetBlocks registra la connettività al 4% dei livelli normali.' },
+      { dot: 'red', date: '6 mar 2026', text: 'La connettività si attesta al ~1% per settimane. Gli iraniani all\'estero non riescono a contattare i familiari. Mappe di allerta missilistica create da volontari colmano il vuoto lasciato da un regime che non avvisa i propri cittadini degli attacchi in arrivo.' },
+      { dot: '', date: '11–21 apr 2026', text: 'Il blackout supera le 1.000 ore, poi il 53° giorno consecutivo — il più lungo nella storia. Il costo stimato raggiunge $1,8 miliardi, con perdite giornaliere di $70–80 milioni — soldi tolti dalle tasche degli iraniani, non del regime. Migliaia di persone restano in carcere, molte rischiando la pena di morte.' },
+      { dot: 'amber', date: '26 mag 2026', text: 'Dopo 138 giorni, la connettività viene parzialmente ripristinata. Ma YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram e migliaia di siti restano bloccati. Le velocità sono sotto i livelli precedenti. La sorveglianza è più profonda. Per milioni di iraniani il danno digitale è permanente.' }
     ],
-    memQuote: '"Pensavano che se avessero ucciso il segnale,<br>avrebbero potuto uccidere la storia.<br>Ma noi siamo la storia. E siamo ancora qui."',
-    memAttr: '— Voce della resistenza iraniana, 2026',
-    shareLabel: 'Condividi questa pagina',
+    ctaText: '"Pensavano che se avessero ucciso il segnale, avrebbero potuto uccidere la storia. Ma noi siamo la storia — e stiamo ancora urlando. Internet è tornato. La censura non è mai andata. La lotta non è finita."',
+    ctaAttr: '— Voce della resistenza iraniana, 2026',
+    shareLabel: 'Diffondi la notizia — spezza il loro silenzio',
     shareX: 'Condividi su X', shareFB: 'Condividi su Facebook', shareMail: 'Condividi via Email',
-    wikiText: 'Leggi di più su Wikipedia: Blackout Internet in Iran 2026',
+    wikiText: 'Wikipedia: Blackout di Internet in Iran del 2026',
     githubText: 'Contribuisci su GitHub',
-    footer: 'In memoria di ogni voce silenziata, ogni immagine bloccata, ogni connessione recisa.<br>Questa pagina non richiede internet. Porta il documento dentro di sé.',
+    footer: 'Ogni foto mai caricata. Ogni chiamata mai arrivata. Ogni famiglia che non è riuscita a tenersi in contatto.<br>Questa pagina porta il documento. Condividila.',
+    disclaimer: 'Questa pagina è dalla parte del popolo iraniano — non contro di esso. La nostra rabbia è diretta esclusivamente al regime terrorista della Repubblica Islamica.',
     bodyClass: '', bodyFont: '',
-    mainText: `<p>Il <strong>regime terrorista della Repubblica Islamica in Iran</strong> non ha semplicemente tagliato i cavi di internet. Ha commesso un atto deliberato e calcolato di guerra contro il popolo iraniano — recidendo le arterie della comunicazione, della memoria e della testimonianza nel preciso momento in cui le strade erano piene di voci che chiedevano di essere ascoltate. Questa è la storia di <strong>88 giorni di oscurità ingegnerizzata</strong>, imposta per proteggere un regime terrorista, non una nazione.</p>
-<p>Quando le proteste nazionali sono esplose in Iran nel 2025–2026 — uomini, donne e bambini che avevano sopportato decenni di tirannia religiosa, rovina economica e brutalità sistematica — il primo riflesso del regime terrorista non fu il dialogo. Fu il silenzio. L'accesso a internet è stato reciso per <strong>decine di milioni di persone</strong>. Limitato. Bloccato. Cancellato.</p>
-<div class="pull-quote">"Un governo che teme il telefono nel tuo taschino è un governo che sa di stare commettendo dei crimini."</div>
-<p>Le forze di sicurezza intensificarono la repressione e il blackout fornì loro copertura. Non fu una coincidenza. Fu un'operazione: spegnere le telecamere, rimuovere i testimoni, massacrare al buio. <strong>Più di 40.000 civili</strong> furono uccisi nel corso delle proteste — persone disarmate, studenti, lavoratori, madri — mentre il regime terrorista si assicurava che nessuna immagine, nessun video, nessuna voce potesse sfuggire in tempo reale.</p>
-<p>Ma il buio serviva anche un secondo scopo, ancora più insidioso. Con internet libero tagliato fuori, il regime terrorista ha cercato di spingere il popolo iraniano verso reti domestiche controllate dal regime — piattaforme di sorveglianza costruite non per connettere le persone, ma per <strong>monitorarle e intrappolarle</strong>. L'obiettivo non era una disconnessione temporanea. L'obiettivo era la <em>sostituzione permanente</em>.</p>
-<p>Questo blackout è un crimine contro il diritto dell'umanità di testimoniare. Ogni foto di protesta mai caricata, ogni chiamata di soccorso mai effettuata, ogni messaggio di coordinamento bloccato — non sono guasti tecnici. Sono <strong>atti di terrore di stato travestiti da infrastruttura</strong>.</p>
-<div class="pull-quote">Siate al fianco del popolo iraniano — non solo con le parole, ma con la testimonianza, con la documentazione, con il rifiuto di accettare come normale la cancellazione della voce di un'intera nazione.</div>`
+    mainText: `<p>Il <strong>regime terrorista della Repubblica Islamica</strong> non ha semplicemente tagliato cavi internet. Ha commesso un atto di guerra deliberato contro il popolo che dice di governare — recidendo comunicazione, memoria e testimonianza nel momento esatto in cui decine di milioni di iraniani ne chiedevano la fine. Quello che segue è il resoconto di <strong>138 giorni di oscurità ingegnerizzata</strong>: 8 gennaio – 26 maggio 2026, il più lungo blackout internet nazionale mai registrato nella storia umana.</p>
+<p>Quando le proteste sono scoppiate a fine 2025 e si sono intensificate nel 2026 — iraniani di ogni provenienza, uniti nel chiedere la fine di quattro decenni di tirannia teocratica — la risposta del regime non è stata il dialogo. È stato l'interruttore. In poche ore, la giunta ha tagliato internet e telefonia in tutto il paese. <strong>Decine di milioni di persone</strong> sono state gettate nel silenzio imposto perché il regime potesse commettere i suoi crimini senza testimoni.</p>
+<div class="demand-box">"Un governo che teme il telefono nel tuo taschino è un governo che sa di stare commettendo dei crimini."</div>
+<p>Il blackout era copertura operativa per il massacro. Mentre l'Iran era al buio, le forze di sicurezza hanno ucciso <strong>più di 40.000 persone</strong> secondo gli osservatori dei diritti umani. Migliaia di altri sono ancora in prigione oggi, molti con accuse che comportano la pena di morte, processati in procedimenti farsa.</p>
+<p>Il costo economico è stato interamente a carico <strong>del popolo iraniano — non del regime</strong>. Funzionari, familiari e reti dei Guardiani della Rivoluzione hanno mantenuto l'accesso per tutta la durata. Gli iraniani comuni — commercianti, creatori di contenuti, studenti, infermieri, freelancer — hanno perso i mezzi di sussistenza da un giorno all'altro. Si stima che <strong>$1,8 miliardi e oltre</strong> siano stati sottratti all'economia iraniana. Dieci milioni di posti di lavoro dipendono dalla connettività internet. Quei dieci milioni di persone hanno pagato il prezzo. Il regime non ha pagato nulla.</p>
+<p>Il <strong>26 maggio 2026</strong>, dopo 138 giorni, la connettività è stata parzialmente ripristinata — ma la lotta è tutt'altro che finita. Il blackout è terminato; la censura no. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram e migliaia di altri servizi restano bloccati. Le velocità sono inferiori ai livelli pre-blackout. L'infrastruttura di sorveglianza costruita durante il blackout rimane e si è approfondita. <strong>Il regime non ha ripristinato internet — l'ha sostituito con una gabbia più stretta.</strong> I creatori di contenuti hanno perso audience costruita in anni. Gli studenti non hanno accesso alla conoscenza globale. L'umiliazione degli iraniani costretti a usare ogni giorno un internet filtrato, sorvegliato e degradato non è una nota a piè di pagina — è la politica in corso.</p>
+<div class="demand-box">Internet è tornato. 40.000 sono ancora morti. Migliaia sono ancora in prigione. La censura è ancora lì. La lotta non è finita. Siate testimoni di ciò che non possono trasmettere. Rifiutate che il loro silenzio diventi il vostro.</div>`
   },
 
   es: {
-    badge: 'Irán · 2025–2026 · 88 Días de Oscuridad',
-    title: 'Cortaron los cables.<br><em>No pudieron cortar la verdad.</em>',
-    subtitle: 'Un memorial y testimonio — el apagón de internet impuesto por el régimen terrorista de la República Islámica en Irán',
+    alert: '▶ Irán · 8 enero – 26 mayo 2026 · 138 días de oscuridad deliberada · El registro está aquí',
+    daysLabel: 'Días que la República Islámica silenció Irán',
+    title: 'Cortaron los cables.<br><em>Seguimos gritando.</em>',
+    subtitle: 'El apagón de internet de 2026 impuesto sobre Irán — el registro documentado de la guerra de un régimen terrorista contra su propio pueblo',
     langLabel: 'Seleccionar idioma',
-    s1: 'Días de apagón', s2: 'Personas silenciadas', s3: 'Muertos en protestas',
+    s1: 'Días de apagón', s2: 'Mín. conectividad alcanzada', s3: 'Pagado por el pueblo', s4: 'Asesinados por el régimen',
+    statsFootnote: '8 ene – 26 may 2026 · Fuentes: NetBlocks, Iran International, Filterwatch, Human Rights Watch, Cloudflare Radar',
+    statusText: '<span class="dot-green"></span><strong>Internet parcialmente restaurado — 26 de mayo de 2026.</strong> Tras 138 días, la conectividad volvió — pero la censura es más pesada que nunca. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram y miles de otros servicios siguen bloqueados. Las velocidades son menores. La vigilancia es más profunda. El muro de filtrado del régimen es más sólido. Esto no es libertad — es una jaula administrada.',
     tlTitle: 'Cronología del Apagón',
     timeline: [
-      { dot: '', date: 'Finales 2025', text: 'Las protestas nacionales estallan en Irán. Hombres, mujeres y niños salen a las calles tras décadas de tiranía religiosa y ruina económica. El régimen terrorista de la República Islámica en Irán responde de inmediato con la limitación de internet y el cierre de servicios.' },
-      { dot: 'red', date: 'Finales 2025', text: 'Se impone un apagón total de internet. Decenas de millones de iraníes pierden acceso a la web global. Las noticias internacionales no llegan al país. Las imágenes de las protestas no pueden salir. La masacre comienza en silencio.' },
-      { dot: 'green', date: 'Principios 2026', text: 'Levantamiento parcial del apagón — una pausa deliberada, no una retirada. El régimen terrorista aprovecha la ventana para empujar a los ciudadanos hacia sus redes de vigilancia internas. El número de muertos supera los 40.000.' },
-      { dot: '', date: '88 Días Totales', text: 'El apagón acumulado dura 88 días — uno de los cortes de internet más prolongados jamás impuestos a una población en la historia moderna. Más de 40.000 personas asesinadas. El mundo fue mantenido a oscuras deliberadamente, para que los crímenes del régimen terrorista contra el pueblo iraní pudieran ser borrados.' }
+      { dot: 'red', date: '8 ene 2026', text: 'En el duodécimo día de protestas nacionales que exigen la caída de la República Islámica, la junta corta el interruptor. Internet y telefonía colapsan en Teherán, Isfahán, Shiraz, Kermanshah, Lordegan y Abdanan. Por la tarde, Irán está casi completamente desconectado. Comienzo de 138 días de oscuridad ingeniada.' },
+      { dot: '', date: '11–20 ene 2026', text: 'El régimen escala: interferencia GPS paraliza Starlink (hasta 80% de pérdida de paquetes), fuerzas de seguridad confiscan antenas casa por casa, y el acceso a Starlink es cortado por completo por primera vez. Bajo la cobertura del apagón, se intensifica la masacre de manifestantes.' },
+      { dot: '', date: '28 ene 2026', text: 'Una "distensión" táctica — no una restauración. Un sistema de lista blanca decide quién puede llegar al mundo exterior. Las ventas en línea caen un 80%. La Bolsa de Teherán pierde 450.000 puntos. Este costo lo paga íntegramente el pueblo iraní, no el régimen.' },
+      { dot: 'red', date: '28 feb 2026', text: 'Tras los ataques israelo-estadounidenses sobre Irán, el régimen vuelve a sumir al país en la oscuridad casi total. NetBlocks registra la conectividad en solo el 4% de los niveles normales.' },
+      { dot: 'red', date: '6 mar 2026', text: 'La conectividad se estanca en ~1% por semanas. Los iraníes en el extranjero no pueden contactar a sus familias. Mapas de alerta de misiles creados por voluntarios llenan el vacío dejado por un régimen que no avisa a sus ciudadanos de los ataques entrantes.' },
+      { dot: '', date: '11–21 abr 2026', text: 'El apagón supera las 1.000 horas, luego su día 53 consecutivo — el más largo de la historia. El costo estimado alcanza $1.800 millones — dinero sacado del bolsillo de los iraníes, no del régimen. Miles permanecen en prisión, muchos enfrentando la pena de muerte.' },
+      { dot: 'amber', date: '26 may 2026', text: 'Tras 138 días, la conectividad se restaura parcialmente. Pero YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram y miles de sitios siguen bloqueados. Las velocidades están por debajo de los niveles anteriores. La vigilancia se ha profundizado. Para millones de iraníes el daño digital es permanente.' }
     ],
-    memQuote: '"Pensaron que si mataban la señal,<br>podrían matar la historia.<br>Pero nosotros somos la historia. Y seguimos aquí."',
-    memAttr: '— Voz de la resistencia iraní, 2026',
-    shareLabel: 'Comparte esta página',
+    ctaText: '"Pensaron que si mataban la señal, podrían matar la historia. Pero nosotros somos la historia — y seguimos gritando. Internet volvió. La censura nunca se fue. La lucha no ha terminado."',
+    ctaAttr: '— Voz de la resistencia iraní, 2026',
+    shareLabel: 'Difunde la noticia — rompe su silencio',
     shareX: 'Compartir en X', shareFB: 'Compartir en Facebook', shareMail: 'Compartir por Email',
-    wikiText: 'Leer más en Wikipedia: Apagón de Internet en Irán 2026',
+    wikiText: 'Wikipedia: Apagón de Internet en Irán de 2026',
     githubText: 'Contribuir en GitHub',
-    footer: 'En memoria de cada voz silenciada, cada imagen bloqueada, cada conexión cortada.<br>Esta página no requiere internet. Lleva el registro dentro de sí misma.',
+    footer: 'Cada foto nunca subida. Cada llamada que nunca llegó. Cada familia que no pudo comunicarse.<br>Esta página lleva el registro. Pásala.',
+    disclaimer: 'Esta página está del lado del pueblo iraní — no en su contra. Nuestra ira se dirige únicamente al régimen terrorista de la República Islámica.',
     bodyClass: '', bodyFont: '',
-    mainText: `<p>El <strong>régimen terrorista de la República Islámica en Irán</strong> no se limitó a cortar cables de internet. Cometió un acto deliberado y calculado de guerra contra el pueblo iraní — cercenando las arterias de la comunicación, la memoria y el testimonio en el preciso momento en que las calles estaban llenas de voces que exigían ser escuchadas. Esta es la historia de <strong>88 días de oscuridad ingeniada</strong>, impuesta para proteger a un régimen terrorista, no a una nación.</p>
-<p>Cuando las protestas nacionales estallaron en Irán en 2025–2026 — hombres, mujeres y niños que habían soportado décadas de tiranía religiosa, ruina económica y brutalidad sistémica — el primer reflejo del régimen terrorista no fue el diálogo. Fue el silencio. El acceso a internet fue cortado para <strong>decenas de millones de personas</strong>. Estrangulado. Bloqueado. Borrado.</p>
-<div class="pull-quote">"Un gobierno que teme el teléfono en tu bolsillo es un gobierno que sabe que está cometiendo crímenes."</div>
-<p>Las fuerzas de seguridad intensificaron su represión y el apagón les dio cobertura. No fue una coincidencia. Fue una operación: apagar las cámaras, eliminar los testigos, masacrar en la oscuridad. <strong>Más de 40.000 civiles</strong> fueron asesinados durante las protestas — personas desarmadas, estudiantes, trabajadores, madres — mientras el régimen terrorista se aseguraba de que ninguna imagen, ningún video, ninguna voz pudiera escapar.</p>
-<p>Pero la oscuridad tenía un segundo propósito, más insidioso. Con el internet libre bloqueado, el régimen terrorista intentó conducir al pueblo iraní hacia redes domésticas controladas por el propio régimen — plataformas de vigilancia construidas no para conectar a las personas, sino para <strong>monitorizarlas y atraparlas</strong>. El objetivo no era una desconexión temporal. El objetivo era la <em>sustitución permanente</em>.</p>
-<p>Este apagón es un crimen contra el derecho de la humanidad a ser testigo. Cada foto de protesta nunca subida, cada llamada de auxilio nunca realizada, cada mensaje de coordinación bloqueado — no son fallos técnicos. Son <strong>actos de terror de estado disfrazados de infraestructura</strong>.</p>
-<div class="pull-quote">Solidarícense con el pueblo iraní — no solo con palabras, sino con testimonio, con documentación, con el rechazo a normalizar el silenciamiento de la voz de toda una nación.</div>`
+    mainText: `<p>El <strong>régimen terrorista de la República Islámica</strong> no se limitó a cortar cables de internet. Cometió un acto de guerra deliberado contra el pueblo que dice gobernar — cercenando comunicación, memoria y testimonio en el momento exacto en que decenas de millones de iraníes exigían su fin. Lo que sigue es el registro de <strong>138 días de oscuridad ingeniada</strong>: 8 de enero – 26 de mayo de 2026, el apagón de internet nacional más largo jamás registrado en la historia humana.</p>
+<p>Cuando las protestas estallaron a finales de 2025 y se intensificaron en 2026 — iraníes de todo origen, unidos en exigir el fin de cuatro décadas de tiranía teocrática — la respuesta del régimen no fue el diálogo. Fue el interruptor. En cuestión de horas, la junta cortó internet y telefonía en todo el país. <strong>Decenas de millones de personas</strong> fueron sumidas en silencio forzado para que el régimen pudiera cometer sus crímenes sin testigos.</p>
+<div class="demand-box">"Un gobierno que teme el teléfono en tu bolsillo es un gobierno que sabe que está cometiendo crímenes."</div>
+<p>El apagón fue cobertura operativa para la masacre. Mientras Irán estaba a oscuras, las fuerzas de seguridad mataron a <strong>más de 40.000 personas</strong> según los observadores de derechos humanos. Miles más siguen hoy en prisión, muchos con cargos que conllevan la pena de muerte, juzgados en procesos simulacro.</p>
+<p>El costo económico fue asumido íntegramente por <strong>el pueblo iraní — no por el régimen</strong>. Funcionarios, sus familias y redes de los Guardianes de la Revolución mantuvieron acceso durante todo el período. Los iraníes comunes — comerciantes, creadores de contenido, estudiantes, enfermeros, autónomos — perdieron sus medios de vida de la noche a la mañana. Se estima que <strong>$1.800 millones y contando</strong> fueron extraídos de la economía iraní. Diez millones de empleos dependen de la conectividad. Esas diez millones de personas pagaron el precio. El régimen no pagó nada.</p>
+<p>El <strong>26 de mayo de 2026</strong>, tras 138 días, la conectividad se restauró parcialmente — pero la lucha está lejos de terminar. El apagón terminó; la censura no. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram y miles de otros servicios siguen bloqueados. Las velocidades están por debajo de los niveles pre-apagón. La infraestructura de vigilancia construida durante el apagón permanece y se ha profundizado. <strong>El régimen no ha restaurado internet — lo ha reemplazado por una jaula más estrecha.</strong> Los creadores de contenido han perdido audiencias construidas durante años. Los estudiantes no tienen acceso al conocimiento global. La humillación de los iraníes obligados a usar cada día un internet filtrado, vigilado y degradado no es una nota al pie — es la política en curso.</p>
+<div class="demand-box">Internet volvió. 40.000 siguen muertos. Miles siguen en prisión. La censura sigue ahí. La lucha no ha terminado. Sean testigos de lo que no pueden transmitir. Nieguen que su silencio se convierta en el de ustedes.</div>`
   },
 
   he: {
-    badge: 'איראן · 2025–2026 · 88 ימי חושך',
-    title: 'הם חתכו את החוטים.<br><em>הם לא יכלו לחתוך את האמת.</em>',
-    subtitle: 'אנדרטה ועדות — הפסקת האינטרנט שהוטלה על ידי המשטר הטרוריסטי של הרפובליקה האסלאמית באיראן',
+    alert: '▶ איראן · ח׳ בשבט – ח׳ בסיוון תשפ״ו · 138 ימי חושך מכוון · התיעוד כאן',
+    daysLabel: 'ימים שבהם הרפובליקה האסלאמית השתיקה את איראן',
+    title: 'הם חתכו את החוטים.<br><em>אנחנו עדיין צועקים.</em>',
+    subtitle: 'השבתת האינטרנט של 2026 שהוטלה על איראן — תיעוד מפורט של מלחמת משטר טרוריסטי בעמו שלו',
     langLabel: 'בחר שפה',
-    s1: 'ימי הפסקה', s2: 'אנשים הושתקו', s3: 'נהרגו במחאות',
+    s1: 'ימי השבתה', s2: 'קישוריות מינ. שנמדדה', s3: 'שולם על ידי העם', s4: 'נהרגו על ידי המשטר',
+    statsFootnote: 'ח׳ שבט – ח׳ סיוון תשפ״ו · מקורות: NetBlocks, Iran International, Filterwatch, Human Rights Watch, Cloudflare Radar',
+    statusText: '<span class="dot-green"></span><strong>האינטרנט שוחזר חלקית — ח׳ בסיוון תשפ״ו (26 מאי 2026).</strong> לאחר 138 ימים, הקישוריות חזרה — אך הצנזורה כבדה מאי פעם. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram ואלפי שירותים נוספים עדיין חסומים. המהירויות נמוכות יותר. המעקב עמוק יותר. חומת הסינון של המשטר חזקה יותר. זו אינה חירות — זוהי כלוב מנוהל.',
     tlTitle: 'ציר הזמן של ההשבתה',
     timeline: [
-      { dot: '', date: 'סוף 2025', text: 'מחאות לאומיות פורצות באיראן. גברים, נשים וילדים יוצאים לרחובות לאחר עשורים של עריצות דתית והרס כלכלי. המשטר הטרוריסטי של הרפובליקה האסלאמית באיראן מגיב מיד בחנק האינטרנט וסגירת שירותים.' },
-      { dot: 'red', date: 'סוף 2025', text: 'הפסקת אינטרנט מלאה מוטלת. עשרות מיליוני איראנים מאבדים גישה לרשת הגלובלית. חדשות בינלאומיות לא מגיעות לארץ. תמונות המחאות לא יכולות לצאת ממנה. הטבח מתחיל בשתיקה.' },
-      { dot: 'green', date: 'תחילת 2026', text: 'הרמה חלקית של ההשבתה — הפסקה מכוונת, לא נסיגה. המשטר הטרוריסטי משתמש בפתח כדי לדחוף אזרחים לרשתות הניטור הפנימיות שלו. מספר ההרוגים עובר את 40,000.' },
-      { dot: '', date: 'סה"כ 88 ימים', text: 'ההשבתה המצטברת נמשכת 88 ימים — אחת מהפסקות האינטרנט הארוכות ביותר שהוטלו על אוכלוסייה בהיסטוריה המודרנית. יותר מ-40,000 אנשים נהרגו. העולם הוחזק בחשכה בכוונה תחילה, כדי שפשעי המשטר הטרוריסטי נגד העם האיראני יימחקו מהתיעוד.' }
+      { dot: 'red', date: 'ח׳ שבט תשפ״ו', text: 'ביום השנים-עשר למחאות הלאומיות לנפילת הרפובליקה האסלאמית, הג\'ונטה מנתקת את הכוח הדיגיטלי. האינטרנט והטלפוניה קורסים בטהרן, אספהאן, שיראז, כרמנשאה, לורדגאן ועבדנאן. עד אחר הצהריים, איראן כמעט לחלוטין לא מחוברת. תחילת 138 ימי חושך מתוכנן.' },
+      { dot: '', date: 'כ״א–ל׳ שבט תשפ״ו', text: 'המשטר מסלים: שיבוש GPS משתק את סטארלינק (עד 80% אובדן חבילות), כוחות ביטחון מחרימים צלחות לוויין מדלת לדלת, גישת סטארלינק נחסמת לראשונה. תחת כיסוי ההשבתה, מסלים הטבח של המוחים.' },
+      { dot: '', date: 'ח׳ אדר א׳ תשפ״ו', text: '"הקלה" טקטית — לא שחזור. מערכת רשימה לבנה מחליטה מי יכול לגשת לעולם החיצון. המכירות המקוונות צוללות ב-80%. הבורסה של טהרן מאבדת 450,000 נקודות. עלות זו מוטלת במלואה על העם האיראני, לא על המשטר.' },
+      { dot: 'red', date: 'ח׳ אדר ב׳ תשפ״ו', text: 'לאחר המתקפות הישראליות-אמריקאיות על איראן, המשטר מחזיר את המדינה לחושך כמעט מוחלט. NetBlocks מדווח על קישוריות של 4% בלבד מהרמה הרגילה.' },
+      { dot: 'red', date: 'ט״ו אדר ב׳ תשפ״ו', text: 'הקישוריות נשארת על ~1% לשבועות. איראנים בחו"ל אינם יכולים לפנות לבני משפחה. מפות אזעקת טילים שנבנו על ידי מתנדבים ממלאות את הריק שהמשטר מסרב למלא.' },
+      { dot: '', date: 'כ״א ניסן – א׳ אייר תשפ״ו', text: 'ההשבתה עוברת 1,000 שעות, ואז את יומה ה-53 הרציף — הארוכה ביותר בהיסטוריה. הנזק המוערך: 1.8 מיליארד דולר — כסף שנלקח מאיראנים רגילים, לא מהמשטר. אלפים בכלא, רבים עומדים בפני גזר דין מוות.' },
+      { dot: 'amber', date: 'ח׳ סיוון תשפ״ו', text: 'לאחר 138 ימים, הקישוריות משוחזרת חלקית. אך YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram ואלפי אתרים עדיין חסומים. המהירויות נמוכות מרמות הטרום-השבתה. המעקב עמק. עבור מיליוני איראנים, הנזק הדיגיטלי הוא קבוע.' }
     ],
-    memQuote: '"הם חשבו שאם יהרגו את האות,<br>יוכלו להרוג את הסיפור.<br>אבל אנחנו הסיפור. ואנחנו עדיין כאן."',
-    memAttr: '— קול ההתנגדות האיראנית, 2026',
-    shareLabel: 'שתפו דף זה',
+    ctaText: '"הם חשבו שאם יהרגו את האות, יוכלו להרוג את הסיפור. אבל אנחנו הסיפור — ואנחנו עדיין צועקים. האינטרנט חזר. הצנזורה מעולם לא הלכה. המאבק לא נגמר."',
+    ctaAttr: '— קול ההתנגדות האיראנית, 2026',
+    shareLabel: 'הפיצו — שברו את השתיקה שלהם',
     shareX: 'שתפו ב-X', shareFB: 'שתפו בפייסבוק', shareMail: 'שתפו באימייל',
-    wikiText: 'קראו עוד בוויקיפדיה: השבתת האינטרנט באיראן 2026',
+    wikiText: 'ויקיפדיה: השבתת האינטרנט באיראן 2026',
     githubText: 'תרמו ב-GitHub',
-    footer: 'לזכר כל קול שהושתק, כל תמונה שנחסמה, כל חיבור שנותק.<br>דף זה אינו זקוק לאינטרנט. הוא נושא את התיעוד בתוכו.',
+    footer: 'כל תמונה שלא הועלתה. כל שיחה שלא עברה. כל משפחה שלא הצליחה לדבר.<br>הדף הזה נושא את התיעוד. העבירו אותו.',
+    disclaimer: 'דף זה עומד לצד העם האיראני — לא נגדו. כעסנו מופנה אך ורק כלפי המשטר הטרוריסטי של הרפובליקה האסלאמית.',
     bodyClass: 'rtl', bodyFont: 'he-font',
-    mainText: `<p><strong>המשטר הטרוריסטי של הרפובליקה האסלאמית באיראן</strong> לא רק ניתקה כבלי אינטרנט. הוא ביצע מעשה מכוון ומחושב של מלחמה נגד העם האיראני — חתך את עורקי התקשורת, הזיכרון והעדות ברגע שבו הרחובות היו מלאים בקולות שדרשו להישמע. זוהי הסיפור של <strong>88 ימי חושך מתוכנן</strong> — חושך שהוטל כדי להגן על משטר טרוריסטי, לא על אומה.</p>
-<p>כאשר המחאות הלאומיות פרצו באיראן ב-2025–2026 — גברים, נשים וילדים שסבלו עשורים של עריצות דתית, הרס כלכלי ואכזריות שיטתית — תגובתו הראשונה של המשטר הטרוריסטי לא הייתה דיאלוג. הייתה דממה. הגישה לאינטרנט נותקה עבור <strong>עשרות מיליוני אנשים</strong>. חנקה. נחסמה. נמחקה.</p>
-<div class="pull-quote">"ממשלה שמפחדת מהטלפון שבכיסך היא ממשלה שיודעת שהיא מבצעת פשעים."</div>
-<p>כוחות הביטחון הסלימו את הדיכוי וההשבתה סיפקה להם כיסוי. זה לא היה מקרי. זו הייתה פעולה מבצעית: לכבות את המצלמות, להסיר את העדים, לטבוח בחושך. <strong>יותר מ-40,000 אזרחים</strong> נהרגו במהלך המחאות — אנשים חסרי נשק, סטודנטים, עובדים, אמהות — בעוד המשטר הטרוריסטי דאג לכך שאף תמונה, אף סרטון, אף קול לא יוכל להימלט.</p>
-<p>אך לחושך היה גם מטרה שנייה, מתוחכמת עוד יותר. עם ניתוק האינטרנט הפתוח, המשטר הטרוריסטי ניסה לדחוף את העם האיראני לרשתות מקומיות הנשלטות על ידי המשטר עצמו — פלטפורמות מעקב שנבנו לא כדי לחבר אנשים, אלא כדי <strong>לפקח עליהם וללכוד אותם</strong>. המטרה לא הייתה ניתוק זמני. המטרה הייתה <em>החלפה קבועה</em>.</p>
-<p>השבתה זו היא פשע כנגד זכות האנושות להיות עד. כל מוות שנסתר מאחורי חיבור מנותק הוא מוות שהמשטר הטרוריסטי ניסה להפוך לבלתי נראה. אלה אינם כשלים טכניים. אלה <strong>מעשי טרור מדינתי המחופשים לתשתית</strong>.</p>
-<div class="pull-quote">עמדו לצד העם האיראני — לא רק במילים, אלא בעדות, בתיעוד, בסירוב לנרמל את השתקת קולה של אומה שלמה.</div>`
+    mainText: `<p><strong>המשטר הטרוריסטי של הרפובליקה האסלאמית</strong> לא רק ניתק כבלי אינטרנט. הוא ביצע מעשה מלחמה מכוון נגד העם שעליו הוא טוען לשלוט — חתך את עורקי התקשורת, הזיכרון והעדות ברגע המדויק שבו עשרות מיליוני איראנים דרשו את סופו. מה שלהלן הוא התיעוד של <strong>138 ימי חושך מתוכנן</strong>: ח׳ שבט – ח׳ סיוון תשפ״ו, ההשבתה הארצית הארוכה ביותר של אינטרנט שנרשמה בהיסטוריה האנושית.</p>
+<p>כאשר המחאות פרצו בסוף תשפ״ה והתעצמו בתשפ״ו — איראנים מכל רובד, מאוחדים בדרישה לסיום ארבעה עשורי עריצות דתית — תגובת המשטר לא הייתה דיאלוג. היה זה מתג הכיבוי. בתוך שעות, ניתקה הג'ונטה אינטרנט וטלפוניה בכל המדינה. <strong>עשרות מיליוני אנשים</strong> הוטלו לשתיקה כפויה כדי שהמשטר יוכל לבצע את פשעיו ללא עדים.</p>
+<div class="demand-box">"ממשלה שמפחדת מהטלפון שבכיסך היא ממשלה שיודעת שהיא מבצעת פשעים."</div>
+<p>ההשבתה הייתה כיסוי מבצעי לטבח. בעוד איראן הייתה בחושך, כוחות הביטחון הרגו <strong>יותר מ-40,000 איש</strong> על פי גופי זכויות אדם. אלפים נוספים שוהים כיום בכלא, רבים עם אישומים שנושאים עונש מוות, בהליכים מגוחכים.</p>
+<p>העלות הכלכלית הוטלה במלואה על <strong>העם האיראני — לא על המשטר</strong>. פקידים, משפחותיהם ורשתות משמרות המהפכה שמרו על גישה לאורך כל התקופה. איראנים רגילים — בעלי חנויות, יוצרי תוכן, סטודנטים, אחיות, פרילנסרים — איבדו את פרנסתם מהיום להלילה. מוערך כי <strong>1.8 מיליארד דולר ויותר</strong> נשאבו מהכלכלה האיראנית. עשרה מיליון משרות תלויות בקישוריות לאינטרנט. אותם עשרה מיליון שילמו את המחיר. המשטר לא שילם כלום.</p>
+<p>ב<strong>ח׳ בסיוון תשפ״ו (26 מאי 2026)</strong>, לאחר 138 ימים, הקישוריות שוחזרה חלקית — אך המאבק רחוק מסיום. ההשבתה הסתיימה; הצנזורה לא. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram ואלפי שירותים נוספים עדיין חסומים. המהירויות נמוכות מרמות הטרום-השבתה. תשתית המעקב שנבנתה בתקופת ההשבתה נשארת ועמקה. <strong>המשטר לא שיחזר את האינטרנט — הוא החליף אותו בכלוב צר יותר.</strong> יוצרי תוכן איבדו קהלים שבנו במשך שנים. סטודנטים אינם ניגשים לידע עולמי. ההשפלה של האיראנים המאולצים להשתמש מדי יום באינטרנט מסונן, מרוגל ומושפל אינה הערת שוליים — זוהי המדיניות המתמשכת.</p>
+<div class="demand-box">האינטרנט חזר. 40,000 עדיין מתים. אלפים עדיין בכלא. הצנזורה עדיין שם. המאבק לא נגמר. היו עדים למה שהם אינם יכולים לשדר. אל תניחו לשתיקתם להפוך לשתיקתכם.</div>`
   },
 
   fr: {
-    badge: 'Iran · 2025–2026 · 88 Jours d\'Obscurité',
-    title: 'Ils ont coupé les fils.<br><em>Ils n\'ont pas pu couper la vérité.</em>',
-    subtitle: 'Un mémorial et un témoignage — la coupure internet imposée par le régime terroriste de la République islamique en Iran',
+    alert: '▶ Iran · 8 janvier – 26 mai 2026 · 138 jours d\'obscurité délibérée · Le dossier est ici',
+    daysLabel: 'Jours pendant lesquels la République islamique a réduit l\'Iran au silence',
+    title: 'Ils ont coupé les fils.<br><em>Nous crions encore.</em>',
+    subtitle: 'La coupure internet de 2026 imposée à l\'Iran — le dossier documenté de la guerre d\'un régime terroriste contre son propre peuple',
     langLabel: 'Choisir la langue',
-    s1: 'Jours de coupure', s2: 'Personnes réduites au silence', s3: 'Tués dans les manifestations',
+    s1: 'Jours de coupure', s2: 'Connectivité min. atteinte', s3: 'Supporté par le peuple', s4: 'Tués par le régime',
+    statsFootnote: '8 jan – 26 mai 2026 · Sources : NetBlocks, Iran International, Filterwatch, Human Rights Watch, Cloudflare Radar',
+    statusText: '<span class="dot-green"></span><strong>Internet partiellement rétabli — 26 mai 2026.</strong> Après 138 jours, la connectivité est revenue — mais la censure est plus lourde que jamais. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram et des milliers d\'autres services restent bloqués. Les débits sont plus lents. La surveillance est plus profonde. Le mur de filtrage du régime est plus solide. Ce n\'est pas la liberté — c\'est une cage gérée.',
     tlTitle: 'Chronologie de la Coupure',
     timeline: [
-      { dot: '', date: 'Fin 2025', text: 'Les manifestations nationales éclatent en Iran. Des hommes, des femmes et des enfants descendent dans les rues après des décennies de tyrannie religieuse et de ruine économique. Le régime terroriste de la République islamique en Iran répond immédiatement par la limitation d\'internet et la fermeture de services.' },
-      { dot: 'red', date: 'Fin 2025', text: 'Coupure internet totale imposée. Des dizaines de millions d\'Iraniens perdent l\'accès au web mondial. Les nouvelles internationales ne peuvent pas atteindre le pays. Les images des manifestations ne peuvent pas en sortir. Le massacre commence dans le silence.' },
-      { dot: 'green', date: 'Début 2026', text: 'Levée partielle de la coupure — une pause délibérée, pas une retraite. Le régime terroriste profite de cette ouverture pour pousser les citoyens vers ses réseaux de surveillance internes. Le nombre de morts dépasse 40 000.' },
-      { dot: '', date: '88 Jours au total', text: 'La coupure cumulée dure 88 jours — l\'une des plus longues jamais imposées à une population dans l\'histoire moderne. Plus de 40 000 personnes tuées. Le monde a été maintenu dans l\'obscurité délibérément, afin que les crimes du régime terroriste contre le peuple iranien puissent être effacés.' }
+      { dot: 'red', date: '8 jan 2026', text: 'Le douzième jour des manifestations nationales réclamant la chute de la République islamique, la junte coupe l\'interrupteur numérique. Internet et téléphonie s\'effondrent à Téhéran, Ispahan, Chiraz, Kermanshah, Lordegan et Abdanan. Dans l\'après-midi, l\'Iran est presque entièrement hors ligne. Début de 138 jours d\'obscurité ingéniée.' },
+      { dot: '', date: '11–20 jan 2026', text: 'Le régime intensifie : le brouillage GPS paralyse Starlink (jusqu\'à 80 % de pertes de paquets), des forces de sécurité confisquent les paraboles porte à porte, l\'accès Starlink est coupé pour la première fois. Sous couverture de la coupure, le massacre des manifestants s\'intensifie.' },
+      { dot: '', date: '28 jan 2026', text: 'Une "détente" tactique — pas un rétablissement. Un système de liste blanche décide qui peut atteindre le monde extérieur. Les ventes en ligne chutent de 80 %. La Bourse de Téhéran perd 450 000 points. Ce coût est intégralement supporté par le peuple iranien, pas par le régime.' },
+      { dot: 'red', date: '28 fév 2026', text: 'Après les frappes israélo-américaines sur l\'Iran, le régime replonge le pays dans l\'obscurité quasi totale. NetBlocks enregistre la connectivité à seulement 4 % des niveaux normaux.' },
+      { dot: 'red', date: '6 mar 2026', text: 'La connectivité reste figée à ~1 % pendant des semaines. Les Iraniens à l\'étranger ne peuvent pas joindre leurs familles. Des cartes d\'alerte aux missiles créées par des bénévoles comblent le vide laissé par un régime qui refuse d\'avertir ses citoyens des frappes entrantes.' },
+      { dot: '', date: '11–21 avr 2026', text: 'La coupure dépasse les 1 000 heures, puis son 53e jour consécutif — la plus longue de l\'histoire. Le coût estimé atteint 1,8 milliard de dollars — de l\'argent sorti des poches des Iraniens, pas du régime. Des milliers sont encore en prison, beaucoup risquant la peine de mort.' },
+      { dot: 'amber', date: '26 mai 2026', text: 'Après 138 jours, la connectivité est partiellement rétablie. Mais YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram et des milliers de sites restent bloqués. Les débits sont en dessous des niveaux d\'avant la coupure. La surveillance s\'est approfondie. Pour des millions d\'Iraniens, les dégâts numériques sont permanents.' }
     ],
-    memQuote: '"Ils pensaient que s\'ils tuaient le signal,<br>ils pourraient tuer l\'histoire.<br>Mais nous sommes l\'histoire. Et nous sommes encore là."',
-    memAttr: '— Voix de la résistance iranienne, 2026',
-    shareLabel: 'Partager cette page',
+    ctaText: '"Ils pensaient que s\'ils tuaient le signal, ils pourraient tuer l\'histoire. Mais nous sommes l\'histoire — et nous crions encore. Internet est de retour. La censure n\'est jamais partie. La lutte n\'est pas terminée."',
+    ctaAttr: '— Voix de la résistance iranienne, 2026',
+    shareLabel: 'Faites passer le mot — brisez leur silence',
     shareX: 'Partager sur X', shareFB: 'Partager sur Facebook', shareMail: 'Partager par Email',
-    wikiText: 'En savoir plus sur Wikipedia : Coupure Internet en Iran 2026',
+    wikiText: 'Wikipedia : Coupure d\'Internet en Iran de 2026',
     githubText: 'Contribuer sur GitHub',
-    footer: 'À la mémoire de chaque voix réduite au silence, de chaque image bloquée, de chaque connexion coupée.<br>Cette page ne nécessite pas d\'internet. Elle porte le témoignage en elle-même.',
+    footer: 'Chaque photo jamais téléchargée. Chaque appel qui n\'est jamais passé. Chaque famille qui n\'a pas pu se joindre.<br>Cette page porte le témoignage. Transmettez-le.',
+    disclaimer: 'Cette page est aux côtés du peuple iranien — pas contre lui. Notre colère vise uniquement le régime terroriste de la République islamique.',
     bodyClass: '', bodyFont: '',
-    mainText: `<p>Le <strong>régime terroriste de la République islamique en Iran</strong> n'a pas simplement coupé des câbles internet. Il a commis un acte délibéré et calculé de guerre contre le peuple iranien — tranchant les artères de la communication, de la mémoire et du témoignage au moment précis où les rues étaient remplies de voix réclamant à être entendues. Voici l'histoire de <strong>88 jours d'obscurité ingéniée</strong>, imposée pour protéger un régime terroriste, non une nation.</p>
-<p>Lorsque les manifestations nationales ont éclaté en Iran en 2025–2026 — hommes, femmes et enfants ayant enduré des décennies de tyrannie religieuse, de ruine économique et de brutalité systémique — le premier réflexe du régime terroriste ne fut pas le dialogue. Ce fut le silence. L'accès à internet a été coupé pour <strong>des dizaines de millions de personnes</strong>. Étranglé. Bloqué. Effacé.</p>
-<div class="pull-quote">« Un gouvernement qui craint le téléphone dans votre poche est un gouvernement qui sait qu'il commet des crimes. »</div>
-<p>Les forces de sécurité ont intensifié leur répression et la coupure leur a fourni une couverture. Ce n'était pas une coïncidence. C'était une opération : éteindre les caméras, supprimer les témoins, massacrer dans l'obscurité. <strong>Plus de 40 000 civils</strong> ont été tués au cours des manifestations — des personnes non armées, des étudiants, des travailleurs, des mères — tandis que le régime terroriste s'assurait qu'aucune image, aucune vidéo, aucune voix ne puisse s'échapper.</p>
-<p>Mais l'obscurité servait aussi un deuxième dessein, plus insidieux. Avec internet libre coupé, le régime terroriste a tenté de pousser le peuple iranien vers des réseaux domestiques contrôlés par le régime lui-même — des plateformes de surveillance construites non pour connecter les gens, mais pour les <strong>surveiller et les piéger</strong>. L'objectif n'était pas une déconnexion temporaire. L'objectif était un <em>remplacement permanent</em>.</p>
-<p>Ce blackout est un crime contre le droit de l'humanité à témoigner. Chaque photo de manifestation jamais téléchargée, chaque appel de détresse jamais passé, chaque message de coordination bloqué — ce ne sont pas des défaillances techniques. Ce sont des <strong>actes de terreur d'État déguisés en infrastructure</strong>.</p>
-<div class="pull-quote">Soyez aux côtés du peuple iranien — pas seulement par des mots, mais par le témoignage, par la documentation, par le refus de normaliser l'effacement de la voix de tout un peuple.</div>`
+    mainText: `<p>Le <strong>régime terroriste de la République islamique</strong> n'a pas simplement coupé des câbles internet. Il a commis un acte de guerre délibéré contre le peuple qu'il prétend gouverner — tranchant communication, mémoire et témoignage au moment précis où des dizaines de millions d'Iraniens en réclamaient la fin. Ce qui suit est le dossier de <strong>138 jours d'obscurité ingéniée</strong> : du 8 janvier au 26 mai 2026, la plus longue coupure internet nationale jamais enregistrée dans l'histoire humaine.</p>
+<p>Quand les manifestations ont éclaté fin 2025 et se sont intensifiées en 2026 — des Iraniens de tous horizons, unis pour exiger la fin de quatre décennies de tyrannie théocratique — la réponse du régime n'a pas été le dialogue. Ce fut l'interrupteur. En quelques heures, la junte a coupé internet et téléphonie dans tout le pays. <strong>Des dizaines de millions de personnes</strong> ont été plongées dans un silence imposé pour que le régime puisse commettre ses crimes sans témoins.</p>
+<div class="demand-box">« Un gouvernement qui craint le téléphone dans votre poche est un gouvernement qui sait qu'il commet des crimes. »</div>
+<p>La coupure était une couverture opérationnelle pour le massacre. Pendant que l'Iran était dans le noir, les forces de sécurité ont tué <strong>plus de 40 000 personnes</strong> selon les observateurs des droits humains. Des milliers d'autres sont encore en prison aujourd'hui, beaucoup accusés de faits passibles de la peine de mort, jugés dans des simulacres de procès.</p>
+<p>Le coût économique a été intégralement supporté par <strong>le peuple iranien — pas par le régime</strong>. Les responsables, leurs familles et les réseaux des Gardiens de la Révolution ont maintenu leur accès tout au long de la période. Les Iraniens ordinaires — commerçants, créateurs de contenu, étudiants, infirmiers, indépendants — ont perdu leurs moyens de subsistance du jour au lendemain. On estime que <strong>1,8 milliard de dollars et plus</strong> ont été siphonnés de l'économie iranienne. Dix millions d'emplois dépendent de la connectivité internet. Ces dix millions de personnes ont payé le prix. Le régime n'a rien payé.</p>
+<p>Le <strong>26 mai 2026</strong>, après 138 jours, la connectivité a été partiellement rétablie — mais la lutte est loin d'être terminée. La coupure a cessé ; la censure non. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram et des milliers d'autres services restent bloqués. Les débits sont en dessous des niveaux d'avant la coupure. L'infrastructure de surveillance construite pendant la coupure reste en place et s'est approfondie. <strong>Le régime n'a pas rétabli internet — il l'a remplacé par une cage plus étroite.</strong> Les créateurs de contenu ont perdu des audiences construites pendant des années. Les étudiants n'ont plus accès au savoir mondial. L'humiliation des Iraniens contraints d'utiliser chaque jour un internet filtré, surveillé et dégradé n'est pas une note de bas de page — c'est la politique en cours.</p>
+<div class="demand-box">Internet est de retour. 40 000 sont encore morts. Des milliers sont encore en prison. La censure est toujours là. La lutte n'est pas terminée. Soyez témoins de ce qu'ils ne peuvent diffuser. Refusez que leur silence devienne le vôtre.</div>`
   }
 };
 
+var currentLang = 'en';
+
 function setLang(code) {
+  currentLang = code;
   var d = T[code] || T['en'];
   var rtl = (code === 'fa' || code === 'he');
 
   document.documentElement.setAttribute('lang', code);
   document.documentElement.setAttribute('dir', rtl ? 'rtl' : 'ltr');
 
-  document.getElementById('i-badge').textContent = d.badge;
+  document.getElementById('i-alert').textContent = d.alert;
+  document.getElementById('i-days-label').textContent = d.daysLabel;
   document.getElementById('i-title').innerHTML = d.title;
   document.getElementById('i-subtitle').textContent = d.subtitle;
   document.getElementById('i-lang-label').textContent = d.langLabel;
   document.getElementById('i-s1').textContent = d.s1;
   document.getElementById('i-s2').textContent = d.s2;
   document.getElementById('i-s3').textContent = d.s3;
+  document.getElementById('i-s4').textContent = d.s4;
+  document.getElementById('i-stats-footnote').textContent = d.statsFootnote;
+  document.getElementById('i-status-text').innerHTML = d.statusText;
   document.getElementById('i-tl-title').textContent = d.tlTitle;
-  document.getElementById('i-mem-quote').innerHTML = d.memQuote;
-  document.getElementById('i-mem-attr').textContent = d.memAttr;
+  document.getElementById('i-cta-text').textContent = d.ctaText;
+  document.getElementById('i-cta-attr').textContent = d.ctaAttr;
   document.getElementById('i-share-label').textContent = d.shareLabel;
   document.getElementById('i-share-x').textContent = d.shareX;
   document.getElementById('i-share-fb').textContent = d.shareFB;
@@ -752,6 +1003,10 @@ function setLang(code) {
   document.getElementById('i-wiki-text').textContent = d.wikiText;
   document.getElementById('i-github-text').textContent = d.githubText;
   document.getElementById('i-footer').innerHTML = d.footer;
+  document.getElementById('i-disclaimer').textContent = d.disclaimer;
+
+  var wikiBtn = document.getElementById('btn-wiki');
+  wikiBtn.href = WIKI_LINKS[code] || WIKI_LINKS['en'];
 
   var mt = document.getElementById('main-text');
   mt.innerHTML = d.mainText;
@@ -760,75 +1015,67 @@ function setLang(code) {
 
   var tl = document.getElementById('timeline-items');
   tl.innerHTML = '';
-  (d.timeline || []).forEach(function(item) {
-    var dotClass = 'timeline-dot' + (item.dot ? ' ' + item.dot : '');
-    tl.innerHTML += '<div class="timeline-item"><div class="' + dotClass + '"></div><div class="timeline-date">' + item.date + '</div><div class="timeline-text">' + item.text + '</div></div>';
+  (d.timeline || []).forEach(function(item, i) {
+    var dotClass = 'tl-dot' + (item.dot ? ' ' + item.dot : '');
+    var isLast = (i === d.timeline.length - 1);
+    tl.innerHTML +=
+      '<div class="timeline-item">' +
+        '<div class="tl-marker">' +
+          '<div class="' + dotClass + '"></div>' +
+          (!isLast ? '<div class="tl-line"></div>' : '') +
+        '</div>' +
+        '<div class="tl-body">' +
+          '<div class="tl-date">' + item.date + '</div>' +
+          '<div class="tl-text">' + item.text + '</div>' +
+        '</div>' +
+      '</div>';
   });
 
-  document.querySelectorAll('.lang-btn').forEach(function(btn) {
-    btn.classList.remove('active');
-  });
+  document.querySelectorAll('.lang-btn').forEach(function(btn) { btn.classList.remove('active'); });
   var btnMap = {en:'English',fa:'فارسی',it:'Italiano',es:'Español',he:'עברית',fr:'Français'};
   document.querySelectorAll('.lang-btn').forEach(function(btn) {
     if (btn.textContent.trim() === btnMap[code]) btn.classList.add('active');
   });
 
   if (rtl) {
-    document.querySelectorAll('.pull-quote').forEach(function(el) {
+    document.querySelectorAll('.demand-box').forEach(function(el) {
       el.style.borderLeft = 'none';
-      el.style.borderRight = '2px solid #3fa86d';
-      el.style.paddingLeft = '0';
-      el.style.paddingRight = '1.6rem';
-    });
-    document.querySelectorAll('.section-title').forEach(function(el) {
-      el.style.flexDirection = 'row-reverse';
+      el.style.borderRight = '4px solid var(--red)';
+      el.style.paddingLeft = '1.4rem';
+      el.style.paddingRight = '1.4rem';
     });
   } else {
-    document.querySelectorAll('.pull-quote').forEach(function(el) {
+    document.querySelectorAll('.demand-box').forEach(function(el) {
       el.style.borderLeft = '';
       el.style.borderRight = '';
       el.style.paddingLeft = '';
       el.style.paddingRight = '';
-    });
-    document.querySelectorAll('.section-title').forEach(function(el) {
-      el.style.flexDirection = '';
     });
   }
 }
 
 var pageUrl = 'https://internetblackout.org';
 var shareTexts = {
-  en: 'Iran Internet Blackout — 88 Days of Silence. Over 40,000 killed. The Islamic Republic terrorist regime cut off 92 million people from the internet to hide its massacre.',
-  fa: 'قطعی اینترنت در ایران — ۸۸ روز سکوت. بیش از ۴۰٬۰۰۰ کشته. رژیم تروریستی جمهوری اسلامی در ایران ۹۲ میلیون نفر را از اینترنت قطع کرد تا کشتار خود را پنهان کند.',
-  it: 'Blackout Internet in Iran — 88 giorni di silenzio. Oltre 40.000 uccisi. Il regime terrorista della Repubblica Islamica in Iran ha tagliato 92 milioni di persone da internet per nascondere il massacro.',
-  es: 'Apagón de Internet en Irán — 88 días de silencio. Más de 40.000 muertos. El régimen terrorista de la República Islámica en Irán cortó a 92 millones de personas de internet para ocultar su masacre.',
-  he: 'השבתת האינטרנט באיראן — 88 ימי שתיקה. יותר מ-40,000 הרוגים. המשטר הטרוריסטי של הרפובליקה האסלאמית באיראן ניתק 92 מיליון איש מהאינטרנט כדי להסתיר את הטבח.',
-  fr: 'Coupure Internet en Iran — 88 jours de silence. Plus de 40 000 tués. Le régime terroriste de la République islamique en Iran a coupé 92 millions de personnes d\'internet pour cacher son massacre.'
+  en: '138 days. The Islamic Republic terrorist regime cut off tens of millions from the internet to hide its massacres. 40,000+ killed. Thousands in prison. The internet is back — but the censorship never left.',
+  fa: '۱۳۸ روز. رژیم تروریستی جمهوری اسلامی ده‌ها میلیون نفر را از اینترنت قطع کرد تا کشتارهایش را پنهان کند. بیش از ۴۰٬۰۰۰ کشته. هزاران نفر در زندان. اینترنت برگشت — اما سانسور هرگز نرفت.',
+  it: '138 giorni. Il regime terrorista della Repubblica Islamica ha tagliato decine di milioni da internet per nascondere i suoi massacri. Oltre 40.000 uccisi. Migliaia in prigione. Internet è tornato — ma la censura non è mai andata.',
+  es: '138 días. El régimen terrorista de la República Islámica cortó a decenas de millones de internet para ocultar sus masacres. Más de 40.000 muertos. Miles en prisión. Internet volvió — pero la censura nunca se fue.',
+  he: '138 ימים. המשטר הטרוריסטי של הרפובליקה האסלאמית ניתק עשרות מיליונים מהאינטרנט כדי להסתיר את הטבחים. 40,000+ הרוגים. אלפים בכלא. האינטרנט חזר — אך הצנזורה לא הלכה.',
+  fr: '138 jours. Le régime terroriste de la République islamique a coupé des dizaines de millions de personnes d\'internet pour cacher ses massacres. Plus de 40 000 tués. Des milliers en prison. Internet est revenu — mais la censure n\'est jamais partie.'
 };
-var currentLang = 'en';
 
 function shareX() {
   var text = shareTexts[currentLang] || shareTexts['en'];
-  var url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(pageUrl);
-  window.open(url, '_blank', 'noopener,noreferrer');
+  window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(pageUrl), '_blank', 'noopener,noreferrer');
 }
 function shareFB() {
-  var url = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(pageUrl);
-  window.open(url, '_blank', 'noopener,noreferrer');
+  window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(pageUrl), '_blank', 'noopener,noreferrer');
 }
 function shareEmail() {
   var d = T[currentLang] || T['en'];
   var text = shareTexts[currentLang] || shareTexts['en'];
-  var subject = encodeURIComponent(d.badge);
-  var body = encodeURIComponent(text + '\n\n' + pageUrl);
-  window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+  window.location.href = 'mailto:?subject=' + encodeURIComponent(d.alert) + '&body=' + encodeURIComponent(text + '\n\n' + pageUrl);
 }
-
-var _origSetLang = setLang;
-setLang = function(code) {
-  currentLang = code;
-  _origSetLang(code);
-};
 
 setLang('en');
 
