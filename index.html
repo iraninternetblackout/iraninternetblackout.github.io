@@ -654,6 +654,11 @@ footer {
     <button class="lang-btn" onclick="setLang('es')">Español</button>
     <button class="lang-btn" onclick="setLang('he')">עברית</button>
     <button class="lang-btn" onclick="setLang('fr')">Français</button>
+    <button class="lang-btn" onclick="setLang('tr')">Türkçe</button>
+    <button class="lang-btn" onclick="setLang('ar')">العربية</button>
+    <button class="lang-btn" onclick="setLang('pt')">Português</button>
+    <button class="lang-btn" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" onclick="setLang('ko')">한국어</button>
   </div>
 </div>
 
@@ -728,7 +733,7 @@ footer {
 </div>
 
 <footer>
-  <div class="footer-emblem">▶ WITNESS · RESIST · REMEMBER ◀</div>
+  <div class="footer-emblem" id="i-footer-emblem">▶ WITNESS · RESIST · REMEMBER ◀</div>
   <div class="footer-text" id="i-footer">Every photo never uploaded. Every call that never went through. Every family that couldn't reach each other.<br>This page carries the record. Pass it on.</div>
   <div class="footer-disclaimer" id="i-disclaimer">This page stands with the people of Iran — not with the regime that cages them. Our anger is directed solely at the Islamic Republic terrorist regime that has occupied, impoverished, and silenced the Iranian people for over four decades.</div>
 </footer>
@@ -738,11 +743,16 @@ footer {
 <script>
 var WIKI_LINKS = {
   en: 'https://en.wikipedia.org/wiki/2026_Internet_blackout_in_Iran',
-  fa: 'https://fa.wikipedia.org/wiki/%D9%82%D8%B7%D8%B9%DB%8C_%D8%A7%DB%8C%D9%86%D8%AA%D8%B1%D9%86%D8%AC%DB%8C_%D8%A7%DB%8C%D8%B1%D8%A7%D9%86_(%DB%B2%DB%B0%DB%B2%DB%B6)',
-  it: 'https://it.wikipedia.org/wiki/Blackout_di_Internet_in_Iran_del_2026',
-  es: 'https://es.wikipedia.org/wiki/Apag%C3%B3n_de_Internet_en_Ir%C3%A1n_de_2026',
-  he: 'https://he.wikipedia.org/wiki/%D7%94%D7%A9%D7%91%D7%AA%D7%AA_%D7%94%D7%90%D7%99%D7%A0%D7%98%D7%A8%D7%A0%D7%98_%D7%91%D7%90%D7%99%D7%A8%D7%90%D7%9F_(2026)',
-  fr: 'https://fr.wikipedia.org/wiki/Coupure_d%27Internet_en_Iran_de_2026'
+  fa: 'https://fa.wikipedia.org/wiki/%D9%82%D8%B7%D8%B9_%D8%A7%DB%8C%D9%86%D8%AA%D8%B1%D9%86%D8%AA_%D8%AF%D8%B1_%D8%A7%DB%8C%D8%B1%D8%A7%D9%86_(%DB%B1%DB%B4%DB%B0%DB%B5%E2%80%93%DB%B1%DB%B4%DB%B0%DB%B4)',
+  it: 'https://it.wikipedia.org/wiki/Proteste_in_Iran_del_2025-2026',
+  es: 'https://es.wikipedia.org/wiki/Apag%C3%B3n_de_internet_en_Ir%C3%A1n_de_2026',
+  he: 'https://he.wikipedia.org/wiki/%D7%97%D7%A1%D7%99%D7%9E%D7%AA_%D7%94%D7%90%D7%99%D7%A0%D7%98%D7%A8%D7%A0%D7%98_%D7%91%D7%90%D7%99%D7%A8%D7%90%D7%9F_(2026)',
+  fr: 'https://fr.wikipedia.org/wiki/Coupure_d%27Internet_en_Iran_en_2026',
+  tr: 'https://tr.wikipedia.org/wiki/2026_%C4%B0ran_internet_kesintisi',
+  ar: 'https://ar.wikipedia.org/wiki/%D8%AD%D8%B8%D8%B1_%D8%A7%D9%84%D8%A5%D9%86%D8%AA%D8%B1%D9%86%D8%AA_%D9%81%D9%8A_%D8%A5%D9%8A%D8%B1%D8%A7%D9%86_%D8%B9%D8%A7%D9%85_2026',
+  pt: 'https://pt.wikipedia.org/wiki/Apag%C3%A3o_da_internet_no_Ir%C3%A3_em_2026',
+  zh: 'https://zh.wikipedia.org/wiki/2026%E5%B9%B4%E4%BC%8A%E6%9C%97%E6%96%B7%E7%B6%B2',
+  ko: 'https://ko.wikipedia.org/wiki/2026%EB%85%84_%EC%9D%B4%EB%9E%80_%EC%9D%B8%ED%84%B0%EB%84%B7_%EC%B0%A8%EB%8B%A8'
 };
 
 var T = {
@@ -772,28 +782,29 @@ var T = {
     wikiText: 'Wikipedia: 2026 Internet blackout in Iran',
     githubText: 'Contribute on GitHub',
     footer: 'Every photo never uploaded. Every call that never went through. Every family that couldn\'t reach each other.<br>This page carries the record. Pass it on.',
+    footerEmblem: '▶ WITNESS · RESIST · REMEMBER ◀',
     disclaimer: 'This page stands with the people of Iran — not with the regime that cages them. Our anger is directed solely at the Islamic Republic terrorist regime that has occupied, impoverished, and silenced the Iranian people for over four decades.',
     bodyClass: '', bodyFont: '',
     mainText: `<p>The <strong>Islamic Republic terrorist regime</strong> did not merely cut internet cables. It committed a calculated act of war against the people it occupies — severing communication, memory, and witness at the exact moment tens of millions of Iranians were demanding its end. What follows is the record of <strong>138 days of engineered darkness</strong>: 8 January to 26 May 2026, the longest nationwide internet shutdown ever recorded in human history.</p>
-<p>When nationwide protests erupted in late 2025 and surged into 2026 — Iranians of every background, united in demanding the end of four decades of theocratic tyranny — the regime's answer was not dialogue. It was the kill switch. Within hours of protests on 8 January 2026, the junta severed internet and phone service nationwide. <strong>Tens of millions of people</strong> were thrown into enforced silence so the regime could commit its crimes unseen.</p>
+<p>When nationwide protests erupted on 28 December 2025 and surged into 2026 — Iranians of every background, united in demanding the end of four decades of theocratic tyranny — the regime's answer was not dialogue. It was the kill switch. Within hours of protests on 8 January 2026, the junta severed internet and phone service nationwide. <strong>Tens of millions of people</strong> were thrown into enforced silence so the regime could commit its crimes unseen.</p>
 <div class="demand-box">"A government that fears the phone in your pocket is a government that knows it is committing crimes."</div>
 <p>The blackout was operational cover for slaughter. While Iran went dark, security forces killed <strong>more than 40,000 people</strong> according to human rights monitors — a number that climbed under a media blackout designed to make counting the dead impossible. Thousands more remain in prison today, many on charges that carry the death penalty, tried in sham proceedings with no access to independent lawyers or public scrutiny. Amnesty International and Human Rights Watch have both stated plainly: the blackout existed to hide massacres from the world.</p>
-<p>The economic cost was borne entirely by <strong>the Iranian people — not the regime</strong>. Officials, their families, and IRGC networks maintained access throughout. Ordinary Iranians — shopkeepers, content creators, students, nurses, freelancers — lost their livelihoods overnight. An estimated <strong>$1.8 billion and counting</strong> was stripped from the Iranian economy; the regime's chamber of commerce estimated daily losses of $30–40 million, with indirect losses likely double. Ten million jobs depend on internet connectivity. Those ten million people paid the price. The regime paid nothing.</p>
+<p>The economic cost was borne entirely by <strong>the Iranian people — not the regime</strong>. Officials, their families, and IRGC networks maintained access throughout. Ordinary Iranians — shopkeepers, content creators, students, nurses, freelancers — lost their livelihoods overnight. An estimated <strong>$1.8 billion and counting</strong> was stripped from the Iranian economy; the regime's own Minister of Communications acknowledged daily losses of $35.7 million; independent economists put the true cost at $30–40 million in direct damage, with indirect losses pushing the total to $70–80 million per day. Millions of jobs depend on internet connectivity. Those millions of people paid the price. The regime paid nothing.</p>
 <div class="demand-box">"Our families couldn't reach us. Our businesses collapsed. Our savings vanished. And the men who ordered it kept their access, their salaries, and their impunity." — Iranian business owner, May 2026</div>
-<p>The regime also hunted down every remaining lifeline. GPS jamming was deployed to cripple Starlink, satellite dishes were confiscated door-to-door, and tens of thousands of Starlink connections were reportedly cut. Using Starlink in Iran is now punishable by <strong>up to ten years in prison — or execution</strong>. That is the measure of what this regime fears most: its own citizens talking to the world.</p>
+<p>The regime also hunted down every remaining lifeline. GPS jamming was deployed to cripple Starlink, satellite dishes were confiscated door-to-door, and tens of thousands of Starlink connections were reportedly cut. In March 2026, the regime's own Ministry of Intelligence announced that possessing a Starlink device is a criminal offence <strong>punishable by death</strong> — with prison terms of up to ten years for lesser charges. That is the measure of what this regime fears most: its own citizens talking to the world.</p>
 <p>On <strong>26 May 2026</strong>, after 138 days, connectivity was partially restored — but the battle is far from over. The blackout ended; the censorship did not. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram, and thousands of other platforms and services remain blocked. Internet speeds are below pre-shutdown levels. Surveillance infrastructure built during the blackout remains in place and has been deepened. Automated verification messages on phone calls suggest routine monitoring. <strong>The regime has not restored the internet — it has replaced it with a tighter cage.</strong> Content creators have lost audiences built over years. Freelancers have lost clients. Students have lost access to global knowledge. The humiliation of Iranians forced to use a filtered, surveilled, degraded internet every day is not a footnote — it is the ongoing policy.</p>
 <div class="demand-box">The internet is back. 40,000 are still dead. Thousands are still in prison. The censorship is still there. The fight is not over. Witness what they cannot broadcast. Refuse to let their silence become yours.</div>`
   },
 
   fa: {
-    alert: '▶ ایران · ۱۸ دی – ۵ خرداد ۱۴۰۴ · ۱۳۸ روز تاریکی عمدی · سند اینجاست',
-    daysLabel: 'روزی که جمهوری اسلامی ایران را خاموش کرد',
+    alert: '▶ ایران · ۱۸ دی ۱۴۰۴ – ۵ خرداد ۱۴۰۵ · ۱۳۸ روز تاریکی عمدی · سند اینجاست',
+    daysLabel: 'روزهایی که جمهوری اسلامی ایران را خاموش کرد',
     title: 'سیم‌ها را بریدند.<br><em>ما هنوز فریاد می‌زنیم.</em>',
-    subtitle: 'قطعی اینترنت ۱۴۰۴ در ایران — سند رسمی جنگ یک رژیم تروریست علیه مردم خودش',
+    subtitle: 'قطعی اینترنت ۱۴۰۴–۱۴۰۵ در ایران — سند رسمی جنگ یک رژیم تروریست علیه مردم خودش',
     langLabel: 'انتخاب زبان',
     s1: 'روز قطعی', s2: 'کمترین اتصال ثبت‌شده', s3: 'تحمیل‌شده بر مردم', s4: 'کشته‌شده توسط رژیم',
-    statsFootnote: '۱۸ دی ۱۴۰۴ – ۵ خرداد ۱۴۰۴ · منابع: نت‌بلاکس، ایران اینترنشنال، فیلتروواچ، دیده‌بان حقوق بشر',
-    statusText: '<span class="dot-green"></span><strong>اینترنت به‌طور نسبی بازگشت — ۵ خرداد ۱۴۰۴.</strong> پس از ۱۳۸ روز، اتصال برگشت — اما سانسور سنگین‌تر از همیشه است. یوتیوب، اینستاگرام، واتساپ، فیسبوک، توییتر/ایکس، تلگرام و هزاران سرویس دیگر همچنان مسدودند. سرعت کمتر. نظارت بیشتر. دیوار فیلتر رژیم محکم‌تر شده. این آزادی نیست — این یک قفس مدیریت‌شده است.',
+    statsFootnote: '۱۸ دی ۱۴۰۴ – ۵ خرداد ۱۴۰۵ · منابع: نت‌بلاکس، ایران اینترنشنال، فیلتروواچ، دیده‌بان حقوق بشر',
+    statusText: '<span class="dot-green"></span><strong>اینترنت به‌طور نسبی بازگشت — ۵ خرداد ۱۴۰۵.</strong> پس از ۱۳۸ روز، اتصال برگشت — اما سانسور سنگین‌تر از همیشه است. یوتیوب، اینستاگرام، واتساپ، فیسبوک، توییتر/ایکس، تلگرام و هزاران سرویس دیگر همچنان مسدودند. سرعت کمتر. نظارت بیشتر. دیوار فیلتر رژیم محکم‌تر شده. این آزادی نیست — این یک قفس مدیریت‌شده است.',
     tlTitle: 'جدول زمانی قطعی اینترنت',
     timeline: [
       { dot: 'red', date: '۱۸ دی ۱۴۰۴', text: 'در دوازدهمین روز اعتراضات سراسری برای پایان جمهوری اسلامی، رژیم کلید قطع را می‌زند. اینترنت و تلفن در تهران، اصفهان، شیراز، کرمانشاه، لردگان و آبدانان قطع می‌شود. تا عصر، ایران تقریباً کاملاً آفلاین است. نت‌بلاکس آن را «قطعی سراسری اینترنت» می‌نامد — آغاز ۱۳۸ روز تاریکی مهندسی‌شده.' },
@@ -801,25 +812,26 @@ var T = {
       { dot: '', date: '۸ بهمن ۱۴۰۴', text: '«تخفیف» تاکتیکی — نه بازگشت. سیستم لیست سفید تعیین می‌کند چه کسی به خارج دسترسی دارد. فروش آنلاین ۸۰٪ سقوط می‌کند. بورس تهران ۴۵۰٬۰۰۰ واحد از دست می‌دهد. این هزینه را مردم ایران می‌پردازند، نه رژیم.' },
       { dot: 'red', date: '۹ اسفند ۱۴۰۴', text: 'پس از حملات اسرائیل–آمریکا به ایران، رژیم کشور را دوباره در تاریکی فرو می‌برد. نت‌بلاکس اتصال را تنها ۴٪ از سطح معمول ثبت می‌کند.' },
       { dot: 'red', date: '۱۵ اسفند ۱۴۰۴', text: 'اتصال برای هفته‌ها در حدود ۱٪ از سطح معمول متوقف می‌شود. ایرانیان خارج از کشور نمی‌توانند با خانواده تماس بگیرند. نقشه‌های هشدار موشکی داوطلبانه جای خلأ رژیمی را می‌گیرند که مردم خود را از حملات آتی مطلع نمی‌سازد.' },
-      { dot: '', date: '۲۲ فروردین – ۱ اردیبهشت ۱۴۰۴', text: 'قطعی از ۱٬۰۰۰ ساعت می‌گذرد؛ طولانی‌ترین قطعی سراسری اینترنت در تاریخ بشر. رژیم فقط به «گروه‌های مورد نظر» دسترسی می‌دهد. زیان اقتصادی: ۱.۸ میلیارد دلار و همچنان در حال افزایش — پولی که از جیب مردم رفت نه رژیم. هزاران نفر در زندان هستند، بسیاری با اتهاماتی که مجازات اعدام دارند.' },
-      { dot: 'amber', date: '۵ خرداد ۱۴۰۴', text: 'پس از ۱۳۸ روز، اتصال به‌صورت نسبی بازگشت. اما یوتیوب، اینستاگرام، واتساپ، فیسبوک، توییتر/ایکس، تلگرام و هزاران سایت هنوز مسدودند. سرعت کمتر از قبل. نظارت عمیق‌تر. برای میلیون‌ها ایرانی — خسارت دیجیتال دائمی است.' }
+      { dot: '', date: '۲۲ فروردین – ۱ اردیبهشت ۱۴۰۵', text: 'قطعی از ۱٬۰۰۰ ساعت می‌گذرد؛ طولانی‌ترین قطعی سراسری اینترنت در تاریخ بشر. رژیم فقط به «گروه‌های مورد نظر» دسترسی می‌دهد. زیان اقتصادی: ۱.۸ میلیارد دلار و همچنان در حال افزایش — پولی که از جیب مردم رفت نه رژیم. هزاران نفر در زندان هستند، بسیاری با اتهاماتی که مجازات اعدام دارند.' },
+      { dot: 'amber', date: '۵ خرداد ۱۴۰۵', text: 'پس از ۱۳۸ روز، اتصال به‌صورت نسبی بازگشت. اما یوتیوب، اینستاگرام، واتساپ، فیسبوک، توییتر/ایکس، تلگرام و هزاران سایت هنوز مسدودند. سرعت کمتر از قبل. نظارت عمیق‌تر. برای میلیون‌ها ایرانی — خسارت دیجیتال دائمی است.' }
     ],
     ctaText: '«فکر می‌کردند اگر سیگنال را بکشند، می‌توانند داستان را بکشند. اما ما داستان هستیم — و هنوز فریاد می‌زنیم. اینترنت برگشت. سانسور هرگز نرفت. مبارزه تمام نشده.»',
-    ctaAttr: '— صدای مقاومت ایرانیان، ۱۴۰۴',
+    ctaAttr: '— صدای مقاومت ایرانیان، ۱۴۰۴–۱۴۰۵',
     shareLabel: 'پخش کنید — سکوت آن‌ها را بشکنید',
     shareX: 'اشتراک در X', shareFB: 'اشتراک در فیسبوک', shareMail: 'ارسال با ایمیل',
-    wikiText: 'ویکی‌پدیا: قطعی اینترنت ایران ۱۴۰۴',
+    wikiText: 'ویکی‌پدیا: قطعی اینترنت ایران ۱۴۰۴–۱۴۰۵',
     githubText: 'مشارکت در گیت‌هاب',
     footer: 'هر عکسی که آپلود نشد. هر تماسی که برقرار نشد. هر خانواده‌ای که نتوانست به هم برسد.<br>این صفحه سند را حمل می‌کند. آن را منتشر کنید.',
+    footerEmblem: '▶ شاهد باشید · مقاومت کنید · به یاد بسپارید ◀',
     disclaimer: 'این صفحه در کنار مردم ایران ایستاده — نه علیه آنان. خشم ما تنها متوجه رژیم تروریستی جمهوری اسلامی است.',
     bodyClass: 'rtl', bodyFont: 'fa-font',
-    mainText: `<p><strong>رژیم تروریستی جمهوری اسلامی</strong> صرفاً کابل اینترنت نبرید. یک عمل جنگی حساب‌شده علیه مردمی که ادعای حکومت بر آن‌ها را دارد مرتکب شد — رگ‌های ارتباط، حافظه و شهادت را در همان لحظه‌ای قطع کرد که ده‌ها میلیون ایرانی خواهان پایان آن بودند. آنچه در پی می‌آید سند <strong>۱۳۸ روز تاریکی مهندسی‌شده</strong> است: ۱۸ دی تا ۵ خرداد ۱۴۰۴، طولانی‌ترین قطعی سراسری اینترنت در تاریخ بشر.</p>
-<p>وقتی اعتراضات سراسری در اواخر ۱۴۰۳ آغاز شد و تا ۱۴۰۴ ادامه یافت — ایرانیان از هر قشری، متحد در خواست پایان چهار دهه استبداد دینی — پاسخ رژیم گفت‌وگو نبود. کلید قطع بود. رژیم در عرض چند ساعت اینترنت و تلفن را در سراسر کشور قطع کرد. <strong>ده‌ها میلیون نفر</strong> در سکوت اجباری فروافتادند تا رژیم جنایاتش را پنهان کند.</p>
+    mainText: `<p><strong>رژیم تروریستی جمهوری اسلامی</strong> صرفاً کابل اینترنت نبرید. یک عمل جنگی حساب‌شده علیه مردمی که ادعای حکومت بر آن‌ها را دارد مرتکب شد — رگ‌های ارتباط، حافظه و شهادت را در همان لحظه‌ای قطع کرد که ده‌ها میلیون ایرانی خواهان پایان آن بودند. آنچه در پی می‌آید سند <strong>۱۳۸ روز تاریکی مهندسی‌شده</strong> است: ۱۸ دی ۱۴۰۴ تا ۵ خرداد ۱۴۰۵، طولانی‌ترین قطعی سراسری اینترنت در تاریخ بشر.</p>
+<p>وقتی اعتراضات سراسری در دی ۱۴۰۴ آغاز شد — ایرانیان از هر قشری، متحد در خواست پایان چهار دهه استبداد دینی — پاسخ رژیم گفت‌وگو نبود. کلید قطع بود. رژیم در عرض چند ساعت اینترنت و تلفن را در سراسر کشور قطع کرد. <strong>ده‌ها میلیون نفر</strong> در سکوت اجباری فروافتادند تا رژیم جنایاتش را پنهان کند.</p>
 <div class="demand-box">«حکومتی که از گوشی تلفن در جیب تو می‌ترسد، حکومتی است که می‌داند جنایت می‌کند.»</div>
 <p>قطعی اینترنت پوشش عملیاتی برای کشتار بود. در حالی که ایران در تاریکی بود، نیروهای امنیتی <strong>بیش از ۴۰٬۰۰۰ نفر</strong> را طبق گزارش ناظران حقوق بشر کشتند — شماری که زیر تاریکی رسانه‌ای شمارش آن غیرممکن بود. هزاران نفر دیگر امروز همچنان در زندان‌اند، بسیاری با اتهاماتی که مجازات اعدام دارند.</p>
-<p>هزینه اقتصادی را <strong>مردم ایران پرداختند — نه رژیم</strong>. مقامات، خانواده‌هایشان و شبکه‌های سپاه در طول قطعی دسترسی داشتند. ایرانیان عادی — مغازه‌داران، تولیدکنندگان محتوا، دانشجویان، پرستاران، فریلنسرها — از شبانه‌روز شغل خود را از دست دادند. تخمیناً <strong>۱.۸ میلیارد دلار و بیشتر</strong> از اقتصاد ایران خارج شد. ده میلیون شغل وابسته به اینترنت بود. آن ده میلیون نفر هزینه را پرداختند. رژیم هیچ نپرداخت.</p>
-<div class="demand-box">«خانواده‌هایمان نمی‌توانستند با ما تماس بگیرند. کسب‌وکارمان فرو پاشید. پس‌اندازمان از بین رفت. و کسانی که این دستور را دادند، دسترسی، حقوق و مصونیت خود را حفظ کردند.» — یک بازرگان ایرانی، خرداد ۱۴۰۴</div>
-<p>در <strong>۵ خرداد ۱۴۰۴</strong>، پس از ۱۳۸ روز، اتصال به‌صورت نسبی بازگشت — اما جنگ تمام نشده. قطعی پایان یافت؛ سانسور نه. یوتیوب، اینستاگرام، واتساپ، فیسبوک، توییتر/ایکس، تلگرام و هزاران پلتفرم دیگر همچنان مسدودند. سرعت اینترنت از پیش از قطعی پایین‌تر است. زیرساخت نظارتی که در دوران قطعی ساخته شد پابرجاست و تعمیق یافته. تولیدکنندگان محتوا مخاطبانی را که سال‌ها ساخته بودند از دست داده‌اند. دانشجویان به دانش جهانی دسترسی ندارند. <strong>رژیم اینترنت را بازگردانده نکرده — آن را با یک قفس تنگ‌تر جایگزین کرده.</strong></p>
+<p>هزینه اقتصادی را <strong>مردم ایران پرداختند — نه رژیم</strong>. مقامات، خانواده‌هایشان و شبکه‌های سپاه در طول قطعی دسترسی داشتند. ایرانیان عادی — مغازه‌داران، تولیدکنندگان محتوا، دانشجویان، پرستاران، فریلنسرها — از شبانه‌روز شغل خود را از دست دادند. تخمیناً <strong>۱.۸ میلیارد دلار و بیشتر</strong> از اقتصاد ایران خارج شد. میلیون‌ها شغل وابسته به اینترنت بود. آن میلیون‌ها نفر هزینه را پرداختند. رژیم هیچ نپرداخت.</p>
+<div class="demand-box">«خانواده‌هایمان نمی‌توانستند با ما تماس بگیرند. کسب‌وکارمان فرو پاشید. پس‌اندازمان از بین رفت. و کسانی که این دستور را دادند، دسترسی، حقوق و مصونیت خود را حفظ کردند.» — یک بازرگان ایرانی، خرداد ۱۴۰۵</div>
+<p>در <strong>۵ خرداد ۱۴۰۵</strong>، پس از ۱۳۸ روز، اتصال به‌صورت نسبی بازگشت — اما جنگ تمام نشده. قطعی پایان یافت؛ سانسور نه. یوتیوب، اینستاگرام، واتساپ، فیسبوک، توییتر/ایکس، تلگرام و هزاران پلتفرم دیگر همچنان مسدودند. سرعت اینترنت از پیش از قطعی پایین‌تر است. زیرساخت نظارتی که در دوران قطعی ساخته شد پابرجاست و تعمیق یافته. تولیدکنندگان محتوا مخاطبانی را که سال‌ها ساخته بودند از دست داده‌اند. دانشجویان به دانش جهانی دسترسی ندارند. <strong>رژیم اینترنت را بازگردانده نکرده — آن را با یک قفس تنگ‌تر جایگزین کرده.</strong></p>
 <div class="demand-box">اینترنت برگشت. ۴۰٬۰۰۰ نفر هنوز کشته‌اند. هزاران نفر هنوز در زندان‌اند. سانسور هنوز هست. مبارزه تمام نشده. شاهد آنچه آن‌ها نمی‌توانند پخش کنند باشید. سکوت آن‌ها را به سکوت خود تبدیل نکنید.</div>`
   },
 
@@ -849,13 +861,14 @@ var T = {
     wikiText: 'Wikipedia: Blackout di Internet in Iran del 2026',
     githubText: 'Contribuisci su GitHub',
     footer: 'Ogni foto mai caricata. Ogni chiamata mai arrivata. Ogni famiglia che non è riuscita a tenersi in contatto.<br>Questa pagina porta il documento. Condividila.',
+    footerEmblem: '▶ TESTIMONIA · RESISTI · RICORDA ◀',
     disclaimer: 'Questa pagina è dalla parte del popolo iraniano — non contro di esso. La nostra rabbia è diretta esclusivamente al regime terrorista della Repubblica Islamica.',
     bodyClass: '', bodyFont: '',
     mainText: `<p>Il <strong>regime terrorista della Repubblica Islamica</strong> non ha semplicemente tagliato cavi internet. Ha commesso un atto di guerra deliberato contro il popolo che dice di governare — recidendo comunicazione, memoria e testimonianza nel momento esatto in cui decine di milioni di iraniani ne chiedevano la fine. Quello che segue è il resoconto di <strong>138 giorni di oscurità ingegnerizzata</strong>: 8 gennaio – 26 maggio 2026, il più lungo blackout internet nazionale mai registrato nella storia umana.</p>
 <p>Quando le proteste sono scoppiate a fine 2025 e si sono intensificate nel 2026 — iraniani di ogni provenienza, uniti nel chiedere la fine di quattro decenni di tirannia teocratica — la risposta del regime non è stata il dialogo. È stato l'interruttore. In poche ore, la giunta ha tagliato internet e telefonia in tutto il paese. <strong>Decine di milioni di persone</strong> sono state gettate nel silenzio imposto perché il regime potesse commettere i suoi crimini senza testimoni.</p>
-<div class="demand-box">"Un governo che teme il telefono nel tuo taschino è un governo che sa di stare commettendo dei crimini."</div>
+<div class="demand-box">"Un governo che teme il telefono nel tuo tasca è un governo che sa di stare commettendo dei crimini."</div>
 <p>Il blackout era copertura operativa per il massacro. Mentre l'Iran era al buio, le forze di sicurezza hanno ucciso <strong>più di 40.000 persone</strong> secondo gli osservatori dei diritti umani. Migliaia di altri sono ancora in prigione oggi, molti con accuse che comportano la pena di morte, processati in procedimenti farsa.</p>
-<p>Il costo economico è stato interamente a carico <strong>del popolo iraniano — non del regime</strong>. Funzionari, familiari e reti dei Guardiani della Rivoluzione hanno mantenuto l'accesso per tutta la durata. Gli iraniani comuni — commercianti, creatori di contenuti, studenti, infermieri, freelancer — hanno perso i mezzi di sussistenza da un giorno all'altro. Si stima che <strong>$1,8 miliardi e oltre</strong> siano stati sottratti all'economia iraniana. Dieci milioni di posti di lavoro dipendono dalla connettività internet. Quei dieci milioni di persone hanno pagato il prezzo. Il regime non ha pagato nulla.</p>
+<p>Il costo economico è stato interamente a carico <strong>del popolo iraniano — non del regime</strong>. Funzionari, familiari e reti dei Guardiani della Rivoluzione hanno mantenuto l'accesso per tutta la durata. Gli iraniani comuni — commercianti, creatori di contenuti, studenti, infermieri, freelancer — hanno perso i mezzi di sussistenza da un giorno all'altro. Si stima che <strong>$1,8 miliardi e oltre</strong> siano stati sottratti all'economia iraniana. Milioni di posti di lavoro dipendono dalla connettività internet. Quelle persone hanno pagato il prezzo. Il regime non ha pagato nulla.</p>
 <p>Il <strong>26 maggio 2026</strong>, dopo 138 giorni, la connettività è stata parzialmente ripristinata — ma la lotta è tutt'altro che finita. Il blackout è terminato; la censura no. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram e migliaia di altri servizi restano bloccati. Le velocità sono inferiori ai livelli pre-blackout. L'infrastruttura di sorveglianza costruita durante il blackout rimane e si è approfondita. <strong>Il regime non ha ripristinato internet — l'ha sostituito con una gabbia più stretta.</strong> I creatori di contenuti hanno perso audience costruita in anni. Gli studenti non hanno accesso alla conoscenza globale. L'umiliazione degli iraniani costretti a usare ogni giorno un internet filtrato, sorvegliato e degradato non è una nota a piè di pagina — è la politica in corso.</p>
 <div class="demand-box">Internet è tornato. 40.000 sono ancora morti. Migliaia sono ancora in prigione. La censura è ancora lì. La lotta non è finita. Siate testimoni di ciò che non possono trasmettere. Rifiutate che il loro silenzio diventi il vostro.</div>`
   },
@@ -886,35 +899,36 @@ var T = {
     wikiText: 'Wikipedia: Apagón de Internet en Irán de 2026',
     githubText: 'Contribuir en GitHub',
     footer: 'Cada foto nunca subida. Cada llamada que nunca llegó. Cada familia que no pudo comunicarse.<br>Esta página lleva el registro. Pásala.',
+    footerEmblem: '▶ TESTIFICA · RESISTE · RECUERDA ◀',
     disclaimer: 'Esta página está del lado del pueblo iraní — no en su contra. Nuestra ira se dirige únicamente al régimen terrorista de la República Islámica.',
     bodyClass: '', bodyFont: '',
     mainText: `<p>El <strong>régimen terrorista de la República Islámica</strong> no se limitó a cortar cables de internet. Cometió un acto de guerra deliberado contra el pueblo que dice gobernar — cercenando comunicación, memoria y testimonio en el momento exacto en que decenas de millones de iraníes exigían su fin. Lo que sigue es el registro de <strong>138 días de oscuridad ingeniada</strong>: 8 de enero – 26 de mayo de 2026, el apagón de internet nacional más largo jamás registrado en la historia humana.</p>
 <p>Cuando las protestas estallaron a finales de 2025 y se intensificaron en 2026 — iraníes de todo origen, unidos en exigir el fin de cuatro décadas de tiranía teocrática — la respuesta del régimen no fue el diálogo. Fue el interruptor. En cuestión de horas, la junta cortó internet y telefonía en todo el país. <strong>Decenas de millones de personas</strong> fueron sumidas en silencio forzado para que el régimen pudiera cometer sus crímenes sin testigos.</p>
 <div class="demand-box">"Un gobierno que teme el teléfono en tu bolsillo es un gobierno que sabe que está cometiendo crímenes."</div>
 <p>El apagón fue cobertura operativa para la masacre. Mientras Irán estaba a oscuras, las fuerzas de seguridad mataron a <strong>más de 40.000 personas</strong> según los observadores de derechos humanos. Miles más siguen hoy en prisión, muchos con cargos que conllevan la pena de muerte, juzgados en procesos simulacro.</p>
-<p>El costo económico fue asumido íntegramente por <strong>el pueblo iraní — no por el régimen</strong>. Funcionarios, sus familias y redes de los Guardianes de la Revolución mantuvieron acceso durante todo el período. Los iraníes comunes — comerciantes, creadores de contenido, estudiantes, enfermeros, autónomos — perdieron sus medios de vida de la noche a la mañana. Se estima que <strong>$1.800 millones y contando</strong> fueron extraídos de la economía iraní. Diez millones de empleos dependen de la conectividad. Esas diez millones de personas pagaron el precio. El régimen no pagó nada.</p>
+<p>El costo económico fue asumido íntegramente por <strong>el pueblo iraní — no por el régimen</strong>. Funcionarios, sus familias y redes de los Guardianes de la Revolución mantuvieron acceso durante todo el período. Los iraníes comunes — comerciantes, creadores de contenido, estudiantes, enfermeros, autónomos — perdieron sus medios de vida de la noche a la mañana. Se estima que <strong>$1.800 millones y contando</strong> fueron extraídos de la economía iraní. Millones de empleos dependen de la conectividad. Esas personas pagaron el precio. El régimen no pagó nada.</p>
 <p>El <strong>26 de mayo de 2026</strong>, tras 138 días, la conectividad se restauró parcialmente — pero la lucha está lejos de terminar. El apagón terminó; la censura no. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram y miles de otros servicios siguen bloqueados. Las velocidades están por debajo de los niveles pre-apagón. La infraestructura de vigilancia construida durante el apagón permanece y se ha profundizado. <strong>El régimen no ha restaurado internet — lo ha reemplazado por una jaula más estrecha.</strong> Los creadores de contenido han perdido audiencias construidas durante años. Los estudiantes no tienen acceso al conocimiento global. La humillación de los iraníes obligados a usar cada día un internet filtrado, vigilado y degradado no es una nota al pie — es la política en curso.</p>
 <div class="demand-box">Internet volvió. 40.000 siguen muertos. Miles siguen en prisión. La censura sigue ahí. La lucha no ha terminado. Sean testigos de lo que no pueden transmitir. Nieguen que su silencio se convierta en el de ustedes.</div>`
   },
 
   he: {
-    alert: '▶ איראן · ח׳ בשבט – ח׳ בסיוון תשפ״ו · 138 ימי חושך מכוון · התיעוד כאן',
+    alert: '▶ איראן · ח׳ שבט – י׳ סיוון תשפ״ו · 138 ימי חושך מכוון · התיעוד כאן',
     daysLabel: 'ימים שבהם הרפובליקה האסלאמית השתיקה את איראן',
     title: 'הם חתכו את החוטים.<br><em>אנחנו עדיין צועקים.</em>',
     subtitle: 'השבתת האינטרנט של 2026 שהוטלה על איראן — תיעוד מפורט של מלחמת משטר טרוריסטי בעמו שלו',
     langLabel: 'בחר שפה',
     s1: 'ימי השבתה', s2: 'קישוריות מינ. שנמדדה', s3: 'שולם על ידי העם', s4: 'נהרגו על ידי המשטר',
-    statsFootnote: 'ח׳ שבט – ח׳ סיוון תשפ״ו · מקורות: NetBlocks, Iran International, Filterwatch, Human Rights Watch, Cloudflare Radar',
-    statusText: '<span class="dot-green"></span><strong>האינטרנט שוחזר חלקית — ח׳ בסיוון תשפ״ו (26 מאי 2026).</strong> לאחר 138 ימים, הקישוריות חזרה — אך הצנזורה כבדה מאי פעם. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram ואלפי שירותים נוספים עדיין חסומים. המהירויות נמוכות יותר. המעקב עמוק יותר. חומת הסינון של המשטר חזקה יותר. זו אינה חירות — זוהי כלוב מנוהל.',
+    statsFootnote: 'ח׳ שבט – י׳ סיוון תשפ״ו · מקורות: NetBlocks, Iran International, Filterwatch, Human Rights Watch, Cloudflare Radar',
+    statusText: '<span class="dot-green"></span><strong>האינטרנט שוחזר חלקית — י׳ בסיוון תשפ״ו (26 מאי 2026).</strong> לאחר 138 ימים, הקישוריות חזרה — אך הצנזורה כבדה מאי פעם. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram ואלפי שירותים נוספים עדיין חסומים. המהירויות נמוכות יותר. המעקב עמוק יותר. חומת הסינון של המשטר חזקה יותר. זו אינה חירות — זוהי כלוב מנוהל.',
     tlTitle: 'ציר הזמן של ההשבתה',
     timeline: [
       { dot: 'red', date: 'ח׳ שבט תשפ״ו', text: 'ביום השנים-עשר למחאות הלאומיות לנפילת הרפובליקה האסלאמית, הג\'ונטה מנתקת את הכוח הדיגיטלי. האינטרנט והטלפוניה קורסים בטהרן, אספהאן, שיראז, כרמנשאה, לורדגאן ועבדנאן. עד אחר הצהריים, איראן כמעט לחלוטין לא מחוברת. תחילת 138 ימי חושך מתוכנן.' },
-      { dot: '', date: 'כ״א–ל׳ שבט תשפ״ו', text: 'המשטר מסלים: שיבוש GPS משתק את סטארלינק (עד 80% אובדן חבילות), כוחות ביטחון מחרימים צלחות לוויין מדלת לדלת, גישת סטארלינק נחסמת לראשונה. תחת כיסוי ההשבתה, מסלים הטבח של המוחים.' },
-      { dot: '', date: 'ח׳ אדר א׳ תשפ״ו', text: '"הקלה" טקטית — לא שחזור. מערכת רשימה לבנה מחליטה מי יכול לגשת לעולם החיצון. המכירות המקוונות צוללות ב-80%. הבורסה של טהרן מאבדת 450,000 נקודות. עלות זו מוטלת במלואה על העם האיראני, לא על המשטר.' },
-      { dot: 'red', date: 'ח׳ אדר ב׳ תשפ״ו', text: 'לאחר המתקפות הישראליות-אמריקאיות על איראן, המשטר מחזיר את המדינה לחושך כמעט מוחלט. NetBlocks מדווח על קישוריות של 4% בלבד מהרמה הרגילה.' },
-      { dot: 'red', date: 'ט״ו אדר ב׳ תשפ״ו', text: 'הקישוריות נשארת על ~1% לשבועות. איראנים בחו"ל אינם יכולים לפנות לבני משפחה. מפות אזעקת טילים שנבנו על ידי מתנדבים ממלאות את הריק שהמשטר מסרב למלא.' },
-      { dot: '', date: 'כ״א ניסן – א׳ אייר תשפ״ו', text: 'ההשבתה עוברת 1,000 שעות, ואז את יומה ה-53 הרציף — הארוכה ביותר בהיסטוריה. הנזק המוערך: 1.8 מיליארד דולר — כסף שנלקח מאיראנים רגילים, לא מהמשטר. אלפים בכלא, רבים עומדים בפני גזר דין מוות.' },
-      { dot: 'amber', date: 'ח׳ סיוון תשפ״ו', text: 'לאחר 138 ימים, הקישוריות משוחזרת חלקית. אך YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram ואלפי אתרים עדיין חסומים. המהירויות נמוכות מרמות הטרום-השבתה. המעקב עמק. עבור מיליוני איראנים, הנזק הדיגיטלי הוא קבוע.' }
+      { dot: '', date: 'י״א–כ׳ שבט תשפ״ו', text: 'המשטר מסלים: שיבוש GPS משתק את סטארלינק (עד 80% אובדן חבילות), כוחות ביטחון מחרימים צלחות לוויין מדלת לדלת, גישת סטארלינק נחסמת לראשונה. תחת כיסוי ההשבתה, מסלים הטבח של המוחים.' },
+      { dot: '', date: 'כ״ח שבט תשפ״ו', text: '"הקלה" טקטית — לא שחזור. מערכת רשימה לבנה מחליטה מי יכול לגשת לעולם החיצון. המכירות המקוונות צוללות ב-80%. הבורסה של טהרן מאבדת 450,000 נקודות. עלות זו מוטלת במלואה על העם האיראני, לא על המשטר.' },
+      { dot: 'red', date: 'י״א אדר תשפ״ו', text: 'לאחר המתקפות הישראליות-אמריקאיות על איראן, המשטר מחזיר את המדינה לחושך כמעט מוחלט. NetBlocks מדווח על קישוריות של 4% בלבד מהרמה הרגילה.' },
+      { dot: 'red', date: 'י״ז אדר תשפ״ו', text: 'הקישוריות נשארת על ~1% לשבועות. איראנים בחו"ל אינם יכולים לפנות לבני משפחה. מפות אזעקת טילים שנבנו על ידי מתנדבים ממלאות את הריק שהמשטר מסרב למלא.' },
+      { dot: '', date: 'כ״ד ניסן – ד׳ אייר תשפ״ו', text: 'ההשבתה עוברת 1,000 שעות, ואז את יומה ה-53 הרציף — הארוכה ביותר בהיסטוריה. הנזק המוערך: 1.8 מיליארד דולר — כסף שנלקח מאיראנים רגילים, לא מהמשטר. אלפים בכלא, רבים עומדים בפני גזר דין מוות.' },
+      { dot: 'amber', date: 'י׳ סיוון תשפ״ו', text: 'לאחר 138 ימים, הקישוריות משוחזרת חלקית. אך YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram ואלפי אתרים עדיין חסומים. המהירויות נמוכות מרמות הטרום-השבתה. המעקב עמק. עבור מיליוני איראנים, הנזק הדיגיטלי הוא קבוע.' }
     ],
     ctaText: '"הם חשבו שאם יהרגו את האות, יוכלו להרוג את הסיפור. אבל אנחנו הסיפור — ואנחנו עדיין צועקים. האינטרנט חזר. הצנזורה מעולם לא הלכה. המאבק לא נגמר."',
     ctaAttr: '— קול ההתנגדות האיראנית, 2026',
@@ -923,14 +937,15 @@ var T = {
     wikiText: 'ויקיפדיה: השבתת האינטרנט באיראן 2026',
     githubText: 'תרמו ב-GitHub',
     footer: 'כל תמונה שלא הועלתה. כל שיחה שלא עברה. כל משפחה שלא הצליחה לדבר.<br>הדף הזה נושא את התיעוד. העבירו אותו.',
+    footerEmblem: '▶ עֵד · הִתְנַגֵּד · זְכֹר ◀',
     disclaimer: 'דף זה עומד לצד העם האיראני — לא נגדו. כעסנו מופנה אך ורק כלפי המשטר הטרוריסטי של הרפובליקה האסלאמית.',
     bodyClass: 'rtl', bodyFont: 'he-font',
-    mainText: `<p><strong>המשטר הטרוריסטי של הרפובליקה האסלאמית</strong> לא רק ניתק כבלי אינטרנט. הוא ביצע מעשה מלחמה מכוון נגד העם שעליו הוא טוען לשלוט — חתך את עורקי התקשורת, הזיכרון והעדות ברגע המדויק שבו עשרות מיליוני איראנים דרשו את סופו. מה שלהלן הוא התיעוד של <strong>138 ימי חושך מתוכנן</strong>: ח׳ שבט – ח׳ סיוון תשפ״ו, ההשבתה הארצית הארוכה ביותר של אינטרנט שנרשמה בהיסטוריה האנושית.</p>
+    mainText: `<p><strong>המשטר הטרוריסטי של הרפובליקה האסלאמית</strong> לא רק ניתק כבלי אינטרנט. הוא ביצע מעשה מלחמה מכוון נגד העם שעליו הוא טוען לשלוט — חתך את עורקי התקשורת, הזיכרון והעדות ברגע המדויק שבו עשרות מיליוני איראנים דרשו את סופו. מה שלהלן הוא התיעוד של <strong>138 ימי חושך מתוכנן</strong>: ח׳ שבט – י׳ סיוון תשפ״ו, ההשבתה הארצית הארוכה ביותר של אינטרנט שנרשמה בהיסטוריה האנושית.</p>
 <p>כאשר המחאות פרצו בסוף תשפ״ה והתעצמו בתשפ״ו — איראנים מכל רובד, מאוחדים בדרישה לסיום ארבעה עשורי עריצות דתית — תגובת המשטר לא הייתה דיאלוג. היה זה מתג הכיבוי. בתוך שעות, ניתקה הג'ונטה אינטרנט וטלפוניה בכל המדינה. <strong>עשרות מיליוני אנשים</strong> הוטלו לשתיקה כפויה כדי שהמשטר יוכל לבצע את פשעיו ללא עדים.</p>
 <div class="demand-box">"ממשלה שמפחדת מהטלפון שבכיסך היא ממשלה שיודעת שהיא מבצעת פשעים."</div>
 <p>ההשבתה הייתה כיסוי מבצעי לטבח. בעוד איראן הייתה בחושך, כוחות הביטחון הרגו <strong>יותר מ-40,000 איש</strong> על פי גופי זכויות אדם. אלפים נוספים שוהים כיום בכלא, רבים עם אישומים שנושאים עונש מוות, בהליכים מגוחכים.</p>
-<p>העלות הכלכלית הוטלה במלואה על <strong>העם האיראני — לא על המשטר</strong>. פקידים, משפחותיהם ורשתות משמרות המהפכה שמרו על גישה לאורך כל התקופה. איראנים רגילים — בעלי חנויות, יוצרי תוכן, סטודנטים, אחיות, פרילנסרים — איבדו את פרנסתם מהיום להלילה. מוערך כי <strong>1.8 מיליארד דולר ויותר</strong> נשאבו מהכלכלה האיראנית. עשרה מיליון משרות תלויות בקישוריות לאינטרנט. אותם עשרה מיליון שילמו את המחיר. המשטר לא שילם כלום.</p>
-<p>ב<strong>ח׳ בסיוון תשפ״ו (26 מאי 2026)</strong>, לאחר 138 ימים, הקישוריות שוחזרה חלקית — אך המאבק רחוק מסיום. ההשבתה הסתיימה; הצנזורה לא. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram ואלפי שירותים נוספים עדיין חסומים. המהירויות נמוכות מרמות הטרום-השבתה. תשתית המעקב שנבנתה בתקופת ההשבתה נשארת ועמקה. <strong>המשטר לא שיחזר את האינטרנט — הוא החליף אותו בכלוב צר יותר.</strong> יוצרי תוכן איבדו קהלים שבנו במשך שנים. סטודנטים אינם ניגשים לידע עולמי. ההשפלה של האיראנים המאולצים להשתמש מדי יום באינטרנט מסונן, מרוגל ומושפל אינה הערת שוליים — זוהי המדיניות המתמשכת.</p>
+<p>העלות הכלכלית הוטלה במלואה על <strong>העם האיראני — לא על המשטר</strong>. פקידים, משפחותיהם ורשתות משמרות המהפכה שמרו על גישה לאורך כל התקופה. איראנים רגילים — בעלי חנויות, יוצרי תוכן, סטודנטים, אחיות, פרילנסרים — איבדו את פרנסתם מהיום להלילה. מוערך כי <strong>1.8 מיליארד דולר ויותר</strong> נשאבו מהכלכלה האיראנית. מיליוני משרות תלויות בקישוריות לאינטרנט. אותן אנשים שילמו את המחיר. המשטר לא שילם כלום.</p>
+<p>ב<strong>י׳ בסיוון תשפ״ו (26 מאי 2026)</strong>, לאחר 138 ימים, הקישוריות שוחזרה חלקית — אך המאבק רחוק מסיום. ההשבתה הסתיימה; הצנזורה לא. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram ואלפי שירותים נוספים עדיין חסומים. המהירויות נמוכות מרמות הטרום-השבתה. תשתית המעקב שנבנתה בתקופת ההשבתה נשארת ועמקה. <strong>המשטר לא שיחזר את האינטרנט — הוא החליף אותו בכלוב צר יותר.</strong> יוצרי תוכן איבדו קהלים שבנו במשך שנים. סטודנטים אינם ניגשים לידע עולמי. ההשפלה של האיראנים המאולצים להשתמש מדי יום באינטרנט מסונן, מרוגל ומושפל אינה הערת שוליים — זוהי המדיניות המתמשכת.</p>
 <div class="demand-box">האינטרנט חזר. 40,000 עדיין מתים. אלפים עדיין בכלא. הצנזורה עדיין שם. המאבק לא נגמר. היו עדים למה שהם אינם יכולים לשדר. אל תניחו לשתיקתם להפוך לשתיקתכם.</div>`
   },
 
@@ -960,15 +975,206 @@ var T = {
     wikiText: 'Wikipedia : Coupure d\'Internet en Iran de 2026',
     githubText: 'Contribuer sur GitHub',
     footer: 'Chaque photo jamais téléchargée. Chaque appel qui n\'est jamais passé. Chaque famille qui n\'a pas pu se joindre.<br>Cette page porte le témoignage. Transmettez-le.',
+    footerEmblem: '▶ TÉMOIGNEZ · RÉSISTEZ · SOUVENEZ-VOUS ◀',
     disclaimer: 'Cette page est aux côtés du peuple iranien — pas contre lui. Notre colère vise uniquement le régime terroriste de la République islamique.',
     bodyClass: '', bodyFont: '',
     mainText: `<p>Le <strong>régime terroriste de la République islamique</strong> n'a pas simplement coupé des câbles internet. Il a commis un acte de guerre délibéré contre le peuple qu'il prétend gouverner — tranchant communication, mémoire et témoignage au moment précis où des dizaines de millions d'Iraniens en réclamaient la fin. Ce qui suit est le dossier de <strong>138 jours d'obscurité ingéniée</strong> : du 8 janvier au 26 mai 2026, la plus longue coupure internet nationale jamais enregistrée dans l'histoire humaine.</p>
 <p>Quand les manifestations ont éclaté fin 2025 et se sont intensifiées en 2026 — des Iraniens de tous horizons, unis pour exiger la fin de quatre décennies de tyrannie théocratique — la réponse du régime n'a pas été le dialogue. Ce fut l'interrupteur. En quelques heures, la junte a coupé internet et téléphonie dans tout le pays. <strong>Des dizaines de millions de personnes</strong> ont été plongées dans un silence imposé pour que le régime puisse commettre ses crimes sans témoins.</p>
 <div class="demand-box">« Un gouvernement qui craint le téléphone dans votre poche est un gouvernement qui sait qu'il commet des crimes. »</div>
 <p>La coupure était une couverture opérationnelle pour le massacre. Pendant que l'Iran était dans le noir, les forces de sécurité ont tué <strong>plus de 40 000 personnes</strong> selon les observateurs des droits humains. Des milliers d'autres sont encore en prison aujourd'hui, beaucoup accusés de faits passibles de la peine de mort, jugés dans des simulacres de procès.</p>
-<p>Le coût économique a été intégralement supporté par <strong>le peuple iranien — pas par le régime</strong>. Les responsables, leurs familles et les réseaux des Gardiens de la Révolution ont maintenu leur accès tout au long de la période. Les Iraniens ordinaires — commerçants, créateurs de contenu, étudiants, infirmiers, indépendants — ont perdu leurs moyens de subsistance du jour au lendemain. On estime que <strong>1,8 milliard de dollars et plus</strong> ont été siphonnés de l'économie iranienne. Dix millions d'emplois dépendent de la connectivité internet. Ces dix millions de personnes ont payé le prix. Le régime n'a rien payé.</p>
+<p>Le coût économique a été intégralement supporté par <strong>le peuple iranien — pas par le régime</strong>. Les responsables, leurs familles et les réseaux des Gardiens de la Révolution ont maintenu leur accès tout au long de la période. Les Iraniens ordinaires — commerçants, créateurs de contenu, étudiants, infirmiers, indépendants — ont perdu leurs moyens de subsistance du jour au lendemain. On estime que <strong>1,8 milliard de dollars et plus</strong> ont été siphonnés de l'économie iranienne. Des millions d'emplois dépendent de la connectivité internet. Ces personnes ont payé le prix. Le régime n'a rien payé.</p>
 <p>Le <strong>26 mai 2026</strong>, après 138 jours, la connectivité a été partiellement rétablie — mais la lutte est loin d'être terminée. La coupure a cessé ; la censure non. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram et des milliers d'autres services restent bloqués. Les débits sont en dessous des niveaux d'avant la coupure. L'infrastructure de surveillance construite pendant la coupure reste en place et s'est approfondie. <strong>Le régime n'a pas rétabli internet — il l'a remplacé par une cage plus étroite.</strong> Les créateurs de contenu ont perdu des audiences construites pendant des années. Les étudiants n'ont plus accès au savoir mondial. L'humiliation des Iraniens contraints d'utiliser chaque jour un internet filtré, surveillé et dégradé n'est pas une note de bas de page — c'est la politique en cours.</p>
 <div class="demand-box">Internet est de retour. 40 000 sont encore morts. Des milliers sont encore en prison. La censure est toujours là. La lutte n'est pas terminée. Soyez témoins de ce qu'ils ne peuvent diffuser. Refusez que leur silence devienne le vôtre.</div>`
+  },
+
+  tr: {
+    alert: '▶ İran · 8 Ocak – 26 Mayıs 2026 · 138 Gün Kasıtlı Karanlık · Kayıt Burada',
+    daysLabel: 'İslam Cumhuriyeti\'nin İran\'ı Susturduğu Günler',
+    title: 'Kabloları kestiler.<br><em>Biz hâlâ bağırıyoruz.</em>',
+    subtitle: 'İran\'a dayatılan 2026 internet kesintisi — bir terör rejiminin kendi halkına karşı yürüttüğü savaşın belgelenmiş kaydı',
+    langLabel: 'Dil Seçin',
+    s1: 'Kesinti günü', s2: 'Ulaşılan min. bağlantı', s3: 'Halk tarafından karşılandı', s4: 'Rejim tarafından öldürüldü',
+    statsFootnote: '8 Oca – 26 May 2026 · Kaynaklar: NetBlocks, Iran International, Filterwatch, Human Rights Watch, Cloudflare Radar',
+    statusText: '<span class="dot-green"></span><strong>İnternet kısmen yeniden sağlandı — 26 Mayıs 2026.</strong> 138 günün ardından bağlantı geri döndü — ancak sansür her zamankinden daha ağır. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram ve binlerce başka hizmet engelli kalmaya devam ediyor. Hızlar daha düşük. Gözetim daha derin. Rejimin filtre duvarı daha güçlü. Bu özgürlük değil — yönetilen bir kafes.',
+    tlTitle: 'Kesinti Zaman Tüneli',
+    timeline: [
+      { dot: 'red', date: '8 Oca 2026', text: 'İslam Cumhuriyeti\'nin devrilmesini talep eden ülke genelindeki protestoların on ikinci gününde cunta dijital fişi çekiyor. Tahran, Isfahan, Şiraz, Kirmanşah, Lordegan ve Abdanan\'da internet ve telefon hatları çöküyor. Öğleden sonra İran neredeyse tamamen çevrimdışı. 138 günlük mühendis edilmiş karanlığın başlangıcı.' },
+      { dot: '', date: '11–20 Oca 2026', text: 'Rejim tırmanıyor: GPS bozucu Starlink\'i felç ediyor (%80\'e varan paket kaybı), güvenlik güçleri uydu çanaklarına kapı kapı el koyuyor ve Starlink erişimi ilk kez tamamen kesiliyor. Kesintinin örtüsü altında güvenlik güçleri protestocuların katliamını yoğunlaştırıyor.' },
+      { dot: '', date: '28 Oca 2026', text: 'Taktiksel bir "gevşeme" — ama yeniden açılma değil. Bir beyaz liste sistemi kimlerin dış dünyaya ulaşabileceğine karar veriyor. Çevrimiçi satışlar %80 düşüyor. Tahran Borsası 450.000 puan kaybediyor. Bu maliyet tamamen İran halkına yükleniyor, rejime değil.' },
+      { dot: 'red', date: '28 Şub 2026', text: 'İsrail–ABD\'nin İran\'a yönelik saldırılarının ardından rejim ülkeyi neredeyse tam karanlığa sokuyor. NetBlocks bağlantıyı normal düzeyin yalnızca %4\'ü olarak kaydediyor.' },
+      { dot: 'red', date: '6 Mar 2026', text: 'Bağlantı haftalarca ~%1 düzeyinde seyir ediyor. Yurt dışındaki İranlılar ailelerine ulaşamıyor. Gelen saldırılara karşı kendi vatandaşlarını uyarmayı reddeden rejimin bıraktığı boşluğu gönüllülerin oluşturduğu füze uyarı haritaları dolduruyor.' },
+      { dot: '', date: '11–21 Nis 2026', text: 'Kesinti 1.000 saati, ardından art arda 53. gününü geçiyor — tarihin en uzun internet kesintisi. Tahmini kayıplar 1,8 milyar dolara ulaşıyor — bu para rejimin değil, sıradan İranlıların cebinden çıkıyor. Binlerce kişi hâlâ cezaevinde, pek çoğu idam cezasıyla karşı karşıya.' },
+      { dot: 'amber', date: '26 May 2026', text: '138 günün ardından bağlantı kısmen yeniden sağlandı. Ancak YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram ve binlerce site hâlâ engelli. Hızlar kesinti öncesi düzeyin altında. Gözetim derinleşti. Milyonlarca İranlı için dijital hasar kalıcı.' }
+    ],
+    ctaText: '"Sinyali öldürlerse hikâyeyi de öldürebileceklerini sanıyorlardı. Oysa biz hikâyeyiz — ve hâlâ bağırıyoruz. İnternet geri döndü. Sansür hiç gitmedi. Mücadele bitmedi."',
+    ctaAttr: '— İran direniş sesi, 2026',
+    shareLabel: 'Yaymak için paylaşın — suskunluklarını kırın',
+    shareX: 'X\'te Paylaş', shareFB: 'Facebook\'ta Paylaş', shareMail: 'E-posta ile Paylaş',
+    wikiText: 'Wikipedia: 2026 İran İnternet Kesintisi',
+    githubText: 'GitHub\'da Katkıda Bulunun',
+    footer: 'Hiç yüklenemeyen her fotoğraf. Hiç bağlanamayan her çağrı. Birbirine ulaşamayan her aile.<br>Bu sayfa kaydı taşıyor. Aktarın.',
+    footerEmblem: '▶ TANIK OL · DİREN · UNUTMA ◀',
+    disclaimer: 'Bu sayfa İran halkının yanında — onlara karşı değil. Öfkemiz yalnızca İslam Cumhuriyeti terör rejimine yöneliktir.',
+    bodyClass: '', bodyFont: '',
+    mainText: `<p><strong>İslam Cumhuriyeti terör rejimi</strong> yalnızca internet kablolarını kesmedi. Yönettiğini iddia ettiği halka karşı kasıtlı bir savaş eylemi gerçekleştirdi — on milyonlarca İranlının sonunu talep ettiği tam o anda iletişimi, belleği ve tanıklığı kesti. Aşağıdakiler, <strong>138 günlük mühendis edilmiş karanlığın</strong> kaydıdır: 8 Ocak – 26 Mayıs 2026, insanlık tarihinde kaydedilmiş en uzun ulusal internet kesintisi.</p>
+<p>2025 sonunda protesto dalgası başladığında ve 2026\'ya taştığında — her kesimden İranlı, dört on yıllık teokratik tiranlığa son verme talebinde birleşti — rejimin yanıtı diyalog olmadı. Kapatma düğmesiydi. Cunta saatler içinde ülke genelinde internet ve telefon hizmetini kesti. <strong>On milyonlarca insan</strong>, rejimin suçlarını gözetim altında işleyebilmesi için zorla susturmaya maruz bırakıldı.</p>
+<div class="demand-box">"Cebinizdeki telefondan korkan bir hükümet, suç işlediğini bilen bir hükümettir."</div>
+<p>Kesinti, katliam için operasyonel bir örtüydü. İran karanlıktayken güvenlik güçleri, insan hakları gözlemcilerine göre <strong>40.000\'den fazla kişiyi</strong> öldürdü. Binlercesi bugün hâlâ cezaevinde, pek çoğu idam cezası gerektiren suçlamalarla sahte yargılamalara maruz bırakılıyor.</p>
+<p>Ekonomik maliyet tamamen <strong>İran halkı tarafından karşılandı — rejim tarafından değil</strong>. Yetkililer, aileleri ve Devrim Muhafızları ağları süreç boyunca erişimlerini sürdürdü. Sıradan İranlılar — esnaf, içerik üreticileri, öğrenciler, hemşireler, serbest çalışanlar — bir gecede geçim kaynaklarını yitirdi. İran ekonomisinden tahminen <strong>1,8 milyar dolar ve üzeri</strong> çekildi. Milyonlarca iş internet bağlantısına bağlıydı. O insanlar bedeli ödedi. Rejim hiçbir şey ödemedi.</p>
+<p><strong>26 Mayıs 2026\'da</strong>, 138 günün ardından bağlantı kısmen yeniden sağlandı — ancak mücadele çok uzakta değil. Kesinti sona erdi; sansür bitmedi. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram ve binlerce başka platform ve hizmet engelli kalmaya devam ediyor. İnternet hızları kesinti öncesi düzeyin altında. Kesinti döneminde inşa edilen gözetim altyapısı yerli yerinde duruyor ve derinleşti. <strong>Rejim interneti yeniden sağlamadı — onu daha dar bir kafesle değiştirdi.</strong> İçerik üreticileri yıllarca emek harcayarak oluşturdukları kitleleri yitirdi. Öğrenciler küresel bilgiye ulaşamıyor. İranlıların her gün filtrelenmiş, gözetlenen ve bozulmuş bir internet kullanmaya zorlanmasının yarattığı aşağılama bir dipnot değil — devam eden politikadır.</p>
+<div class="demand-box">İnternet geri döndü. 40.000 kişi hâlâ ölü. Binlercesi hâlâ cezaevinde. Sansür hâlâ orada. Mücadele bitmedi. Yayınlayamadıklarına tanık olun. Suskunluklarının sizinkine dönüşmesine izin vermeyin.</div>`
+  },
+
+  ar: {
+    alert: '▶ إيران · 8 يناير – 26 مايو 2026 · 138 يوماً من الظلام المتعمد · السجل هنا',
+    daysLabel: 'الأيام التي أسكتت فيها الجمهورية الإسلامية إيران',
+    title: 'قطعوا الأسلاك.<br><em>ما زلنا نصرخ.</em>',
+    subtitle: 'انقطاع الإنترنت عام 2026 المفروض على إيران — توثيق لحرب نظام إرهابي على شعبه',
+    langLabel: 'اختر اللغة',
+    s1: 'أيام الانقطاع', s2: 'أدنى اتصال مُسجَّل', s3: 'يتحمله الشعب', s4: 'قتلى على يد النظام',
+    statsFootnote: '8 يناير – 26 مايو 2026 · المصادر: NetBlocks، Iran International، Filterwatch، Human Rights Watch، Cloudflare Radar',
+    statusText: '<span class="dot-green"></span><strong>استُعيد الإنترنت جزئياً — 26 مايو 2026.</strong> بعد 138 يوماً، عادت الاتصالية — لكن الرقابة أشد من أي وقت مضى. لا تزال YouTube وInstagram وWhatsApp وFacebook وTwitter/X وTelegram وآلاف الخدمات الأخرى محجوبة. السرعات أبطأ. المراقبة أعمق. جدار الفلترة الذي يفرضه النظام أمتن. هذه ليست حرية — بل قفص مُدار.',
+    tlTitle: 'الجدول الزمني للانقطاع',
+    timeline: [
+      { dot: 'red', date: '8 يناير 2026', text: 'في اليوم الثاني عشر من الاحتجاجات الوطنية المطالِبة بإسقاط الجمهورية الإسلامية، تشدّ الخونتا قابس الرقمي. ينهار الإنترنت والاتصالات في طهران وأصفهان وشيراز وكرمانشاه ولردغان وآبدانان. بحلول الظهر، تكاد إيران تكون خارج الشبكة كلياً. بداية 138 يوماً من الظلام المهندَس.' },
+      { dot: '', date: '11–20 يناير 2026', text: 'يصعّد النظام: يشلّ التشويش على GPS خدمةَ Starlink (خسارة حزم تصل إلى 80%)، تصادر قوات الأمن أطباق الأقمار الاصطناعية من الباب إلى الباب، وتُقطع إمكانية الوصول إلى Starlink للمرة الأولى. في ظل غطاء الانقطاع، تتصاعد عمليات الإبادة بحق المحتجين.' },
+      { dot: '', date: '28 يناير 2026', text: '"تخفيف" تكتيكي — لا استعادة حقيقية. نظام قوائم بيضاء يحدد مَن يملك حق الوصول إلى العالم الخارجي. تتهاوى المبيعات الإلكترونية بنسبة 80%. تخسر بورصة طهران 450,000 نقطة. يتحمل هذه التكلفة الشعب الإيراني كاملاً، لا النظام.' },
+      { dot: 'red', date: '28 فبراير 2026', text: 'في أعقاب الضربات الأمريكية الإسرائيلية على إيران، يعيد النظام البلاد إلى شبه ظلام تام. يسجّل NetBlocks الاتصالية عند 4% فحسب من مستوياتها الطبيعية.' },
+      { dot: 'red', date: '6 مارس 2026', text: 'تتجمد الاتصالية عند ~1% لأسابيع. لا يستطيع الإيرانيون في الخارج التواصل مع ذويهم. تسدّ خرائط تحذير الصواريخ التي بنيها متطوعون الفراغ الذي خلّفه نظام يرفض تحذير مواطنيه من الضربات القادمة.' },
+      { dot: '', date: '11–21 أبريل 2026', text: 'يتجاوز الانقطاع 1,000 ساعة، ثم يومه الـ53 المتواصل — الأطول في التاريخ. تبلغ الخسائر المقدَّرة 1.8 مليار دولار — أموال من جيوب الإيرانيين العاديين، لا من النظام. لا يزال آلاف خلف القضبان، كثيرون منهم مهددون بعقوبة الإعدام.' },
+      { dot: 'amber', date: '26 مايو 2026', text: 'بعد 138 يوماً، استُعيدت الاتصالية جزئياً. لكن YouTube وInstagram وWhatsApp وFacebook وTwitter/X وTelegram وآلاف المواقع لا تزال محجوبة. السرعات دون مستويات ما قبل الانقطاع. المراقبة ازدادت عمقاً. بالنسبة لملايين الإيرانيين، الضرر الرقمي دائم.' }
+    ],
+    ctaText: '"ظنوا أنهم إذا قتلوا الإشارة، قتلوا الحكاية. لكننا نحن الحكاية — وما زلنا نصرخ. الإنترنت عاد. الرقابة لم تغادر قط. الكفاح لم ينتهِ."',
+    ctaAttr: '— صوت المقاومة الإيرانية، 2026',
+    shareLabel: 'انشر الخبر — اكسر صمتهم',
+    shareX: 'شارك على X', shareFB: 'شارك على Facebook', shareMail: 'شارك عبر البريد الإلكتروني',
+    wikiText: 'ويكيبيديا: انقطاع الإنترنت في إيران 2026',
+    githubText: 'ساهم على GitHub',
+    footer: 'كل صورة لم تُرفَع. كل مكالمة لم تصل. كل عائلة لم تتمكن من التواصل.<br>هذه الصفحة تحمل السجل. مرّره.',
+    footerEmblem: '▶ اشهد · قاوم · تذكّر ◀',
+    disclaimer: 'هذه الصفحة تقف مع الشعب الإيراني — لا ضده. غضبنا موجّه حصراً نحو النظام الإرهابي للجمهورية الإسلامية.',
+    bodyClass: 'rtl', bodyFont: '',
+    mainText: `<p><strong>النظام الإرهابي للجمهورية الإسلامية</strong> لم يكتفِ بقطع كابلات الإنترنت. لقد ارتكب فعل حرب متعمّداً ضد الشعب الذي يدّعي حكمه — قاطعاً التواصل والذاكرة والشهادة في اللحظة ذاتها التي كان فيها عشرات الملايين من الإيرانيين يطالبون بنهايته. ما يلي هو توثيق <strong>138 يوماً من الظلام المهندَس</strong>: من 8 يناير إلى 26 مايو 2026، أطول انقطاع وطني للإنترنت يُسجَّل في تاريخ البشرية.</p>
+<p>حين اندلعت الاحتجاجات الوطنية في أواخر عام 2025 واتّسعت في 2026 — إيرانيون من كل الأطياف، متحدون في المطالبة بإنهاء أربعة عقود من الاستبداد الديني — لم يكن ردّ النظام الحوار. كان مفتاح الإطفاء. في غضون ساعات، قطعت الخونتا خدمتَي الإنترنت والهاتف على مستوى البلاد. <strong>عشرات الملايين من الناس</strong> أُسقطوا في صمت قسري لكي يرتكب النظام جرائمه بعيداً عن الأنظار.</p>
+<div class="demand-box">"حكومة تخشى الهاتف في جيبك هي حكومة تعلم أنها ترتكب جرائم."</div>
+<p>كان الانقطاع غطاءً عملياتياً للمجزرة. بينما كانت إيران في الظلام، قتلت قوات الأمن <strong>أكثر من 40,000 شخص</strong> وفق ما رصدته منظمات حقوق الإنسان. لا يزال الآلاف خلف القضبان اليوم، كثيرون منهم بتهم تستوجب الإعدام، يُحاكَمون في محاكمات صورية.</p>
+<p>تحمّل الشعب الإيراني التكلفة الاقتصادية بأكملها — <strong>لا النظام</strong>. حافظ المسؤولون وعائلاتهم وشبكات الحرس الثوري على وصولهم طوال تلك الفترة. أما الإيرانيون العاديون — أصحاب المحال وصنّاع المحتوى والطلاب والممرضون والعمال المستقلون — فقد فقدوا مصادر رزقهم من الليل إلى الصباح. تُشير التقديرات إلى أن <strong>ما يزيد على 1.8 مليار دولار</strong> نُزع من الاقتصاد الإيراني. الملايين من الوظائف تعتمد على الاتصال بالإنترنت. هؤلاء الناس دفعوا الثمن. النظام لم يدفع شيئاً.</p>
+<p>في <strong>26 مايو 2026</strong>، وبعد 138 يوماً، استُعيدت الاتصالية جزئياً — غير أن المعركة لم تنتهِ بعد. توقف الانقطاع؛ لكن الرقابة لم تتوقف. لا تزال YouTube وInstagram وWhatsApp وFacebook وTwitter/X وTelegram وآلاف المنصات والخدمات محجوبة. سرعات الإنترنت دون مستويات ما قبل الانقطاع. البنية التحتية للمراقبة التي أُنشئت إبان الانقطاع لا تزال قائمة وتعمّقت. <strong>لم يُعِد النظام الإنترنت — بل استبدله بقفص أضيق.</strong> فقد صنّاع المحتوى جماهير بنوها على مدار سنوات. حُرم الطلاب من الوصول إلى المعرفة العالمية. إذلال الإيرانيين المضطرين يومياً إلى استخدام إنترنت مُفلتَر ومراقَب ومُهان ليس هامشاً — بل هو السياسة المستمرة.</p>
+<div class="demand-box">الإنترنت عاد. 40,000 لا يزالون موتى. الآلاف لا يزالون خلف القضبان. الرقابة لا تزال قائمة. الكفاح لم ينتهِ. اشهد ما لا يستطيعون بثّه. أبِ أن يتحوّل صمتهم إلى صمتك.</div>`
+  },
+
+  pt: {
+    alert: '▶ Irão · 8 janeiro – 26 maio 2026 · 138 Dias de Escuridão Deliberada · O Registo Está Aqui',
+    daysLabel: 'Dias em que a República Islâmica silenciou o Irão',
+    title: 'Cortaram os fios.<br><em>Ainda estamos a gritar.</em>',
+    subtitle: 'O apagão de internet de 2026 imposto ao Irão — o registo documentado da guerra de um regime terrorista contra o seu próprio povo',
+    langLabel: 'Selecionar Idioma',
+    s1: 'Dias de apagão', s2: 'Mín. conetividade atingida', s3: 'Suportado pelo povo', s4: 'Mortos pelo regime',
+    statsFootnote: '8 jan – 26 mai 2026 · Fontes: NetBlocks, Iran International, Filterwatch, Human Rights Watch, Cloudflare Radar',
+    statusText: '<span class="dot-green"></span><strong>Internet parcialmente restaurada — 26 de maio de 2026.</strong> Após 138 dias, a conetividade regressou — mas a censura é mais pesada do que nunca. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram e milhares de outros serviços continuam bloqueados. As velocidades são mais lentas. A vigilância é mais profunda. O muro de filtragem do regime é mais sólido. Isto não é liberdade — é uma jaula gerida.',
+    tlTitle: 'Cronologia do Apagão',
+    timeline: [
+      { dot: 'red', date: '8 jan 2026', text: 'No décimo segundo dia dos protestos nacionais que exigem a queda da República Islâmica, a junta corta o interruptor digital. A internet e as linhas telefónicas colapsam em Teerão, Isfahan, Shiraz, Kermanshah, Lordegan e Abdanan. Ao final da tarde, o Irão está quase totalmente offline. Início de 138 dias de escuridão planeada.' },
+      { dot: '', date: '11–20 jan 2026', text: 'O regime intensifica: interferência GPS paralisa o Starlink (até 80% de perda de pacotes), as forças de segurança confiscam antenas parabólicas de porta em porta, e o acesso ao Starlink é cortado pela primeira vez. Sob a cobertura do apagão, as forças de segurança intensificam o massacre dos manifestantes.' },
+      { dot: '', date: '28 jan 2026', text: 'Uma "distensão" tática — não um restauro. Um sistema de lista branca decide quem pode aceder ao mundo exterior. As vendas online caem 80%. A Bolsa de Teerão perde 450.000 pontos. Este custo é suportado inteiramente pelo povo iraniano, não pelo regime.' },
+      { dot: 'red', date: '28 fev 2026', text: 'Na sequência dos ataques israelo-americanos ao Irão, o regime mergulha o país de volta numa escuridão quase total. O NetBlocks regista a conetividade em apenas 4% dos níveis normais.' },
+      { dot: 'red', date: '6 mar 2026', text: 'A conetividade estabiliza em ~1% por semanas. Os iranianos no estrangeiro não conseguem contactar as suas famílias. Mapas de alerta de mísseis criados por voluntários preenchem o vazio deixado por um regime que recusa avisar os seus cidadãos dos ataques iminentes.' },
+      { dot: '', date: '11–21 abr 2026', text: 'O apagão ultrapassa as 1.000 horas, depois o seu 53.º dia consecutivo — o mais longo da história. As perdas estimadas atingem 1,8 mil milhões de dólares — dinheiro retirado dos bolsos dos iranianos, não do regime. Milhares permanecem na prisão, muitos arriscando a pena de morte.' },
+      { dot: 'amber', date: '26 mai 2026', text: 'Após 138 dias, a conetividade é parcialmente restaurada. Mas YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram e milhares de sites continuam bloqueados. As velocidades estão abaixo dos níveis anteriores ao apagão. A vigilância aprofundou-se. Para milhões de iranianos, o dano digital é permanente.' }
+    ],
+    ctaText: '"Pensavam que se matassem o sinal, podiam matar a história. Mas nós somos a história — e ainda estamos a gritar. A internet voltou. A censura nunca foi embora. A luta não acabou."',
+    ctaAttr: '— Voz da resistência iraniana, 2026',
+    shareLabel: 'Espalha a palavra — quebra o silêncio deles',
+    shareX: 'Partilhar no X', shareFB: 'Partilhar no Facebook', shareMail: 'Partilhar por Email',
+    wikiText: 'Wikipédia: Apagão de internet no Irão em 2026',
+    githubText: 'Contribuir no GitHub',
+    footer: 'Cada foto nunca carregada. Cada chamada que nunca passou. Cada família que não conseguiu contactar-se.<br>Esta página carrega o registo. Passa-o adiante.',
+    footerEmblem: '▶ TESTEMUNHA · RESISTE · RECORDA ◀',
+    disclaimer: 'Esta página está do lado do povo iraniano — não contra ele. A nossa raiva é dirigida exclusivamente ao regime terrorista da República Islâmica.',
+    bodyClass: '', bodyFont: '',
+    mainText: `<p>O <strong>regime terrorista da República Islâmica</strong> não se limitou a cortar cabos de internet. Cometeu um ato de guerra calculado contra o povo que diz governar — cortando a comunicação, a memória e o testemunho no momento exato em que dezenas de milhões de iranianos exigiam o seu fim. O que se segue é o registo de <strong>138 dias de escuridão planeada</strong>: 8 de janeiro a 26 de maio de 2026, o maior apagão nacional de internet alguma vez registado na história humana.</p>
+<p>Quando os protestos nacionais eclodiram no final de 2025 e se intensificaram em 2026 — iranianos de todas as origens, unidos na exigência do fim de quatro décadas de tirania teocrática — a resposta do regime não foi o diálogo. Foi o interruptor de corte. Em poucas horas, a junta cortou o serviço de internet e telefone em todo o país. <strong>Dezenas de milhões de pessoas</strong> foram lançadas num silêncio forçado para que o regime pudesse cometer os seus crimes sem ser visto.</p>
+<div class="demand-box">"Um governo que tem medo do telemóvel no seu bolso é um governo que sabe que está a cometer crimes."</div>
+<p>O apagão foi uma cobertura operacional para o massacre. Enquanto o Irão estava às escuras, as forças de segurança mataram <strong>mais de 40.000 pessoas</strong>, segundo os monitores de direitos humanos. Milhares mais permanecem hoje na prisão, muitos com acusações que implicam a pena de morte, julgados em processos simulacro.</p>
+<p>O custo económico foi suportado inteiramente pelo <strong>povo iraniano — não pelo regime</strong>. Os funcionários, as suas famílias e as redes dos Guardiões da Revolução mantiveram o acesso ao longo de todo o período. Os iranianos comuns — lojistas, criadores de conteúdo, estudantes, enfermeiros, freelancers — perderam os seus meios de subsistência de um dia para o outro. Estima-se que <strong>1,8 mil milhões de dólares e mais</strong> foram retirados da economia iraniana. Milhões de empregos dependem da conetividade à internet. Essas pessoas pagaram o preço. O regime não pagou nada.</p>
+<p>A <strong>26 de maio de 2026</strong>, após 138 dias, a conetividade foi parcialmente restaurada — mas a luta está longe de terminar. O apagão terminou; a censura não. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram e milhares de outros serviços continuam bloqueados. As velocidades de internet estão abaixo dos níveis anteriores ao apagão. A infraestrutura de vigilância construída durante o apagão permanece e foi aprofundada. <strong>O regime não restaurou a internet — substituiu-a por uma jaula mais apertada.</strong> Os criadores de conteúdo perderam audiências construídas ao longo de anos. Os estudantes perderam o acesso ao conhecimento global. A humilhação dos iranianos forçados a usar diariamente uma internet filtrada, vigiada e degradada não é uma nota de rodapé — é a política em curso.</p>
+<div class="demand-box">A internet voltou. 40.000 continuam mortos. Milhares continuam na prisão. A censura continua lá. A luta não acabou. Sê testemunha do que não podem transmitir. Recusa deixar que o silêncio deles se torne o teu.</div>`
+  },
+
+  zh: {
+    alert: '▶ 伊朗 · 2026年1月8日 – 5月26日 · 138天蓄意黑暗 · 记录在此',
+    daysLabel: '伊斯兰共和国让伊朗噤声的天数',
+    title: '他们切断了电线。<br><em>我们仍在呐喊。</em>',
+    subtitle: '2026年强加于伊朗的互联网断网事件——一个恐怖政权对本国人民发动战争的有据可查的记录',
+    langLabel: '选择语言',
+    s1: '断网天数', s2: '最低连通率', s3: '由人民承担', s4: '政权杀害人数',
+    statsFootnote: '2026年1月8日 – 5月26日 · 来源：NetBlocks、Iran International、Filterwatch、人权观察、Cloudflare Radar',
+    statusText: '<span class="dot-green"></span><strong>互联网已部分恢复——2026年5月26日。</strong>138天后，连接恢复——但审查比以往任何时候都更严苛。YouTube、Instagram、WhatsApp、Facebook、Twitter/X、Telegram及数千项其他服务仍处于封锁状态。网速更慢。监控更深入。政权的过滤墙更加坚固。这不是自由——这是一个被管控的牢笼。',
+    tlTitle: '断网事件时间线',
+    timeline: [
+      { dot: 'red', date: '2026年1月8日', text: '在要求终结伊斯兰共和国的全国抗议第十二天，军政府切断数字电源。德黑兰、伊斯法罕、设拉子、克尔曼沙赫、洛尔德甘和阿卜达南的互联网与电话线路全面崩溃。午后，伊朗几乎完全断网。138天蓄意黑暗就此开始。' },
+      { dot: '', date: '2026年1月11–20日', text: '政权升级行动：GPS干扰使星链瘫痪（丢包率高达80%），安全部队挨家挨户没收卫星天线，星链访问通道首次被完全封锁。断网的掩护下，安全部队加剧对抗议者的屠杀。' },
+      { dot: '', date: '2026年1月28日', text: '战术性"松动"——而非真正恢复。白名单系统决定谁可以接触外部世界。线上销售崩跌80%。德黑兰证券交易所损失45万点。这一代价完全由伊朗人民承担，而非政权。' },
+      { dot: 'red', date: '2026年2月28日', text: '以色列与美国对伊朗发动打击后，政权将国家重新推入近乎全面的黑暗。NetBlocks记录到的连通率仅为正常水平的4%。' },
+      { dot: 'red', date: '2026年3月6日', text: '连通率长达数周维持在约1%。海外伊朗人无法联系家人。志愿者制作的导弹预警地图填补了政权拒绝向本国公民发出进攻预警所留下的空白。' },
+      { dot: '', date: '2026年4月11–21日', text: '断网时长超过1,000小时，随后连续第53天——史上持续时间最长的全国互联网断网。预计损失达18亿美元——这是从普通伊朗人口袋里掏走的钱，而非政权付出的代价。数千人仍身陷囹圄，许多人面临死刑。' },
+      { dot: 'amber', date: '2026年5月26日', text: '138天后，连接部分恢复。但YouTube、Instagram、WhatsApp、Facebook、Twitter/X、Telegram及数千个网站仍被封锁。网速低于断网前水平。监控已进一步深化。对数百万伊朗人而言，数字损害是永久性的。' }
+    ],
+    ctaText: '"他们以为杀死信号就能杀死故事。但我们就是故事——我们仍在呐喊。互联网回来了。审查从未离去。斗争未曾结束。"',
+    ctaAttr: '——伊朗抵抗之声，2026年',
+    shareLabel: '传播出去——打破他们的沉默',
+    shareX: '在X上分享', shareFB: '在Facebook上分享', shareMail: '通过邮件分享',
+    wikiText: '维基百科：2026年伊朗互联网断网事件',
+    githubText: '在GitHub上贡献',
+    footer: '每一张从未上传的照片。每一个从未接通的电话。每一个无法相互联系的家庭。<br>这个页面承载着记录。请将它传递下去。',
+    footerEmblem: '▶ 见证 · 抵抗 · 铭记 ◀',
+    disclaimer: '这个页面与伊朗人民站在一起——而非与压迫他们的政权为伍。我们的愤怒仅针对伊斯兰共和国恐怖政权。',
+    bodyClass: '', bodyFont: '',
+    mainText: `<p><strong>伊斯兰共和国恐怖政权</strong>所做的不仅仅是切断互联网线缆。它对其自称统治的人民发动了一场蓄意的战争行为——在数千万伊朗人要求其终结的那一刻，切断了通讯、记忆与见证。以下是<strong>138天蓄意黑暗</strong>的记录：2026年1月8日至5月26日，人类历史上有记录以来最长的全国性互联网断网事件。</p>
+<p>当全国抗议浪潮于2025年底爆发并在2026年持续高涨——各阶层伊朗人团结一致，要求终结四十年神权暴政——政权的回应并非对话，而是断电开关。在抗议爆发的数小时内，军政府切断了全国的互联网和电话服务。<strong>数千万人</strong>被强制推入沉默，使政权得以在无人目睹的情况下犯下罪行。</p>
+<div class="demand-box">"一个害怕你口袋里手机的政府，是一个知道自己在犯罪的政府。"</div>
+<p>断网是屠杀的行动掩护。伊朗陷入黑暗之际，据人权监察机构称，安全部队杀害了<strong>逾40,000人</strong>——这一数字在媒体封锁下无法准确统计。数千人至今仍身陷囹圄，许多人被以死刑罪名指控，在缺乏独立律师或公众监督的情况下接受虚假庭审。</p>
+<p>经济代价完全由<strong>伊朗人民承担——而非政权</strong>。官员、其家属及伊斯兰革命卫队网络全程保持网络访问权限。普通伊朗人——店主、内容创作者、学生、护士、自由职业者——一夜之间失去了生计。据估计，<strong>逾18亿美元</strong>从伊朗经济中流失。数百万个工作岗位依赖互联网连接。那些人付出了代价。政权分文未付。</p>
+<p><strong>2026年5月26日</strong>，138天后，连接得到部分恢复——但斗争远未结束。断网结束了；审查没有。YouTube、Instagram、WhatsApp、Facebook、Twitter/X、Telegram及数千个其他平台和服务仍遭封锁。互联网速度低于断网前水平。断网期间构建的监控基础设施仍然存在且已进一步深化。<strong>政权并未恢复互联网——而是用一个更狭窄的牢笼取而代之。</strong>内容创作者失去了多年积累的受众。学生失去了获取全球知识的渠道。伊朗人每天被迫使用经过过滤、监控和降速的互联网，这种羞辱并非注脚——而是持续推行的政策。</p>
+<div class="demand-box">互联网回来了。40,000人仍已罹难。数千人仍身陷囹圄。审查依然存在。斗争尚未结束。见证他们无法播出的一切。拒绝让他们的沉默成为你的沉默。</div>`
+  },
+
+  ko: {
+    alert: '▶ 이란 · 2026년 1월 8일 – 5월 26일 · 138일간의 의도적 암흑 · 기록이 여기 있습니다',
+    daysLabel: '이슬람 공화국이 이란을 침묵시킨 날들',
+    title: '그들은 전선을 끊었다.<br><em>우리는 여전히 외치고 있다.</em>',
+    subtitle: '이란에 강요된 2026년 인터넷 차단 — 테러 정권이 자국민에 맞서 벌인 전쟁의 공식 기록',
+    langLabel: '언어 선택',
+    s1: '차단 일수', s2: '기록된 최저 연결률', s3: '국민이 부담한 비용', s4: '정권에 의해 살해된 수',
+    statsFootnote: '2026년 1월 8일 – 5월 26일 · 출처: NetBlocks, Iran International, Filterwatch, Human Rights Watch, Cloudflare Radar',
+    statusText: '<span class="dot-green"></span><strong>인터넷이 부분적으로 복구됨 — 2026년 5월 26일.</strong> 138일 후 연결이 돌아왔지만, 검열은 그 어느 때보다 강화되었습니다. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram과 수천 개의 기타 서비스가 여전히 차단되어 있습니다. 속도는 더 느리고, 감시는 더 깊어졌습니다. 정권의 필터 장벽은 더욱 견고해졌습니다. 이것은 자유가 아닙니다 — 관리되는 감옥입니다.',
+    tlTitle: '차단 사건 타임라인',
+    timeline: [
+      { dot: 'red', date: '2026년 1월 8일', text: '이슬람 공화국의 종식을 요구하는 전국 시위 12일째, 군사 정권이 디지털 전원을 차단합니다. 테헤란, 이스파한, 시라즈, 케르만샤, 로르데간, 아브다난에서 인터넷과 전화선이 마비됩니다. 오후에 이란은 거의 완전히 오프라인 상태가 됩니다. 138일간의 계획된 암흑의 시작입니다.' },
+      { dot: '', date: '2026년 1월 11–20일', text: '정권이 수위를 높입니다. GPS 교란으로 스타링크가 마비되고(패킷 손실 최대 80%), 보안군이 가가호호 위성 수신 장치를 압수하며 스타링크 접근이 처음으로 완전히 차단됩니다. 차단의 엄폐 아래 보안군은 시위대 학살을 강화합니다.' },
+      { dot: '', date: '2026년 1월 28일', text: '전술적 "완화" — 복구가 아닙니다. 화이트리스트 시스템이 외부 세계에 접근할 수 있는 사람을 결정합니다. 온라인 판매가 80% 폭락합니다. 테헤란 증권거래소가 45만 포인트를 잃습니다. 이 비용은 정권이 아닌 이란 국민이 전적으로 부담합니다.' },
+      { dot: 'red', date: '2026년 2월 28일', text: '이스라엘-미국의 이란 공습 후 정권이 국가를 거의 완전한 암흑으로 되돌립니다. NetBlocks는 연결률이 정상 수준의 4%에 불과하다고 기록합니다.' },
+      { dot: 'red', date: '2026년 3월 6일', text: '연결률이 수주간 ~1%에 머뭅니다. 해외 이란인들이 가족에게 연락할 수 없습니다. 자국민에게 들어오는 공습을 경고하기를 거부하는 정권이 남긴 공백을 자원봉사자들이 만든 미사일 경보 지도가 채웁니다.' },
+      { dot: '', date: '2026년 4월 11–21일', text: '차단이 1,000시간을 넘고, 이어 연속 53일째 — 역사상 가장 긴 전국 인터넷 차단입니다. 추정 손실이 18억 달러에 달합니다 — 이는 정권이 아닌 평범한 이란인들의 주머니에서 나간 돈입니다. 수천 명이 여전히 감옥에 있으며, 많은 이들이 사형에 직면해 있습니다.' },
+      { dot: 'amber', date: '2026년 5월 26일', text: '138일 후 연결이 부분적으로 복구됩니다. 하지만 YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram과 수천 개의 사이트는 여전히 차단되어 있습니다. 속도는 차단 이전 수준을 밑돌고 있습니다. 감시는 깊어졌습니다. 수백만 이란인에게 디지털 피해는 영구적입니다.' }
+    ],
+    ctaText: '"신호를 죽이면 이야기도 죽일 수 있다고 생각했습니다. 하지만 우리가 바로 그 이야기입니다 — 그리고 우리는 여전히 외치고 있습니다. 인터넷이 돌아왔습니다. 검열은 한 번도 떠난 적이 없습니다. 싸움은 끝나지 않았습니다."',
+    ctaAttr: '— 이란 저항의 목소리, 2026',
+    shareLabel: '알리세요 — 그들의 침묵을 깨뜨리세요',
+    shareX: 'X에서 공유', shareFB: 'Facebook에서 공유', shareMail: '이메일로 공유',
+    wikiText: '위키피디아: 2026년 이란 인터넷 차단',
+    githubText: 'GitHub에서 기여하기',
+    footer: '업로드되지 못한 모든 사진. 연결되지 못한 모든 통화. 서로 연락할 수 없었던 모든 가족.<br>이 페이지가 기록을 담고 있습니다. 전달해 주세요.',
+    footerEmblem: '▶ 목격하라 · 저항하라 · 기억하라 ◀',
+    disclaimer: '이 페이지는 이란 국민과 함께합니다 — 그들에 맞서지 않습니다. 우리의 분노는 오직 이슬람 공화국 테러 정권을 향합니다.',
+    bodyClass: '', bodyFont: '',
+    mainText: `<p><strong>이슬람 공화국 테러 정권</strong>은 단순히 인터넷 케이블을 끊은 것이 아닙니다. 수천만 명의 이란인이 그 종말을 요구하던 바로 그 순간, 자신들이 통치한다고 주장하는 국민에 맞서 통신, 기억, 증언을 끊어버리는 계산된 전쟁 행위를 저질렀습니다. 다음은 <strong>138일간의 계획된 암흑</strong>에 대한 기록입니다: 2026년 1월 8일부터 5월 26일까지, 인류 역사상 기록된 가장 긴 전국 단위 인터넷 차단 사건입니다.</p>
+<p>2025년 말 전국적인 시위가 폭발하고 2026년으로 이어지면서 — 사십 년간의 신정 독재 종식을 요구하며 뭉친 모든 계층의 이란인들 — 정권의 답은 대화가 아니었습니다. 단전 스위치였습니다. 몇 시간 만에 군사 정권은 전국의 인터넷과 전화 서비스를 차단했습니다. <strong>수천만 명의 사람들</strong>이 정권이 보이지 않는 곳에서 범죄를 저지를 수 있도록 강제 침묵 속에 던져졌습니다.</p>
+<div class="demand-box">"주머니 속 전화기를 두려워하는 정부는 자신이 범죄를 저지르고 있다는 것을 아는 정부입니다."</div>
+<p>차단은 학살을 위한 작전 엄호였습니다. 이란이 암흑 속에 있는 동안 인권 감시 단체에 따르면 보안군이 <strong>40,000명 이상</strong>을 살해했습니다. 수천 명이 오늘도 여전히 감옥에 있으며, 많은 이들이 사형에 해당하는 혐의를 받고 형식적인 재판을 받고 있습니다.</p>
+<p>경제적 비용은 전적으로 <strong>이란 국민이 부담했습니다 — 정권이 아닙니다</strong>. 관리들과 그 가족들, 혁명수비대 네트워크는 전 기간 동안 접속을 유지했습니다. 평범한 이란인들 — 상인, 콘텐츠 창작자, 학생, 간호사, 프리랜서 — 은 하룻밤 사이에 생계를 잃었습니다. <strong>18억 달러 이상</strong>이 이란 경제에서 빠져나간 것으로 추정됩니다. 수백만 개의 일자리가 인터넷 연결에 의존하고 있습니다. 그 수백만 명이 대가를 치렀습니다. 정권은 아무것도 내지 않았습니다.</p>
+<p><strong>2026년 5월 26일</strong>, 138일 후 연결이 부분적으로 복구되었습니다 — 그러나 싸움은 아직 끝나지 않았습니다. 차단은 끝났지만 검열은 끝나지 않았습니다. YouTube, Instagram, WhatsApp, Facebook, Twitter/X, Telegram과 수천 개의 다른 플랫폼과 서비스가 여전히 차단되어 있습니다. 인터넷 속도는 차단 이전 수준을 밑돌고 있습니다. 차단 기간 동안 구축된 감시 인프라는 그대로 남아 더욱 강화되었습니다. <strong>정권은 인터넷을 복구한 것이 아닙니다 — 더 좁은 감옥으로 대체한 것입니다.</strong> 콘텐츠 창작자들은 수년에 걸쳐 쌓아온 구독자를 잃었습니다. 학생들은 세계 지식에 접근하지 못하고 있습니다. 매일 필터링되고 감시받으며 저하된 인터넷을 사용할 수밖에 없는 이란인들의 굴욕은 각주가 아닙니다 — 이것이 현재 진행 중인 정책입니다.</p>
+<div class="demand-box">인터넷이 돌아왔습니다. 40,000명은 여전히 죽은 상태입니다. 수천 명이 여전히 감옥에 있습니다. 검열은 여전히 존재합니다. 싸움은 끝나지 않았습니다. 그들이 방송할 수 없는 것을 목격하세요. 그들의 침묵이 당신의 침묵이 되도록 내버려 두지 마세요.</div>`
   }
 };
 
@@ -977,7 +1183,7 @@ var currentLang = 'en';
 function setLang(code) {
   currentLang = code;
   var d = T[code] || T['en'];
-  var rtl = (code === 'fa' || code === 'he');
+  var rtl = (code === 'fa' || code === 'he' || code === 'ar');
 
   document.documentElement.setAttribute('lang', code);
   document.documentElement.setAttribute('dir', rtl ? 'rtl' : 'ltr');
@@ -1003,6 +1209,7 @@ function setLang(code) {
   document.getElementById('i-wiki-text').textContent = d.wikiText;
   document.getElementById('i-github-text').textContent = d.githubText;
   document.getElementById('i-footer').innerHTML = d.footer;
+  document.getElementById('i-footer-emblem').textContent = d.footerEmblem || '▶ WITNESS · RESIST · REMEMBER ◀';
   document.getElementById('i-disclaimer').textContent = d.disclaimer;
 
   var wikiBtn = document.getElementById('btn-wiki');
@@ -1032,7 +1239,7 @@ function setLang(code) {
   });
 
   document.querySelectorAll('.lang-btn').forEach(function(btn) { btn.classList.remove('active'); });
-  var btnMap = {en:'English',fa:'فارسی',it:'Italiano',es:'Español',he:'עברית',fr:'Français'};
+  var btnMap = {en:'English',fa:'فارسی',it:'Italiano',es:'Español',he:'עברית',fr:'Français',tr:'Türkçe',ar:'العربية',pt:'Português',zh:'中文',ko:'한국어'};
   document.querySelectorAll('.lang-btn').forEach(function(btn) {
     if (btn.textContent.trim() === btnMap[code]) btn.classList.add('active');
   });
@@ -1061,7 +1268,12 @@ var shareTexts = {
   it: '138 giorni. Il regime terrorista della Repubblica Islamica ha tagliato decine di milioni da internet per nascondere i suoi massacri. Oltre 40.000 uccisi. Migliaia in prigione. Internet è tornato — ma la censura non è mai andata.',
   es: '138 días. El régimen terrorista de la República Islámica cortó a decenas de millones de internet para ocultar sus masacres. Más de 40.000 muertos. Miles en prisión. Internet volvió — pero la censura nunca se fue.',
   he: '138 ימים. המשטר הטרוריסטי של הרפובליקה האסלאמית ניתק עשרות מיליונים מהאינטרנט כדי להסתיר את הטבחים. 40,000+ הרוגים. אלפים בכלא. האינטרנט חזר — אך הצנזורה לא הלכה.',
-  fr: '138 jours. Le régime terroriste de la République islamique a coupé des dizaines de millions de personnes d\'internet pour cacher ses massacres. Plus de 40 000 tués. Des milliers en prison. Internet est revenu — mais la censure n\'est jamais partie.'
+  fr: '138 jours. Le régime terroriste de la République islamique a coupé des dizaines de millions de personnes d\'internet pour cacher ses massacres. Plus de 40 000 tués. Des milliers en prison. Internet est revenu — mais la censure n\'est jamais partie.',
+  tr: '138 gün. İslam Cumhuriyeti terör rejimi katliamlarını gizlemek için on milyonları internetten kesti. 40.000\'den fazla kişi öldürüldü. Binlercesi cezaevinde. İnternet geri döndü — ama sansür hiç gitmedi.',
+  ar: '138 يوماً. قطع النظام الإرهابي للجمهورية الإسلامية الإنترنت عن عشرات الملايين لإخفاء مجازره. أكثر من 40,000 قتيل. الآلاف في السجون. الإنترنت عاد — لكن الرقابة لم تغادر قط.',
+  pt: '138 dias. O regime terrorista da República Islâmica cortou a internet a dezenas de milhões para esconder os seus massacres. Mais de 40.000 mortos. Milhares na prisão. A internet voltou — mas a censura nunca foi embora.',
+  zh: '138天。伊斯兰共和国恐怖政权切断数千万人的互联网以掩盖其屠杀行为。逾40,000人遇难。数千人身陷囹圄。互联网回来了——但审查从未离去。',
+  ko: '138일. 이슬람 공화국 테러 정권이 학살을 숨기기 위해 수천만 명의 인터넷을 차단했습니다. 40,000명 이상 사망. 수천 명이 수감 중. 인터넷이 돌아왔지만 검열은 한 번도 떠난 적이 없습니다.'
 };
 
 function shareX() {
